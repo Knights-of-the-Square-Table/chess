@@ -67,12 +67,13 @@ BoardCell* ChessBoard::getCell(int rowIndex, int colIndex){
 void ChessBoard::print(){
     string divider = "  _________________________";
     string empty = "   ";
+    string center = "               ";
     cout << endl << endl;
 //    cout << divider << endl;
-    cout << "  | a | b | c | d | e | f |" << endl;
-    cout << divider << endl;
+    cout << center <<"  | a | b | c | d | e | f |" << endl;
+    cout << center << divider << endl;
     for (int ri = 0; ri < ROW_COUNT; ri++){
-        cout << "|" << ri+1 << "|";
+        cout << center <<"|" << ri+1 << "|";
         for (int ci = 0; ci < COL_COUNT; ci++){
             BoardCell* cell = getCell(ri,ci);
             if(cell->isEmpty()){
@@ -83,9 +84,9 @@ void ChessBoard::print(){
             }
         }
         cout << ri+1 << "|" << endl;
-        cout << divider << endl;
+        cout << center << divider << endl;
     }
-    cout << "  | a | b | c | d | e | f |" << endl;
+    cout << center << "  | a | b | c | d | e | f |" << endl;
         cout << endl << endl;
 
 }

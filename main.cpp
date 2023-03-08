@@ -28,6 +28,7 @@ int main(){
     cout << "CHESS GAME\n\n" << endl;
 
     ChessGame* g = new ChessGame();
+    g->run();
     g->printBoard();
 
     tryMove( g, 0, 0, 1, 1);
