@@ -117,7 +117,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 //Chris
 bool ChessGame::validateInput(std::string input)
 {
-
+    return false;
 }
 
 Player* ChessGame::getCurrentPlayer(){
