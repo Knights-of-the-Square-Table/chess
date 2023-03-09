@@ -1,6 +1,7 @@
 #include <iostream>
 #include "chessgame.h"
 #include "boardcell.h"
+#include <string.h>
 
 using namespace std;
 

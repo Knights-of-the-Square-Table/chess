@@ -4,6 +4,8 @@
 #include "chessboard.h"
 #include "player.h"
 
+#include <tuple>
+
 class ChessGame{
     public:
     ChessBoard* board;
@@ -19,6 +21,8 @@ class ChessGame{
     void run();
     void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
     void getUserInput();
+    std::tuple<int,int,int> convertInput(std::string input);
+    bool validateInput(std::string input);
 
     Player* getCurrentPlayer();
 };
