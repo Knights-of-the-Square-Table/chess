@@ -2,7 +2,7 @@
 #include "chessgame.h"
 #include "boardcell.h"
 #include <string.h>
-
+#include "chessgame.h"
 using namespace std;
 
 void getUserInput(){
@@ -32,21 +32,34 @@ int main(){
     g->run();
     g->printBoard();
 
-    tryMove( g, 0, 0, 1, 1);
-    tryMove( g, 0, 0, 0, 0);
+// Testing game with input/moving pieces
+    string userInput = "";
+    string userInput2 = "";
 
-    tryMove( g, 0, 5, 3, 5);
-    tryMove( g, 3, 5, 3, 0);
-    tryMove( g, 0, 0, 5, 0);
-    tryMove( g, 3, 0, 3, 1);
+    tuple<int,int,int> fromPos;
+    tuple<int,int,int> toPos;
+    while(true){
+        cout << "Choose your piece and where to move: ";
+        cin >> userInput ;
 
-    tryMove( g, 0, 0, 5, 0);
 
-    tryMove( g, 5, 5, 0, 5);
-    tryMove( g, 0, 5, 0, 4);
-    tryMove( g, 0, 4, 0, 3);
-    tryMove( g, 0, 3, 0, 2);
-    tryMove( g, 0, 2, 0, 1);
+        if(userInput == "q"){
+            return 0;
+        }
+
+        cin >> userInput2;
+
+        fromPos = g->convertInput(userInput);
+        toPos = g->convertInput(userInput2);
+
+//        tryMove( g, 0, 0, 1, 0);
+        tryMove( g, get<1>(fromPos), get<0>(fromPos), get<1>(toPos), get<0>(toPos));
+    }
+
+
+
+
+
 
     return 0;
 }

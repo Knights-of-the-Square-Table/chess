@@ -41,7 +41,7 @@ bool Rook::isValidMove(BoardCell* target){
     // - - - - - -
 
     // Check that all cells between(!) source and target cells are empty
-    if (srcColIndex == dstColIndex){
+    if (srcRowIndex == dstRowIndex){
         int minRowIndex = min(srcRowIndex, dstRowIndex) + 1;
         int maxRowIndex = max(srcRowIndex, dstRowIndex) - 1;
 
