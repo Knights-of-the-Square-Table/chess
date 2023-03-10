@@ -73,8 +73,74 @@ void ChessGame::printStartOptionsMenu()
 
 }
 
+
+//Chris
+std::tuple<int, int, int> ChessGame::convertInput(std::string input)
+{
+    //initialize the 3 int variables to store converted string
+    int firstNum, secondNum, thirdNum;
+
+    //construct a char pointer to convert the char to an int
+    const char* str = input.c_str();
+
+    //convert the letter to a number 0 -> 7
+    char letter;
+    letter = toupper(input[0]);
+
+    //8 cases for 8x8 board.
+    switch(letter){
+
+    case 'A':
+            firstNum = 0;
+            break;
+        case 'B':
+            firstNum = 1;
+            break;
+        case 'C':
+            firstNum = 2;
+            break;
+        case 'D':
+            firstNum = 3;
+            break;
+        case 'E':
+            firstNum = 4;
+            break;
+        case 'F':
+            firstNum = 5;
+            break;
+        case 'G':
+            firstNum = 6;
+            break;
+        case 'H':
+            firstNum = 7;
+            break;
+        }
+
+    //Converts string input of the number to a usable integer
+    const char *stringInt, *stringInt2;
+    stringInt = &str[1];
+
+
+    secondNum = atoi(stringInt)-1;
+
+    //thirdnum for when we add a 3rd dimension
+    thirdNum = atoi(stringInt2)-1;
+
+    tuple<int, int, int> output(firstNum, secondNum, thirdNum);
+
+    return output;
+}
+
+//Chris
+bool ChessGame::validateInput(std::string input)
+{
+    return false;
+}
+
 Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
+
+
 
 
