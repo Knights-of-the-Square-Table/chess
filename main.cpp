@@ -32,11 +32,11 @@ void tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
 
 
 int main(){
-    cout << "CHESS GAME\n\n" << endl;
-    int in;
-    cout << "Enter a char:";
-    cin>>in;
-    cout << "char inputted is: " << in;
+//    cout << "CHESS GAME\n\n" << endl;
+//    int in;
+//    cout << "Enter a char:";
+//    cin>>in;
+//    cout << "char inputted is: " << in;
 
 
 
