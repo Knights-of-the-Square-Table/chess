@@ -53,6 +53,23 @@ void ChessGame::printStartText()
 void ChessGame::run()
 {
     this->printStartText();
+    this->printOptionsMenu();
+
+
+}
+
+char ChessGame::printOptionsMenu()
+{
+    char action;
+    int player = currentPlayerIndex;
+    cout << "[Player " << player << "]: SELECT FROM THE FOLLOWING OPTIONS" << endl;
+    cout << "[M]move    [Q]quit     [E]end game with a winner    [S]start over" << endl;
+    cin >> action;
+    return action;
+}
+
+void ChessGame::printStartOptionsMenu()
+{
 
 }
 

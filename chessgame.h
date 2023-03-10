@@ -19,6 +19,8 @@ class ChessGame{
     void run();
     void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
     void getUserInput();
+    char printOptionsMenu();
+    void printStartOptionsMenu();
 
     Player* getCurrentPlayer();
 };
