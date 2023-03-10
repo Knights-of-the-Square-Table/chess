@@ -78,7 +78,7 @@ void ChessGame::printStartOptionsMenu()
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 {
     //initialize the 3 int variables to store converted string
-    int firstNum, secondNum, thirdNum;
+    int column, row, floor;
 
     //construct a char pointer to convert the char to an int
     const char* str = input.c_str();
@@ -91,28 +91,28 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     switch(letter){
 
     case 'A':
-            firstNum = 0;
+            column = 0;
             break;
         case 'B':
-            firstNum = 1;
+            column = 1;
             break;
         case 'C':
-            firstNum = 2;
+            column = 2;
             break;
         case 'D':
-            firstNum = 3;
+            column = 3;
             break;
         case 'E':
-            firstNum = 4;
+            column = 4;
             break;
         case 'F':
-            firstNum = 5;
+            column = 5;
             break;
         case 'G':
-            firstNum = 6;
+            column = 6;
             break;
         case 'H':
-            firstNum = 7;
+            column = 7;
             break;
         }
 
@@ -121,12 +121,12 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     stringInt = &str[1];
 
 
-    secondNum = atoi(stringInt)-1;
+    row = atoi(stringInt)-1;
 
     //thirdnum for when we add a 3rd dimension
-    thirdNum = atoi(stringInt2)-1;
+    floor = atoi(stringInt2)-1;
 
-    tuple<int, int, int> output(firstNum, secondNum, thirdNum);
+    tuple<int, int, int> output(column, row, floor);
 
     return output;
 }
