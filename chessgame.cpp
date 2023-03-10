@@ -78,7 +78,7 @@ void ChessGame::printStartOptionsMenu()
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 {
     //initialize the 3 int variables to store converted string
-    int column, row, floor;
+    int column, row, board;
 
     //construct a char pointer to convert the char to an int
     const char* str = input.c_str();
@@ -124,9 +124,9 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     row = atoi(stringInt)-1;
 
     //thirdnum for when we add a 3rd dimension
-    floor = atoi(stringInt2)-1;
+    board = atoi(stringInt2)-1;
 
-    tuple<int, int, int> output(column, row, floor);
+    tuple<int, int, int> output(column, row, board);
 
     return output;
 }
