@@ -11,6 +11,7 @@ void getUserInput(){
 void tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
     cout << "Move: (" << r1 << ',' << c1 << ") - (" << r2 << ',' << c2 << ")";
 
+
     BoardCell* srcCell = g->board->getCell(r1,c1);
     BoardCell* dstCell = g->board->getCell(r2,c2);
 
@@ -26,6 +27,11 @@ void tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
 
 int main(){
     cout << "CHESS GAME\n\n" << endl;
+
+    char in;
+    cout << "please enter a char:";
+    cin >> in;
+    cout << "you types in: " << in << endl;
 
     ChessGame* g = new ChessGame();
     g->run();
