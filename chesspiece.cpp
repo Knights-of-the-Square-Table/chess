@@ -1,5 +1,5 @@
 #include "chesspiece.h"
-
+#include "chessgame.h"
 
 ChessPiece::ChessPiece(BoardCell* cell, Color color){
     this->cell = cell;
@@ -32,7 +32,7 @@ bool ChessPiece::hasSameColor(ChessPiece* piece){
 }
 
 void ChessPiece::beCaptured(){
-    // TODO: put the piece into captured vector
+    this->parentGame->getCurrentPlayer()->addCapturedPiece(this);
 
     cell->removePiece();
     cell = NULL;

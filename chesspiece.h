@@ -4,14 +4,17 @@
 #include <string>
 #include "boardcell.h"
 #include "color.h"
+//#include "chessgame.h"
 
 class BoardCell;
+class ChessGame;
 
 class ChessPiece{
 
     public:
     BoardCell* cell;
     Color color;
+    ChessGame* parentGame;
 
     ChessPiece(BoardCell* cell, Color color);
 
