@@ -21,8 +21,13 @@ class ChessGame{
     void run();
     void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
     void getUserInput();
+
+    char printOptionsMenu();
+    void printStartOptionsMenu();
+
     std::tuple<int,int,int> convertInput(std::string input);
     bool validateInput(std::string input);
+
 
     Player* getCurrentPlayer();
 };

@@ -3,10 +3,12 @@
 #include "chessgame.h"
 #include "boardcell.h"
 #include <string.h>
-
+<<<<<<< HEAD
 #include "chessgame.h"
+=======
 
 
+>>>>>>> 52b701fd39874573ede32e34b9f3f1bf6ce8f78e
 using namespace std;
 
 
@@ -45,7 +47,7 @@ int main(){
     g->run();
     g->printBoard();
 
-
+<<<<<<< HEAD
 // Testing game with input/moving pieces
     string userInput = "";
     string userInput2 = "";
@@ -74,7 +76,7 @@ int main(){
 
 
 
-
+=======
 //    ChessGame* g = new ChessGame();
 //    g->run();
 //    char input;
@@ -97,7 +99,7 @@ int main(){
 //    tryMove( g, 0, 4, 0, 3);
 //    tryMove( g, 0, 3, 0, 2);
 //    tryMove( g, 0, 2, 0, 1);
-
+>>>>>>> 52b701fd39874573ede32e34b9f3f1bf6ce8f78e
 
 //    return 0;
 }
