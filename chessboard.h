@@ -1,7 +1,7 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
-#include "boardcell.h"
+//#include "boardcell.h"
 
 const int ROW_COUNT = 6;
 const int COL_COUNT = 6;

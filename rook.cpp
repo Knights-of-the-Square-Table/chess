@@ -32,6 +32,9 @@ bool Rook::isValidMove(BoardCell* target){
     }
 
 
+
+
+    //
     // Case 1 - vertical: both soruce and target have the same column index
     // - - - - - -
     // - S - - - -
@@ -40,8 +43,8 @@ bool Rook::isValidMove(BoardCell* target){
     // - T - - - -
     // - - - - - -
 
-    // Check that all cells between(!) source and target cells are empty
-    if (srcRowIndex == dstRowIndex){
+
+   if(srcColIndex == dstColIndex){
         int minRowIndex = min(srcRowIndex, dstRowIndex) + 1;
         int maxRowIndex = max(srcRowIndex, dstRowIndex) - 1;
 
@@ -61,9 +64,7 @@ bool Rook::isValidMove(BoardCell* target){
     // - - - - - -
     // - - - - - -
     // - - - - - -
-
-    // Check that all cells between(!) source and target cells are empty
-    if (srcColIndex == dstColIndex){
+    if(srcRowIndex == dstRowIndex){
         int minColIndex = min(srcColIndex, dstColIndex) + 1;
         int maxColIndex = max(srcColIndex, dstColIndex) - 1;
 
