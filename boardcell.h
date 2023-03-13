@@ -23,6 +23,8 @@ class BoardCell {
     void removePiece();
     void placePiece(ChessPiece* piece);
     bool hasPiece(Color color);
+    ChessPiece* getPiece();
+
 };
 
 #endif // BOARDCELL_H

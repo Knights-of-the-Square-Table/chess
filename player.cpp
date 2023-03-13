@@ -5,5 +5,5 @@ Player::Player(Color color){
 }
 
 void Player::addCapturedPiece(ChessPiece* piece){
-    capturedPieces.push_back(piece);
+//    capturedPieces.push_back(piece);
 }

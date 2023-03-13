@@ -21,3 +21,10 @@ void BoardCell::placePiece(ChessPiece* piece){
 bool BoardCell::hasPiece(Color color){
     return !isEmpty() && piece->color == color;
 }
+
+ChessPiece *BoardCell::getPiece()
+{
+    return this->piece;
+}
+
+
