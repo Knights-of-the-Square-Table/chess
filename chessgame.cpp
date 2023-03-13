@@ -126,7 +126,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     //thirdnum for when we add a 3rd dimension
     board = atoi(stringInt2)-1;
 
-    tuple<int, int, int> output(column, row, board);
+    tuple<int, int, int> output(row, column, board);
 
     return output;
 }
