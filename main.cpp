@@ -67,7 +67,7 @@ int main(){
         toPos = g->convertInput(userInput2);
 
 //        tryMove( g, 0, 0, 1, 0);
-        tryMove( g, get<1>(fromPos), get<0>(fromPos), get<1>(toPos), get<0>(toPos));
+        tryMove( g, get<0>(fromPos), get<1>(fromPos), get<0>(toPos), get<1>(toPos));
     }
 
 
