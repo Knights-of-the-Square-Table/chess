@@ -84,12 +84,11 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     int column, row, board;
 
     //construct a char pointer to convert the char to an int
-    const char* str = input.c_str();
+    const char* str = &input.c_str()[ '\0'];
 
     //convert the letter to a number 0 -> 7
     char letter;
     letter = toupper(input[0]);
-
     //8 cases for 8x8 board.
     switch(letter){
 
@@ -120,15 +119,13 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
         }
 
     //Converts string input of the number to a usable integer
-    const char *stringInt, *stringInt2;
-    stringInt = &str[1];
-    stringInt2 = &str[2];
+    char stringInt;
+    stringInt = str[1];
 
-
-    row = atoi(stringInt)-1;
+    row = atoi(&stringInt)-1;
 
     //thirdnum for when we add a 3rd dimension
-    board = atoi(stringInt2)-1;
+    board = atoi(&str[2])-1;
 
     tuple<int, int, int> output(row, column, board);
 

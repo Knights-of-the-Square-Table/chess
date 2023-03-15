@@ -20,8 +20,13 @@ void tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
 
     BoardCell* srcCell = g->board->getCell(r1,c1);
     BoardCell* dstCell = g->board->getCell(r2,c2);
+    bool validMove = false;
+    if( srcCell->piece ==NULL){
+        validMove = false;
+    }else{
+        validMove = srcCell->piece->isValidMove(dstCell);
+    }
 
-    bool validMove = srcCell->piece->isValidMove(dstCell);
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
 
     if (validMove){
@@ -56,18 +61,20 @@ int main(){
         cout << "Choose your piece and where to move: ";
         cin >> userInput ;
 
+        if(g->validateInput(userInput)){
+            if(userInput == "q" || userInput == "Q"){
+                return 0;
+            }
+            cin >> userInput2;
+            if(g->validateInput(userInput2)){
+                fromPos = g->convertInput(userInput);
+                toPos = g->convertInput(userInput2);
 
-        if(userInput == "q"){
-            return 0;
+                tryMove( g, get<0>(fromPos), get<1>(fromPos), get<0>(toPos), get<1>(toPos));
+            }
         }
 
-        cin >> userInput2;
 
-        fromPos = g->convertInput(userInput);
-        toPos = g->convertInput(userInput2);
-
-//        tryMove( g, 0, 0, 1, 0);
-        tryMove( g, get<0>(fromPos), get<1>(fromPos), get<0>(toPos), get<1>(toPos));
     }
 
 
