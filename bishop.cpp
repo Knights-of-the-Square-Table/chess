@@ -31,8 +31,8 @@ bool Bishop::isValidMove(BoardCell* target){
     int dstColIndex = target->colIndex;
 
     //Define variables to store difference between source and target cell
-    int vertDifference = srcRowIndex - dstRowIndex;
-    int horizDifference = srcColIndex - dstColIndex;
+    int vertDifference = dstRowIndex - srcRowIndex;
+    int horizDifference = dstColIndex - srcColIndex;
 
     //If the absolute value of the horizontal and vertical distance is the same amount, the move is diagonal
     if(abs(vertDifference) != abs(horizDifference)){
@@ -51,9 +51,6 @@ bool Bishop::isValidMove(BoardCell* target){
 
         int minColIndex = min(srcColIndex, dstColIndex) + 1;
         int maxColIndex = max(srcColIndex, srcColIndex) -1;
-
-        //int ci = srcColIndex;
-        //int ri = srcRowIndex;
 
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             for(int ci = minColIndex; ci <= maxColIndex; ci++){
