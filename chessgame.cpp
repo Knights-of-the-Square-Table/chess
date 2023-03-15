@@ -56,7 +56,7 @@ void ChessGame::run()
 {
     this->printStartText();
     this->printOptionsMenu();
-
+    this->gameLoop();
 
 }
 
@@ -180,6 +180,11 @@ bool ChessGame::validateInput(std::string input)
         return regex_match(input, chess3D);
     }
     return false;
+}
+
+void ChessGame::gameLoop()
+{
+
 }
 
 Player* ChessGame::getCurrentPlayer(){
