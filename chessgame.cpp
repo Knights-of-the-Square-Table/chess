@@ -15,6 +15,7 @@ ChessGame::ChessGame()
     players[0] = new Player(WHITE);
     players[1] = new Player(BLACK);
     currentPlayerIndex = 0;
+    board->parentGame = this;
 }
 
 void ChessGame::printBoard(){
