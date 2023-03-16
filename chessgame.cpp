@@ -89,6 +89,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     //convert the letter to a number 0 -> 7
     char letter;
     letter = toupper(input[0]);
+
     //8 cases for 8x8 board.
     switch(letter){
 
@@ -137,8 +138,8 @@ bool ChessGame::validateInput(std::string input)
 {
 
     char commandList[] = {'M', 'Q', 'E', 'S', '\0'};
-    const std::regex chess2D("[a-h|A-H]?[1-8]");
-    const std::regex chess3D("[a-h|A-H]?[1-8]?[1-3]");
+    const std::regex chess2D("[a-h|A-H]?[1-6]");
+    const std::regex chess3D("[a-h|A-H]?[1-6]?[1-3]");
     const int inputLength = input.size();
     char* inputArray = new char[inputLength + 1];
     char inputLetter;
