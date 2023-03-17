@@ -13,3 +13,7 @@ void Player::addCapturedPiece(ChessPiece* piece){
     cout << capturedPieces.size() << endl;
     cout << "piece added to player's captured pieces" << endl;
 }
+
+Color Player::getColor(){
+    return color;
+}

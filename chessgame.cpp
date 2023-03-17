@@ -57,7 +57,7 @@ void ChessGame::run()
 {
     this->printStartText();
     this->printOptionsMenu();
-
+    this->gameLoop();
 
 }
 
@@ -84,7 +84,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     int column, row, board;
 
     //construct a char pointer to convert the char to an int
-    const char* str = input.c_str();
+    const char* str = &input.c_str()[ '\0'];
 
     //convert the letter to a number 0 -> 7
     char letter;
@@ -120,15 +120,13 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
         }
 
     //Converts string input of the number to a usable integer
-    const char *stringInt, *stringInt2;
-    stringInt = &str[1];
-    stringInt2 = &str[2];
+    char stringInt;
+    stringInt = str[1];
 
-
-    row = atoi(stringInt)-1;
+    row = atoi(&stringInt)-1;
 
     //thirdnum for when we add a 3rd dimension
-    board = atoi(stringInt2)-1;
+    board = atoi(&str[2])-1;
 
     tuple<int, int, int> output(row, column, board);
 
@@ -140,8 +138,8 @@ bool ChessGame::validateInput(std::string input)
 {
 
     char commandList[] = {'M', 'Q', 'E', 'S', '\0'};
-    const std::regex chess2D("[a-h|A-H]?[1-8]");
-    const std::regex chess3D("[a-h|A-H]?[1-8]?[1-3]");
+    const std::regex chess2D("[a-h|A-H]?[1-6]");
+    const std::regex chess3D("[a-h|A-H]?[1-6]?[1-3]");
     const int inputLength = input.size();
     char* inputArray = new char[inputLength + 1];
     char inputLetter;
@@ -181,6 +179,11 @@ bool ChessGame::validateInput(std::string input)
         return regex_match(input, chess3D);
     }
     return false;
+}
+
+void ChessGame::gameLoop()
+{
+
 }
 
 Player* ChessGame::getCurrentPlayer(){
