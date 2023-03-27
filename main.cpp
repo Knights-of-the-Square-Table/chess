@@ -15,18 +15,18 @@ void getUserInput(){
 }
 
 void tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
-    cout << "Move: (" << r1 << ',' << c1 << ") - (" << r2 << ',' << c2 << ")";
+    cout << "Move: (" << c1 << ',' << r1 << ") - (" << c2 << ',' << r2 << ")";
 
 
-    BoardCell* srcCell = g->board->getCell(r1,c1);
-    BoardCell* dstCell = g->board->getCell(r2,c2);
+    BoardCell* srcCell = g->topBoard->getCell(r1,c1);
+    BoardCell* dstCell = g->topBoard->getCell(r2,c2);
 
     bool validMove = srcCell->piece->isValidMove(dstCell);
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
 
     if (validMove){
         srcCell->piece->move(dstCell);
-        g->printBoard();
+        g->printBoards();
     }
 }
 
@@ -43,7 +43,7 @@ int main(){
 
     ChessGame* g = new ChessGame();
     g->run();
-    g->printBoard();
+    g->printBoards();
 
 
 // Testing game with input/moving pieces

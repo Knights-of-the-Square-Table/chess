@@ -23,6 +23,7 @@ HEADERS += \
     chesspiece.h \
     color.h \
     king.h \
+    level.h \
     player.h \
     queen.h \
     rook.h

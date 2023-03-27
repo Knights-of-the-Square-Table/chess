@@ -8,17 +8,38 @@ using namespace std;
 
 ChessGame::ChessGame()
 {
-    board = new ChessBoard();
+    botBoard = new ChessBoard(this, BOTTOM);
+
+    // 3d version stuff*******************
+
+    topBoard = new ChessBoard(this, TOP);
+
+    /*************************************/
 
     players[0] = new Player(WHITE);
     players[1] = new Player(BLACK);
     currentPlayerIndex = 0;
 }
 
-void ChessGame::printBoard(){
-    board->print();
-}
 
+// 3d version stuff********new*********
+
+void ChessGame::printBoards()
+{
+    printBoard(topBoard);
+
+    printBoard(botBoard);
+}
+void ChessGame::printBoard(ChessBoard* b)
+{
+    b->print();
+
+}
+/*****************old******************/
+//void ChessGame::printBoard(){
+//    board->print();
+//}
+/**************************************/
 void ChessGame::nextTurn(){
     currentPlayerIndex = (currentPlayerIndex + 1) % 2;
 }

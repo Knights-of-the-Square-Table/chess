@@ -1,9 +1,13 @@
 #include "boardcell.h"
+#include <iostream>
+
+using namespace std;
 
 BoardCell::BoardCell(ChessBoard* board, int rowIndex, int colIndex){
     this->board = board;
     this->rowIndex = rowIndex;
     this->colIndex = colIndex;
+    this->piece = NULL;
 }
 
 bool BoardCell::isEmpty(){

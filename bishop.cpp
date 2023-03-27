@@ -50,19 +50,26 @@ bool Bishop::isValidMove(BoardCell* target){
         int maxRowIndex = max(srcRowIndex, dstRowIndex) -1 ;
 
         int minColIndex = min(srcColIndex, dstColIndex) + 1;
-        int maxColIndex = max(srcColIndex, srcColIndex) -1;
+        int maxColIndex = max(srcColIndex, dstColIndex) -1;
 
         //int ci = srcColIndex;
         //int ri = srcRowIndex;
 
-        for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
-            for(int ci = minColIndex; ci <= maxColIndex; ci++){
-                BoardCell* c = target->board->getCell(ri, ci);
-                if(!c->isEmpty()){
-                    return false;
-                }
+        for(int ri = minRowIndex, ci = minColIndex; ri <= maxRowIndex; ri++, ci++){
+            BoardCell* c = target->board->getCell(ri, ci);
+            if(!c->isEmpty()){
+                return false;
             }
         }
+
+//        for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
+//            for(int ci = minColIndex; ci <= maxColIndex; ci++){
+//                BoardCell* c = target->board->getCell(ri, ci);
+//                if(!c->isEmpty()){
+//                    return false;
+//                }
+//            }
+//        }
     }
 
     //If all checks pass, the move is valid!
