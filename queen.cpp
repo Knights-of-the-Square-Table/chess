@@ -29,16 +29,16 @@ bool Queen::isValidMove(BoardCell* target){
     int dstColIndex = target->colIndex;
 
     //Define variables to store difference between source and target cell
-    int vertDifference = srcRowIndex - dstRowIndex;
-    int horizDifference = srcColIndex - dstColIndex;
+    int vertDifference = dstRowIndex - srcRowIndex;
+    int horizDifference = dstColIndex - srcColIndex;
 
     //Check to see if the move is diagonal, horizontal, or vertical
-    if(abs(vertDifference) != abs(horizDifference) || srcRowIndex != dstRowIndex || srcColIndex != dstColIndex){
+    if(abs(vertDifference) != abs(horizDifference) && srcRowIndex != dstRowIndex && srcColIndex != dstColIndex){
         return false;
     }
 
-    // Check that the horizontal path is clear
-    if (srcRowIndex == dstRowIndex){
+    // Check that the vertical path is clear
+    if (srcColIndex == dstColIndex){
         int minRowIndex = min(srcRowIndex, dstRowIndex) + 1;
         int maxRowIndex = max(srcRowIndex, dstRowIndex) - 1;
 
@@ -51,8 +51,8 @@ bool Queen::isValidMove(BoardCell* target){
         }
     }
 
-    // Check that the vertical path is clear
-    if (srcColIndex == dstColIndex){
+    // Check that the horizontal path is clear
+    if (srcRowIndex == dstRowIndex){
         int minColIndex = min(srcColIndex, dstColIndex) + 1;
         int maxColIndex = max(srcColIndex, dstColIndex) - 1;
 
@@ -72,9 +72,6 @@ bool Queen::isValidMove(BoardCell* target){
 
         int minColIndex = min(srcColIndex, dstColIndex) + 1;
         int maxColIndex = max(srcColIndex, srcColIndex) -1;
-
-        //int ci = srcColIndex;
-        //int ri = srcRowIndex;
 
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             for(int ci = minColIndex; ci <= maxColIndex; ci++){

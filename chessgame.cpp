@@ -2,7 +2,9 @@
 #include "chessgame.h"
 #include "chessboard.h"
 #include "player.h"
-
+#include <regex>
+#include<array>
+#include <cstring>
 using namespace std;
 
 
@@ -19,6 +21,8 @@ ChessGame::ChessGame()
     players[0] = new Player(WHITE);
     players[1] = new Player(BLACK);
     currentPlayerIndex = 0;
+    botBoard->game = this;
+    topBoard->game = this;
 }
 
 
@@ -75,7 +79,7 @@ void ChessGame::run()
 {
     this->printStartText();
     this->printOptionsMenu();
-
+    this->gameLoop();
 
 }
 
@@ -102,7 +106,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     int column, row, board;
 
     //construct a char pointer to convert the char to an int
-    const char* str = input.c_str();
+    const char* str = &input.c_str()[ '\0'];
 
     //convert the letter to a number 0 -> 7
     char letter;
@@ -138,16 +142,15 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
         }
 
     //Converts string input of the number to a usable integer
-    const char *stringInt, *stringInt2;
-    stringInt = &str[1];
+    char stringInt;
+    stringInt = str[1];
 
-
-    row = atoi(stringInt)-1;
+    row = atoi(&stringInt)-1;
 
     //thirdnum for when we add a 3rd dimension
-    board = atoi(stringInt2)-1;
+    board = atoi(&str[2])-1;
 
-    tuple<int, int, int> output(column, row, board);
+    tuple<int, int, int> output(row, column, board);
 
     return output;
 }
@@ -155,7 +158,54 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 //Chris
 bool ChessGame::validateInput(std::string input)
 {
+
+    char commandList[] = {'M', 'Q', 'E', 'S', '\0'};
+    const std::regex chess2D("[a-h|A-H]?[1-6]");
+    const std::regex chess3D("[a-h|A-H]?[1-6]?[1-3]");
+    const int inputLength = input.size();
+    char* inputArray = new char[inputLength + 1];
+    char inputLetter;
+//    input += '\0';
+
+    //potentially in danger to abuse from buffer overflow
+    //TODO find a better way
+    strcpy(inputArray, input.c_str());
+
+    if(inputLength == 0 || input.size() > 3){
+        return false;
+    }
+
+    if(inputLength == 1){
+        inputLetter = toupper(inputArray[0]);
+        for(unsigned int i = 0; i < sizeof(commandList); i++){
+
+            if(inputLetter != commandList[i]){
+                continue;
+            }else
+
+            if(inputLetter == commandList[i]){
+                return true;
+            }else
+
+            if(commandList[i] == '\0'){
+                return false;
+            }
+        }
+    }
+
+    if(inputLength == 2){
+        return regex_match(input, chess2D);
+    }
+
+    if(inputLength == 3){
+        return regex_match(input, chess3D);
+    }
     return false;
+}
+
+void ChessGame::gameLoop()
+{
+
 }
 
 Player* ChessGame::getCurrentPlayer(){

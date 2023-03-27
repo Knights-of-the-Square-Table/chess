@@ -31,8 +31,8 @@ bool Bishop::isValidMove(BoardCell* target){
     int dstColIndex = target->colIndex;
 
     //Define variables to store difference between source and target cell
-    int vertDifference = srcRowIndex - dstRowIndex;
-    int horizDifference = srcColIndex - dstColIndex;
+    int vertDifference = dstRowIndex - srcRowIndex;
+    int horizDifference = dstColIndex - srcColIndex;
 
     //If the absolute value of the horizontal and vertical distance is the same amount, the move is diagonal
     if(abs(vertDifference) != abs(horizDifference)){
@@ -45,18 +45,18 @@ bool Bishop::isValidMove(BoardCell* target){
     }
 
     //Check that the diagonal path is clear
-    if(srcColIndex != dstColIndex && srcRowIndex != dstRowIndex){
-        int minRowIndex = min(srcRowIndex, dstRowIndex) + 1;
-        int maxRowIndex = max(srcRowIndex, dstRowIndex) -1 ;
+    //If this condition passes the move is diagonal
+    if(abs(vertDifference) == abs(horizDifference)){
+        int moveLength = vertDifference;
 
-        int minColIndex = min(srcColIndex, dstColIndex) + 1;
-        int maxColIndex = max(srcColIndex, dstColIndex) -1;
 
-        //int ci = srcColIndex;
-        //int ri = srcRowIndex;
+        //these values will be used to help check the diagonal pieces from src to dst
+        int x = (dstRowIndex - srcRowIndex)/moveLength;
+        int y = (dstColIndex - srcColIndex)/moveLength;
 
-        for(int ri = minRowIndex, ci = minColIndex; ri <= maxRowIndex; ri++, ci++){
-            BoardCell* c = target->board->getCell(ri, ci);
+        //iterate through the diagonal pieces and make sure they are not occupied
+        for(int i = 1; i < moveLength; i++){
+            BoardCell* c = target->board->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
             if(!c->isEmpty()){
                 return false;
             }

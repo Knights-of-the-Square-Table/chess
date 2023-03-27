@@ -14,6 +14,7 @@ class Player
 
     Player(Color color);
     void addCapturedPiece(ChessPiece* piece);
+    Color getColor();
 };
 
 #endif // PLAYER_H

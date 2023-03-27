@@ -15,16 +15,16 @@ class ChessBoard
 {
     public:
     BoardCell* cells[ROW_COUNT][COL_COUNT];
+
     ChessGame* game;
-//3d version stuff*******new*******
+
     ChessBoard(ChessGame* game, Level level);
-    /*************old***************/
-//    ChessBoard();
-    /*******************************/
+
     BoardCell* getCell(int rowIndex, int colIndex);
     void print();
     Level level;
     ChessBoard* getMirrorBoard();
+
 
 
 };
