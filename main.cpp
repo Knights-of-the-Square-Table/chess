@@ -14,11 +14,15 @@ void getUserInput(){
     //TODO: gets user input and return a list of coordinates to input into tryMove function  
 }
 
-//Olga with some bits from Chris
-bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
 
-    BoardCell* srcCell = g->board->getCell(r1,c1);
-    BoardCell* dstCell = g->board->getCell(r2,c2);
+bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
+    cout << "Move: (" << c1 << ',' << r1 << ") - (" << c2 << ',' << r2 << ")";
+
+
+    BoardCell* srcCell = g->topBoard->getCell(r1,c1);
+    BoardCell* dstCell = g->topBoard->getCell(r2,c2);
+
+
     bool validMove = false;
 
     //check that there is a piece in the cell
@@ -39,7 +43,7 @@ bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
-        g->printBoard();
+        g->printBoards();
     }
     return validMove;
 }
@@ -49,7 +53,7 @@ int main(){
 
     ChessGame* g = new ChessGame();
     g->run();
-    g->printBoard();
+    g->printBoards();
 
 
 // Testing game with input/moving pieces

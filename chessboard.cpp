@@ -7,10 +7,14 @@
 #include "king.h"
 #include "queen.h"
 
+
 using namespace std;
 
 
-ChessBoard::ChessBoard(){
+ChessBoard::ChessBoard(ChessGame* game, Level level){
+    this->game = game;
+
+    this->level = level;
 
     // Create cells
     for(int ri = 0; ri < ROW_COUNT; ri++){
@@ -19,28 +23,34 @@ ChessBoard::ChessBoard(){
         }
     }
 
-
-    const int lastRowIndex = ROW_COUNT - 1;
-    const int lastColIndex = COL_COUNT - 1;
-
     // Create and place Rocks
-    new Rook( getCell(0,0), WHITE );
-    new Rook( getCell(0,lastColIndex), WHITE );
-    new Rook( getCell(lastRowIndex,0), BLACK );
-    new Rook( getCell(lastRowIndex,lastColIndex), BLACK );
+
+    if(level == TOP){
+        new Rook(   getCell(0,0), WHITE );
+        new Bishop( getCell(0,1), WHITE );
+        new King(   getCell(0,2), WHITE );
+        new Queen(  getCell(0,3), WHITE );
+        new Bishop( getCell(0,4), WHITE );
+        new Rook(   getCell(0,5), WHITE );
+    }
+
+    else{
+        new Rook(   getCell(5,0), BLACK );
+        new Bishop( getCell(5,1), BLACK );
+        new King(   getCell(5,2), BLACK );
+        new Queen(  getCell(5,3), BLACK );
+        new Bishop( getCell(5,4), BLACK );
+        new Rook(   getCell(5,5), BLACK );
+    }
 
 
-    new Bishop( getCell(0,1), WHITE );
-    new Bishop( getCell(0,lastColIndex-1), WHITE );
-    new Bishop( getCell(lastRowIndex,1), BLACK );
-    new Bishop( getCell(lastRowIndex,lastColIndex-1), BLACK );
 
 
-    new King( getCell(0,2), WHITE );
-    new King( getCell(lastRowIndex,2), BLACK );
 
-    new Queen( getCell(0,3), WHITE );
-    new Queen( getCell(lastRowIndex,3), BLACK );
+
+
+
+
 
 }
 
@@ -80,6 +90,7 @@ void ChessBoard::print(){
                 cout << empty << "|";
             } else {
                 char nickName = cell->piece->getNickName();
+            //    char nickName = '!';
                 cout << " " << nickName << " |";
             }
         }
@@ -89,6 +100,16 @@ void ChessBoard::print(){
     cout << center << "  | a | b | c | d | e | f |" << endl;
         cout << endl << endl;
 
+}
+
+ChessBoard *ChessBoard::getMirrorBoard()
+{
+    if(this->level==TOP){
+        return this->game->botBoard;
+    }
+    else{
+        return this->game->topBoard;
+    }
 }
 
 

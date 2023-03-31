@@ -49,6 +49,7 @@ bool Bishop::isValidMove(BoardCell* target){
     if(abs(vertDifference) == abs(horizDifference)){
         int moveLength = vertDifference;
 
+
         //these values will be used to help check the diagonal pieces from src to dst
         int x = (dstRowIndex - srcRowIndex)/moveLength;
         int y = (dstColIndex - srcColIndex)/moveLength;
@@ -60,6 +61,15 @@ bool Bishop::isValidMove(BoardCell* target){
                 return false;
             }
         }
+
+//        for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
+//            for(int ci = minColIndex; ci <= maxColIndex; ci++){
+//                BoardCell* c = target->board->getCell(ri, ci);
+//                if(!c->isEmpty()){
+//                    return false;
+//                }
+//            }
+//        }
     }
 
     //If all checks pass, the move is valid!

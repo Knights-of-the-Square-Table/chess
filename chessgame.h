@@ -6,16 +6,19 @@
 
 #include <tuple>
 
+class ChessBoard;
+class Player;
 class ChessGame{
     public:
-    ChessBoard* board;
+    ChessBoard* topBoard;
+    ChessBoard* botBoard;
 
     Player* players[2];
     int currentPlayerIndex;
 
 
     ChessGame();
-    void printBoard();
+ //   void printBoard();
     void nextTurn();
     void printStartText();
     void run();
@@ -32,6 +35,11 @@ class ChessGame{
 
 
     Player* getCurrentPlayer();
+
+    //3d version stuff************
+    void printBoards();
+    void printBoard(ChessBoard* b);
+    /****************************/
 };
 
 #endif // CHESSGAME_H

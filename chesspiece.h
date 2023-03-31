@@ -4,6 +4,9 @@
 #include <string>
 #include "boardcell.h"
 #include "color.h"
+#include "chessgame.h"
+
+
 
 class BoardCell;
 class ChessGame;

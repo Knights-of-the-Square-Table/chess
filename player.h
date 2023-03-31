@@ -5,6 +5,7 @@
 #include "color.h"
 #include "chesspiece.h"
 
+class ChessPiece;
 class Player
 {
     public:

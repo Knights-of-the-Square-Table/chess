@@ -33,7 +33,7 @@ bool ChessPiece::hasSameColor(ChessPiece* piece){
 
 //Liam
 void ChessPiece::beCaptured(){
-    this->cell->board->parentGame->getCurrentPlayer()->addCapturedPiece(this);
+    this->cell->board->game->getCurrentPlayer()->addCapturedPiece(this);
     cell->removePiece();
     cell = NULL;
     this->cell->board->parentGame->getCurrentWinner();

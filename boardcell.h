@@ -25,6 +25,7 @@ class BoardCell {
     bool hasPiece(Color color);
     ChessPiece* getPiece();
 
+
 };
 
 #endif // BOARDCELL_H
