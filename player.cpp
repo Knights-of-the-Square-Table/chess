@@ -8,12 +8,17 @@ Player::Player(Color color){
 }
 
 void Player::addCapturedPiece(ChessPiece* piece){
-    cout << capturedPieces.size() << endl;
     capturedPieces.push_back(piece);
-    cout << capturedPieces.size() << endl;
-    cout << "piece added to player's captured pieces" << endl;
 }
 
 Color Player::getColor(){
     return color;
+}
+
+int Player::getPoints(){
+    int total = 0;
+    for(int i=0; i<int(capturedPieces.size()); i++){
+        total += capturedPieces[i]->getPointValue();
+    }
+    return total;
 }

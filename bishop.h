@@ -16,5 +16,9 @@ class Bishop : public ChessPiece
     }
 
     bool isValidMove(BoardCell* target);
+
+    int getPointValue(){
+        return 3;
+    }
 };
 #endif // BISHOP_H

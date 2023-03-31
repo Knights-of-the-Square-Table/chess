@@ -22,6 +22,7 @@ class ChessGame{
     void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
     void getUserInput();
     void gameLoop();
+    void getCurrentWinner();
 
     char printOptionsMenu();
     void printStartOptionsMenu();

@@ -12,8 +12,11 @@ class King: public ChessPiece{
         return color == WHITE ? 'K' : 'k';
     }
 
-
     bool isValidMove(BoardCell* target);
+
+    int getPointValue(){
+        return 100;
+    }
 };
 
 #endif // KING_H

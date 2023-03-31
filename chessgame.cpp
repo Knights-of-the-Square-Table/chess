@@ -190,6 +190,17 @@ Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
 
+void ChessGame::getCurrentWinner(){
+    if (this->players[0]->getPoints() == this->players[1]->getPoints()){
+        cout << "It's a tie, both players have equal points" << endl;
+    }
+    else if (this->players[0]->getPoints() > this->players[1]->getPoints()){
+        cout << "Player 0 wins!" << endl;
+    }
+    else { //Player 1 has more points
+        cout << "Player 1 wins!" << endl;
+    }
+}
 
 
 

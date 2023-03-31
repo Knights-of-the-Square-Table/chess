@@ -13,11 +13,11 @@ class ChessPiece{
     public:
     BoardCell* cell;
     Color color;
-
     ChessPiece(BoardCell* cell, Color color);
 
     virtual bool isValidMove(BoardCell* target) = 0;
     virtual char getNickName() = 0;
+    virtual int getPointValue() = 0;
 
     bool isInplay();
     void move(BoardCell* target);

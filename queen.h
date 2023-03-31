@@ -14,6 +14,10 @@ class Queen: public ChessPiece{
     }
 
     bool isValidMove(BoardCell* target);
+
+    int getPointValue(){
+        return 9;
+    }
 };
 
 #endif // QUEEN_H
