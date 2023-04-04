@@ -15,15 +15,23 @@ void getUserInput(){
 }
 
 
-bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
-    cout << "Move: (" << c1 << ',' << r1 << ") - (" << c2 << ',' << r2 << ")";
-
-
-    BoardCell* srcCell = g->topBoard->getCell(r1,c1);
-    BoardCell* dstCell = g->topBoard->getCell(r2,c2);
-
+bool tryMove(ChessGame* g, int r1, int c1, int level1, int r2, int c2, int level2){
 
     bool validMove = false;
+    BoardCell* srcCell;
+    BoardCell* dstCell;
+
+    //first attempt at adding 2nd board
+    if(level1 == 0){
+        srcCell = g->botBoard->getCell(r1, c1);
+    }else{
+        srcCell = g->topBoard->getCell(r1, c1);
+    }
+    if(level2 == 0){
+        dstCell = g->botBoard->getCell(r2,c2);
+    }else{
+        dstCell = g->topBoard->getCell(r2, c2);
+    }
 
     //check that there is a piece in the cell
     if( srcCell->piece ==NULL){
@@ -37,7 +45,8 @@ bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
     else{
         validMove = srcCell->piece->isValidMove(dstCell);
     }
-    cout << "Move: (" << r1 << ',' << c1 << ") - (" << r2 << ',' << c2 << ")";
+
+    cout << "Move: (" << c1 << ',' << r1 <<',' <<level1 << ") - (" << c2 << ',' << r2 << ',' << level2 << ")";
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
 
     //move the piece if it is a valid move
@@ -50,7 +59,7 @@ bool tryMove(ChessGame* g, int r1, int c1, int r2, int c2){
 
 
 int main(){
-
+    cout << "Game starting" << endl;
     ChessGame* g = new ChessGame();
     g->run();
     g->printBoards();
@@ -94,7 +103,7 @@ int main(){
                 toPos = g->convertInput(userInput2);
 
                 //tries to move the pieces, if it succeeds, it increments the games turn counter
-                if(tryMove( g, get<0>(fromPos), get<1>(fromPos), get<0>(toPos), get<1>(toPos))){
+                if(tryMove( g, get<0>(fromPos), get<1>(fromPos),get<2>(fromPos), get<0>(toPos), get<1>(toPos), get<2>(toPos))){
                     g->nextTurn();
                 }
             }
