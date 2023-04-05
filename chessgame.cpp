@@ -89,6 +89,7 @@ void ChessGame::run()
 void ChessGame::gameLoop()
 {
     char input = printOptionsMenu();
+    //menu loop
     while(1){
 
         if(toupper(input) == 'P'){
@@ -98,6 +99,7 @@ void ChessGame::gameLoop()
              string curPlayer;
              tuple<int,int,int> fromPos;
              tuple<int,int,int> toPos;
+             //game loop
              while(1){
 
                  //Get the current player's turn
@@ -112,11 +114,8 @@ void ChessGame::gameLoop()
                  cin >> userInput ;
                  //check it the first input is valid
                  if(this->validateInput(userInput)){
-                     //TEMPORARY if until we get option methods set up
-                     if(userInput == "q" || userInput == "Q"){
-                         cout << "You chose to quit" << endl;
-                         exit(-1);
-                     }
+
+                     //kicks back out to menu loop
                      if(userInput == "M" || userInput == "m"){
                          cout << "you chose to display window" << endl;
                          input = 'm';
@@ -304,7 +303,7 @@ void ChessGame::getCurrentWinner(){
     }
 }
 
-//Olga  + some minor modifycations by Chris for additional boards
+//Olga  + some minor modifycations by Chris for additional boards and abstracting from main.cpp
 bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     bool validMove = false;
     BoardCell* srcCell;
