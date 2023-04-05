@@ -21,7 +21,7 @@ class ChessGame{
  //   void printBoard();
     void nextTurn();
     void printStartText();
-    void run();
+    void run(ChessGame *g);
     bool tryMove(ChessGame *g, int sr, int sc,int slevel, int tr, int tc, int tlevel);
     void getUserInput();
     void gameLoop(ChessGame *g);

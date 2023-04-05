@@ -10,10 +10,10 @@
 using namespace std;
 
 int main(){
-    cout << "Game starting" << endl;
-    ChessGame* g = new ChessGame();
 
-    g->run();
+    ChessGame* g = new ChessGame();
+    g->run(g);
+//    g->run();
 
     return 0;
 }

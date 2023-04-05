@@ -76,9 +76,9 @@ void ChessGame::printStartText()
 
 }
 
-void ChessGame::run()
+void ChessGame::run(ChessGame *g)
 {
-    ChessGame* g = new ChessGame();
+   // ChessGame* g = new ChessGame();
     this->printStartText();
     this->gameLoop(g);
 
@@ -144,12 +144,15 @@ void ChessGame::gameLoop(ChessGame *g)
                  cin.clear();
                  cin.ignore(numeric_limits<streamsize>::max(), '\n');
              }
+
         }else if(toupper(input) == 'M'){
             input = g->printOptionsMenu();
+
 
         }else if(toupper(input) == 'Q'){
             cout << "You have chosen to quit, application will exit" << endl;
             exit(0);
+
         }else if(toupper(input) == 'E'){
             g->getCurrentWinner();
             //TODO: potential reset/newGame method? exit for now
