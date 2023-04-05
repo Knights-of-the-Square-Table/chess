@@ -22,9 +22,9 @@ class ChessGame{
     void nextTurn();
     void printStartText();
     void run();
-    void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
+    bool tryMove(ChessGame *g, int sr, int sc,int slevel, int tr, int tc, int tlevel);
     void getUserInput();
-    void gameLoop();
+    void gameLoop(ChessGame *g);
     void getCurrentWinner();
 
     char printOptionsMenu();
