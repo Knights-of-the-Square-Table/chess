@@ -12,8 +12,7 @@ using namespace std;
 int main(){
 
     ChessGame* g = new ChessGame();
-    g->run(g);
-//    g->run();
+    g->run();
 
     return 0;
 }

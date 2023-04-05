@@ -6,6 +6,7 @@
 #include<array>
 #include <cstring>
 #include <stdlib.h>
+#include <string>
 using namespace std;
 
 
@@ -76,31 +77,31 @@ void ChessGame::printStartText()
 
 }
 
-void ChessGame::run(ChessGame *g)
+void ChessGame::run()
 {
-   // ChessGame* g = new ChessGame();
+
     this->printStartText();
-    this->gameLoop(g);
+    this->gameLoop();
 
 }
 
 //Chris
-void ChessGame::gameLoop(ChessGame *g)
+void ChessGame::gameLoop()
 {
     char input = printOptionsMenu();
     while(1){
 
         if(toupper(input) == 'P'){
-             g->printBoards();
-             string userInput = "";
-             string userInput2 = "";
+             this->printBoards();
+             string userInput;
+             string userInput2;
              string curPlayer;
              tuple<int,int,int> fromPos;
              tuple<int,int,int> toPos;
-             while(true){
+             while(1){
 
                  //Get the current player's turn
-                 if(g->getCurrentPlayer()->getColor() == 0){
+                 if(this->getCurrentPlayer()->getColor() == 0){
                      curPlayer = "White";
                  }else{
                      curPlayer = "Black";
@@ -110,8 +111,7 @@ void ChessGame::gameLoop(ChessGame *g)
 
                  cin >> userInput ;
                  //check it the first input is valid
-                 if(g->validateInput(userInput)){
-
+                 if(this->validateInput(userInput)){
                      //TEMPORARY if until we get option methods set up
                      if(userInput == "q" || userInput == "Q"){
                          cout << "You chose to quit" << endl;
@@ -125,15 +125,15 @@ void ChessGame::gameLoop(ChessGame *g)
 
                      cin >> userInput2;
                      //check if the second input is valid
-                     if(g->validateInput(userInput2)){
+                     if(this->validateInput(userInput2)){
                          //Convert both inputs from form " A3 " to (0,2).
-                         fromPos = g->convertInput(userInput);
-                         toPos = g->convertInput(userInput2);
+                         fromPos = this->convertInput(userInput);
+                         toPos = this->convertInput(userInput2);
 
                          //tries to move the pieces, if it succeeds, it increments the games turn counter
-                         if(tryMove( g, get<0>(fromPos), get<1>(fromPos),get<2>(fromPos), get<0>(toPos), get<1>(toPos), get<2>(toPos))){
-                             g->nextTurn();
-                             cout << "player turn " << g->currentPlayerIndex << endl;
+                         if(tryMove(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos), get<0>(toPos), get<1>(toPos), get<2>(toPos))){
+                             this->nextTurn();
+                             cout << "player turn " << this->currentPlayerIndex << endl;
                          }
                      }
                  }else{
@@ -146,7 +146,7 @@ void ChessGame::gameLoop(ChessGame *g)
              }
 
         }else if(toupper(input) == 'M'){
-            input = g->printOptionsMenu();
+            input = this->printOptionsMenu();
 
 
         }else if(toupper(input) == 'Q'){
@@ -154,7 +154,7 @@ void ChessGame::gameLoop(ChessGame *g)
             exit(0);
 
         }else if(toupper(input) == 'E'){
-            g->getCurrentWinner();
+            this->getCurrentWinner();
             //TODO: potential reset/newGame method? exit for now
             exit(0);
 
@@ -198,15 +198,12 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
     //initialize the 3 int variables to store converted string
     int column, row, board;
 
-    //construct a char pointer to convert the char to an int
-    const char* str = &input.c_str()[ '\0'];
-
     //convert the letter to a number 0 -> 7
-    char letter;
-    letter = toupper(input[0]);
+    char holder;
+    holder = toupper(input[0]);
 
-    //8 cases for 8x8 board.
-    switch(letter){
+    //8 cases for up to 8x8 board.
+    switch(holder){
 
     case 'A':
             column = 0;
@@ -235,13 +232,12 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
         }
 
     //Converts string input of the number to a usable integer
-    char stringInt;
-    stringInt = str[1];
-
-    row = atoi(&stringInt)-1;
+    holder = input[1];
+    row = atoi(&holder)-1;
 
     //thirdnum for when we add a 3rd dimension
-    board = atoi(&str[2])-1;
+    holder = input[2];
+    board = atoi(&holder)-1;
 
     tuple<int, int, int> output(row, column, board);
 
@@ -309,22 +305,21 @@ void ChessGame::getCurrentWinner(){
 }
 
 //Olga  + some minor modifycations by Chris for additional boards
-bool ChessGame::tryMove(ChessGame *g, int r1, int c1, int level1, int r2, int c2, int level2){
-
+bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     bool validMove = false;
     BoardCell* srcCell;
     BoardCell* dstCell;
 
     //first attempt at adding 2nd board
     if(level1 == 0){
-        srcCell = g->botBoard->getCell(r1, c1);
+        srcCell = this->botBoard->getCell(r1, c1);
     }else{
-        srcCell =   g->topBoard->getCell(r1, c1);
+        srcCell =   this->topBoard->getCell(r1, c1);
     }
     if(level2 == 0){
-        dstCell = g->botBoard->getCell(r2, c2);
+        dstCell = this->botBoard->getCell(r2, c2);
     }else{
-        dstCell = g->topBoard->getCell(r2, c2);
+        dstCell = this->topBoard->getCell(r2, c2);
     }
 
     //check that there is a piece in the cell
@@ -332,7 +327,7 @@ bool ChessGame::tryMove(ChessGame *g, int r1, int c1, int level1, int r2, int c2
         validMove = false;
     }
             //check that the current player is trying to move their pieces and not enemy pieces
-    else if(srcCell->getPiece()->color !=  g->getCurrentPlayer()->color){
+    else if(srcCell->getPiece()->color !=  this->getCurrentPlayer()->color){
             cout << "You cannot move other players pieces" << endl;
             validMove = false;
         }
@@ -346,7 +341,7 @@ bool ChessGame::tryMove(ChessGame *g, int r1, int c1, int level1, int r2, int c2
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
-        g->printBoards();
+        this->printBoards();
     }
     return validMove;
 }

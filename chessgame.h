@@ -21,10 +21,10 @@ class ChessGame{
  //   void printBoard();
     void nextTurn();
     void printStartText();
-    void run(ChessGame *g);
-    bool tryMove(ChessGame *g, int sr, int sc,int slevel, int tr, int tc, int tlevel);
+    void run();
+    bool tryMove(int sr, int sc,int slevel, int tr, int tc, int tlevel);
     void getUserInput();
-    void gameLoop(ChessGame *g);
+    void gameLoop();
     void getCurrentWinner();
 
     char printOptionsMenu();
