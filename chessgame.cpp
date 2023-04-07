@@ -2,6 +2,7 @@
 #include "chessgame.h"
 #include "chessboard.h"
 #include "player.h"
+#include <limits>
 #include <regex>
 #include<array>
 #include <cstring>
