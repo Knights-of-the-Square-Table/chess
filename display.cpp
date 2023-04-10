@@ -120,6 +120,11 @@ void Display::setup()
 //Chris
 void Display::placePieces()
 {
+    /*
+     *Currently set up for 6x6x2 boards
+     */
+
+
     //setup black pieces
     cellList[0]->setImage(":/images/resource/blkrook.png");
     cellList[5]->setImage(":/images/resource/blkrook.png");
