@@ -17,6 +17,7 @@ class BoardCell {
 
     ChessPiece* piece;
 
+
     BoardCell(ChessBoard* board, int rowIndex, int colIndex);
 
     bool isEmpty();
@@ -24,6 +25,7 @@ class BoardCell {
     void placePiece(ChessPiece* piece);
     bool hasPiece(Color color);
     ChessPiece* getPiece();
+    BoardCell* getMirrorCell();
 
 
 };
