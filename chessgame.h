@@ -3,13 +3,17 @@
 
 #include "chessboard.h"
 #include "player.h"
+#include "qobject.h"
 
 #include <tuple>
 
 class ChessBoard;
 class Player;
-class ChessGame{
-    public:
+class ChessGame : public QObject{
+
+    Q_OBJECT
+
+public:
     ChessBoard* topBoard;
     ChessBoard* botBoard;
 
@@ -40,6 +44,13 @@ class ChessGame{
     void printBoards();
     void printBoard(ChessBoard* b);
     /****************************/
+
+    // Qt Signaling
+public slots:
+    void getInput(QString input);
+
+signals:
+    void sendResponse(QString response);
 };
 
 #endif // CHESSGAME_H

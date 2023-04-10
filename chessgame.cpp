@@ -42,6 +42,7 @@ void ChessGame::printBoard(ChessBoard* b)
     b->print();
 
 }
+
 /*****************old******************/
 //void ChessGame::printBoard(){
 //    board->print();
@@ -346,3 +347,7 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     return validMove;
 }
 
+void ChessGame::getInput(QString input)
+{
+
+}

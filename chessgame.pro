@@ -21,6 +21,7 @@ SOURCES += \
         chessgame.cpp \
         chesspiece.cpp \
         display.cpp \
+        guicell.cpp \
         king.cpp \
         main.cpp \
         player.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     chesspiece.h \
     color.h \
     display.h \
+    guicell.h \
     king.h \
     level.h \
     player.h \

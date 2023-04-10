@@ -6,15 +6,16 @@
 #include <QtCore>
 #include <QtGui>
 #include "chessgame.h"
+#include "guicell.h"
 
-
+//Chris
 class Display: public QObject
 {
     Q_OBJECT
 private:
     QGraphicsScene * DisplayScene;
     ChessGame game;
- //   QList<Space *> spaceList;
+    QList<GUICell *> cellList;
     QString move;
     void setup();
     void placePieces();
@@ -24,6 +25,7 @@ private:
 
     const QString spaces[192] =
     {
+ //QString identities for each space for the 3 boards
  //bottomboard:
         "a80", "b80", "c80", "d80", "e80", "f80", "g80", "h80",
         "a70", "b70", "c70", "d70", "e70", "f70", "g70", "h70",
