@@ -25,7 +25,7 @@ class BoardCell {
     void placePiece(ChessPiece* piece);
     bool hasPiece(Color color);
     ChessPiece* getPiece();
-    BoardCell* getMirrorCell();
+    BoardCell* getMirrorCell(int rowIndex, int colIndex);
 
 
 };
