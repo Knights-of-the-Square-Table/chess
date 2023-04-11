@@ -44,3 +44,22 @@ bool King::isValidMove(BoardCell* target) {
     return true;
 
 }
+
+bool King::isInCheck(){
+    bool result = false;
+    ChessBoard* brd = this->cell->board;
+
+
+    //For all cells on the board that the king is on
+    for(int i = 0; i < ROW_COUNT; i++){
+        for(int j = 0; j < COL_COUNT; j++){
+            if(!brd->cells[i][j]->isEmpty()){
+                result = brd->cells[i][j]->getPiece()->isValidMove(this->cell);
+                if(result == true){break;}
+            }
+        }
+    }
+    //for(int k = 0; k< )
+
+    return result;
+}

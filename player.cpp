@@ -16,9 +16,14 @@ Color Player::getColor(){
 }
 
 int Player::getPoints(){
-    int total = 0;
-    for(int i=0; i<int(capturedPieces.size()); i++){
+    int total= 0;
+    if (int(capturedPieces.size()) == 0){
+        total=0;
+    }
+    else{
+        for(int i=0; i<=int(capturedPieces.size()); i++){
         total += capturedPieces[i]->getPointValue();
+        }
     }
     return total;
 }
