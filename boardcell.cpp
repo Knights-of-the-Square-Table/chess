@@ -8,6 +8,7 @@ BoardCell::BoardCell(ChessBoard* board, int rowIndex, int colIndex){
     this->rowIndex = rowIndex;
     this->colIndex = colIndex;
     this->piece = NULL;
+
 }
 
 bool BoardCell::isEmpty(){
@@ -29,6 +30,11 @@ bool BoardCell::hasPiece(Color color){
 ChessPiece *BoardCell::getPiece()
 {
     return this->piece;
+}
+
+BoardCell *BoardCell::getMirrorCell(int rowIndex, int colIndex)
+{
+    return this->board->getMirrorBoard()->getCell(rowIndex, colIndex);
 }
 
 

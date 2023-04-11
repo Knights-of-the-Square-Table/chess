@@ -2,6 +2,7 @@
 #include "chessgame.h"
 #include "chessboard.h"
 #include "player.h"
+#include <limits>
 #include <regex>
 #include<array>
 #include <cstring>
@@ -18,6 +19,8 @@ ChessGame::ChessGame()
 
     topBoard = new ChessBoard(this, TOP);
 
+    midBoard = new ChessBoard(this, MIDDLE);
+
     /*************************************/
 
     players[0] = new Player(WHITE);
@@ -25,6 +28,7 @@ ChessGame::ChessGame()
     currentPlayerIndex = 0;
     botBoard->game = this;
     topBoard->game = this;
+    midBoard->game = this;
 }
 
 
@@ -33,6 +37,8 @@ ChessGame::ChessGame()
 void ChessGame::printBoards()
 {
     printBoard(topBoard);
+
+    printBoard(midBoard);
 
     printBoard(botBoard);
 }

@@ -12,6 +12,7 @@ class ChessGame{
     public:
     ChessBoard* topBoard;
     ChessBoard* botBoard;
+    ChessBoard* midBoard;
 
     Player* players[2];
     int currentPlayerIndex;
