@@ -26,6 +26,10 @@ bool Bishop::isValidMove(BoardCell* target){
     int srcRowIndex = cell->rowIndex;
     int srcColIndex = cell->colIndex;
 
+    //Define the source and destination boards (1 or 2)
+    int srcBoardIndex = cell->board->level;
+    int dstBoardIndex = target->board->level;
+
     //Define index for destination cell
     int dstRowIndex = target->rowIndex;
     int dstColIndex = target->colIndex;
@@ -44,11 +48,17 @@ bool Bishop::isValidMove(BoardCell* target){
         return false;
     }
 
+    //If the Bishop tries to move more than 1 cell when moving between boards, the move is not valid
+    if(srcBoardIndex != dstBoardIndex){
+        if (abs(vertDifference) > 1){
+            return false;
+        }
+    }
+
     //Check that the diagonal path is clear
     //If this condition passes the move is diagonal
     if(abs(vertDifference) == abs(horizDifference)){
-        int moveLength = vertDifference;
-
+        int moveLength = abs(vertDifference);
 
         //these values will be used to help check the diagonal pieces from src to dst
         int x = (dstRowIndex - srcRowIndex)/moveLength;
@@ -57,19 +67,18 @@ bool Bishop::isValidMove(BoardCell* target){
         //iterate through the diagonal pieces and make sure they are not occupied
         for(int i = 1; i < moveLength; i++){
             BoardCell* c = target->board->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+            BoardCell* d = target->board->getMirrorBoard()->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+
             if(!c->isEmpty()){
                 return false;
             }
+
+            else if(!d->isEmpty()){
+                return false;
+            }
+
         }
 
-//        for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
-//            for(int ci = minColIndex; ci <= maxColIndex; ci++){
-//                BoardCell* c = target->board->getCell(ri, ci);
-//                if(!c->isEmpty()){
-//                    return false;
-//                }
-//            }
-//        }
     }
 
     //If all checks pass, the move is valid!
