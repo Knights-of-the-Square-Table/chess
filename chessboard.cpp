@@ -34,7 +34,7 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
         new Rook(   getCell(0,5), WHITE );
     }
 
-    else{
+    else if(level == BOTTOM){
         new Rook(   getCell(5,0), BLACK );
         new Bishop( getCell(5,1), BLACK );
         new King(   getCell(5,2), BLACK );
@@ -78,12 +78,22 @@ void ChessBoard::print(){
     string divider = "  _________________________";
     string empty = "   ";
     string center = "               ";
+    string boardLevelFrontSpace = "     ";
+    string boardLevelEndSpace = "    ";
+    string boardLevel = this->printBoardLevel(this->level);
     cout << endl << endl;
 //    cout << divider << endl;
     cout << center <<"  | a | b | c | d | e | f |" << endl;
     cout << center << divider << endl;
     for (int ri = 0; ri < ROW_COUNT; ri++){
-        cout << center <<"|" << ri+1 << "|";
+        if(ri==2){
+            cout << boardLevelFrontSpace << boardLevel << boardLevelEndSpace << "|" << ri+1 << "|";
+        }
+        else
+        {
+            cout << center <<"|" << ri+1 << "|";
+        }
+
         for (int ci = 0; ci < COL_COUNT; ci++){
             BoardCell* cell = getCell(ri,ci);
             if(cell->isEmpty()){
@@ -112,7 +122,36 @@ ChessBoard *ChessBoard::getMirrorBoard()
     }
 }
 
+ChessBoard *ChessBoard::getTopBoard()
+{
+    return this->game->topBoard;
+}
 
+ChessBoard *ChessBoard::getBotBoard()
+{
+    return this->game->botBoard;
+}
+
+ChessBoard *ChessBoard::getMidBoard()
+{
+    return this->game->midBoard;
+}
+
+string ChessBoard::printBoardLevel(Level level)
+{
+    if(level == TOP)
+    {
+        return "Top(3)";
+    }
+    else if(level == MIDDLE)
+    {
+        return "Mid(2)";
+    }
+    else
+    {
+        return "Bot(1)";
+    }
+}
 
 /*
 

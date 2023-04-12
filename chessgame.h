@@ -12,6 +12,7 @@ class ChessGame{
     public:
     ChessBoard* topBoard;
     ChessBoard* botBoard;
+    ChessBoard* midBoard;
 
     Player* players[2];
     int currentPlayerIndex;
@@ -22,7 +23,7 @@ class ChessGame{
     void nextTurn();
     void printStartText();
     void run();
-    void tryMove(ChessBoard*, int sr, int sc, int tr, int tc);
+    bool tryMove(int sr, int sc,int slevel, int tr, int tc, int tlevel);
     void getUserInput();
     void gameLoop();
     void getCurrentWinner();

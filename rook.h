@@ -15,6 +15,10 @@ class Rook: public ChessPiece
 
     bool isValidMove(BoardCell* target);
 
+    bool isPathClear(BoardCell* target);
+
+    bool isMoveToDiffBoard(BoardCell* target);
+
     int getPointValue(){
         return 5;
     }
