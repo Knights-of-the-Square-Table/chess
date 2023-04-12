@@ -15,11 +15,14 @@ GUICell::GUICell(int x, int y, int level)
 
 void GUICell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
+    //Player must left click to emit signal
     if(e->buttons() == Qt::LeftButton){
          qDebug() << "You clicked " << name;
-
+         emit sendSignal(name);
     }
-    emit sendSignal(name);
+
+
+
 }
 
 void GUICell::setName(QString n)

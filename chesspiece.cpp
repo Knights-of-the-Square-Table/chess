@@ -36,6 +36,5 @@ void ChessPiece::beCaptured(){
     this->cell->board->game->getCurrentPlayer()->addCapturedPiece(this);
     cell->removePiece();
     cell = NULL;
-//    this->cell->board->game->getCurrentWinner();
 }
 
