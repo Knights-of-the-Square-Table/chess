@@ -28,9 +28,40 @@ bool Queen::isValidMove(BoardCell* target){
     int dstRowIndex = target->rowIndex;
     int dstColIndex = target->colIndex;
 
+    //Define the source and destination boards
+    int srcBoardIndex = this->cell->board->level;
+    int dstBoardIndex = target->board->level;
+
     //Define variables to store difference between source and target cell
     int vertDifference = dstRowIndex - srcRowIndex;
     int horizDifference = dstColIndex - srcColIndex;
+
+    //If the Bishop is moving between boards, the legal moves change
+    if(srcBoardIndex != dstBoardIndex){
+        int boardMove = abs(dstBoardIndex - srcBoardIndex);
+
+        //if the Bishop moves one board level, it can move one cell away
+        if (boardMove == 1){
+            if(abs(vertDifference) > 1){
+                return false;
+            }
+
+            else if(abs(horizDifference) > 1){
+                return false;
+            }
+        }
+
+        //if the Bishop moves two board levels, it can move two cells away
+        else if(boardMove == 2){
+            if(abs(vertDifference) > 2){
+                return false;
+            }
+
+            else if(abs(horizDifference) > 2){
+                return false;
+            }
+        }
+    }
 
     //Check to see if the move is diagonal, horizontal, or vertical
     if(abs(vertDifference) != abs(horizDifference) && srcRowIndex != dstRowIndex && srcColIndex != dstColIndex){
@@ -45,7 +76,13 @@ bool Queen::isValidMove(BoardCell* target){
         int ci = srcColIndex;
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             BoardCell* c =  target->board->getCell(ri, ci);
+            BoardCell* mirror = target->board->getMirrorBoard()->getCell(ri, ci);
+
             if(!c->isEmpty()){
+                return false;
+            }
+
+            else if(!mirror->isEmpty()){
                 return false;
             }
         }
@@ -59,33 +96,45 @@ bool Queen::isValidMove(BoardCell* target){
         int ri = srcRowIndex;
         for(int ci = minColIndex; ci <= maxColIndex; ci++){
             BoardCell* c =  target->board->getCell(ri, ci);
+            BoardCell* mirror = target->board->getMirrorBoard()->getCell(ri, ci);
+
             if(!c->isEmpty()){
+                return false;
+            }
+
+            else if(!mirror->isEmpty()){
                 return false;
             }
         }
     }
 
     //Check that the diagonal path is clear
-    if(srcColIndex != dstColIndex && srcRowIndex != dstRowIndex){
-        int minRowIndex = min(srcRowIndex, dstRowIndex) + 1;
-        int maxRowIndex = max(srcRowIndex, dstRowIndex) -1 ;
+    if(abs(vertDifference) == abs(horizDifference)){
+        int moveLength = abs(vertDifference);
 
-        int minColIndex = min(srcColIndex, dstColIndex) + 1;
-        int maxColIndex = max(srcColIndex, srcColIndex) -1;
+        //these values will be used to help check the diagonal pieces from src to dst
+        int x = (dstRowIndex - srcRowIndex)/moveLength;
+        int y = (dstColIndex - srcColIndex)/moveLength;
 
-        for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
-            for(int ci = minColIndex; ci <= maxColIndex; ci++){
-                BoardCell* c = target->board->getCell(ri, ci);
-                if(!c->isEmpty()){
-                    return false;
-                }
+        //iterate through the diagonal pieces and make sure they are not occupied
+        for(int i = 1; i < moveLength; i++){
+            BoardCell* c = target->board->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+            BoardCell* mirror = target->board->getMirrorBoard()->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+
+            if(!c->isEmpty()){
+                return false;
             }
+
+            else if(!mirror->isEmpty()){
+                return false;
+            }
+
         }
+
     }
 
     //If all checks pass, the move is valid!
     return true;
-
 
 }
 

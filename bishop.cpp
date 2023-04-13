@@ -26,8 +26,8 @@ bool Bishop::isValidMove(BoardCell* target){
     int srcRowIndex = cell->rowIndex;
     int srcColIndex = cell->colIndex;
 
-    //Define the source and destination boards (1 or 2)
-    int srcBoardIndex = cell->board->level;
+    //Define the source and destination boards
+    int srcBoardIndex = this->cell->board->level;
     int dstBoardIndex = target->board->level;
 
     //Define index for destination cell
@@ -48,10 +48,22 @@ bool Bishop::isValidMove(BoardCell* target){
         return false;
     }
 
-    //If the Bishop tries to move more than 1 cell when moving between boards, the move is not valid
+    //If the Bishop is moving between boards, the legal moves change
     if(srcBoardIndex != dstBoardIndex){
-        if (abs(vertDifference) > 1){
-            return false;
+        int boardMove = abs(dstBoardIndex - srcBoardIndex);
+
+        //if the Bishop moves one board level, it can move one cell away
+        if (boardMove == 1){
+            if(abs(vertDifference) > 1){
+                return false;
+            }
+        }
+
+        //if the Bishop moves two board levels, it can move two cells away
+        else if(boardMove == 2){
+            if(abs(vertDifference) > 2){
+                return false;
+            }
         }
     }
 
