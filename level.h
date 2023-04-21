@@ -4,6 +4,7 @@
 enum Level
 {
     TOP,
+    MIDDLE,
     BOTTOM
 };
 

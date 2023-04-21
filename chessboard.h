@@ -4,6 +4,9 @@
 //#include "boardcell.h"
 #include "level.h"
 //#include "chessgame.h"
+#include <iostream>
+
+
 
 const int ROW_COUNT = 6;
 const int COL_COUNT = 6;
@@ -24,6 +27,11 @@ class ChessBoard
     void print();
     Level level;
     ChessBoard* getMirrorBoard();
+    ChessBoard* getTopBoard();
+    ChessBoard* getBotBoard();
+    ChessBoard* getMidBoard();
+    std::string printBoardLevel(Level level);
+
 
 
 

@@ -32,14 +32,9 @@ ChessPiece *BoardCell::getPiece()
     return this->piece;
 }
 
-BoardCell *BoardCell::getMirrorCell()
+BoardCell *BoardCell::getMirrorCell(int rowIndex, int colIndex)
 {
-    if (this->board->level==TOP){
-        return this->board->game->botBoard->getCell(rowIndex, colIndex);
-    }
-    else {
-        return this->board->game->topBoard->getCell(rowIndex, colIndex);
-    }
+    return this->board->getMirrorBoard()->getCell(rowIndex, colIndex);
 }
 
 

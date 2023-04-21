@@ -16,21 +16,30 @@ bool Rook::isValidMove(BoardCell* target)
         return false;
     }
 
+    //check to see if the move is to different board
     if(isMoveToDiffBoard(target))
     {
-        if(abs(target->rowIndex - cell->rowIndex) > 1)
+        if(cell->board->level == MIDDLE && abs(target->rowIndex - cell->rowIndex) > 1)
         {
             return false;
         }
-        else if(abs(target->colIndex - cell->colIndex) > 1)
+        else if(cell->board->level == MIDDLE && abs(target->colIndex - cell->colIndex) > 1)
         {
             return false;
         }
         else if((abs(target->colIndex - cell->colIndex) == 0) && (abs(target->rowIndex - cell->rowIndex) == 0)){
             return true;
         }
-        else {
+        else if(cell->board->level != MIDDLE && abs(target->rowIndex - cell->rowIndex) > 2)
+        {
             return false;
+        }
+        else if(cell->board->level != MIDDLE && abs(target->colIndex - cell->colIndex) > 2)
+        {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
@@ -40,17 +49,14 @@ bool Rook::isValidMove(BoardCell* target)
     }
 
     //check mirror board to see if target cell has piece on it
-    if(!target->getMirrorCell()->isEmpty())
+    if(!target->getMirrorCell(target->rowIndex, target->colIndex)->isEmpty())
     {
         return false;
     }
 
 
-    //check to see if the move is to different board
-    //if different board, the validate move method will have to change
 
 
-    cout << "got here" << endl;
     if(!this->isPathClear(target))
     {
             return false;
@@ -58,7 +64,7 @@ bool Rook::isValidMove(BoardCell* target)
 
 
     bool clear = this->isPathClear(target);
-    cout << clear << endl;
+    cout << &clear << endl;
 
 
 
@@ -100,7 +106,11 @@ bool Rook::isPathClear(BoardCell *target)
         int ci = srcColIndex;
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             BoardCell* c =  target->board->getCell(ri, ci);
+            BoardCell* mirrorC = target->getMirrorCell(ri, ci);
             if(!c->isEmpty()){
+                return false;
+            }
+            else if(!mirrorC->isEmpty()){
                 return false;
             }
         }
@@ -120,7 +130,11 @@ bool Rook::isPathClear(BoardCell *target)
         int ri = srcRowIndex;
         for(int ci = minColIndex; ci <= maxColIndex; ci++){
             BoardCell* c =  target->board->getCell(ri, ci);
+            BoardCell* mirrorC = target->getMirrorCell(ri, ci);
             if(!c->isEmpty()){
+                return false;
+            }
+            else if(!mirrorC->isEmpty()){
                 return false;
             }
         }
