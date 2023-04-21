@@ -2,6 +2,7 @@
 #include "chessgame.h"
 #include "chessboard.h"
 #include "player.h"
+#include "qdebug.h"
 #include <limits>
 #include <regex>
 #include<array>
@@ -83,8 +84,8 @@ void ChessGame::printStartText()
 void ChessGame::run()
 {
 
-    this->printStartText();
-    this->gameLoop();
+ //   this->printStartText();
+ //   this->gameLoop();
 
 }
 
@@ -290,6 +291,12 @@ bool ChessGame::validateInput(std::string input)
     return false;
 }
 
+void ChessGame::resetMoves()
+{
+    move1 = "";
+    move2 = "";
+}
+
 Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
@@ -348,7 +355,58 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     return validMove;
 }
 
-void ChessGame::getInput(QString input)
+//Chris
+BoardCell* ChessGame::getCell(int row, int col, int level)
+{
+    BoardCell * cell = nullptr;
+    if(level ==0){
+        cell = this->botBoard->getCell(row, col);
+    }else if(level == 1){
+        //cell = this->midBoard->getCell(row, col);
+    }else
+        if(level ==2){
+        cell = this->topBoard->getCell(row, col);
+        }
+    return cell;
+}
+
+std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
 {
 
+    int row, col, level;
+
+    level = input[0]-'a';
+    row = input[1]-48;
+    col = input[2]-48;
+
+    std::tuple<int,int,int> converted(row, col, level);
+    return converted;
+
+}
+
+
+//Chris
+void ChessGame::getInput(QString input)
+{
+    qDebug() << "Game saw that " << input << "was clicked, and will now respond.";
+
+    // If this is the first click, store it in move1
+    if (move1 == "")
+    {
+        qDebug() << "move ==0 ";
+        string tempInput = input.toStdString();
+        std::tuple<int,int,int>firstCell = convertGUIinput(tempInput);
+        BoardCell * cell;
+        cell = this->getCell(get<0>(firstCell), get<1>(firstCell), get<2>(firstCell));
+
+
+
+    }else{
+        // If this is the first click, store it in move1
+        if (move1 == "")
+        {
+            qDebug() << "Move has been added";
+            move1 = input.toStdString();
+        }
+    }
 }

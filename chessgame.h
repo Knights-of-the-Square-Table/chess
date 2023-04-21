@@ -16,6 +16,7 @@ class ChessGame : public QObject{
 public:
     ChessBoard* topBoard;
     ChessBoard* botBoard;
+    ChessBoard* midBoard;
 
     Player* players[2];
     int currentPlayerIndex;
@@ -33,10 +34,17 @@ public:
 
     char printOptionsMenu();
     void printStartOptionsMenu();
-
+    BoardCell * getCell(int row,int col,int level);
+    std::tuple<int,int,int> convertGUIinput(std::string input);
     std::tuple<int,int,int> convertInput(std::string input);
     bool validateInput(std::string input);
 
+    QString guimove;
+    std::string move1 = "";
+    std::string move2 = "";
+    Color guiTurn = WHITE;
+    void switchGuiTurn();
+    void resetMoves();
 
     Player* getCurrentPlayer();
 

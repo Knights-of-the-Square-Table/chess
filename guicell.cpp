@@ -1,5 +1,7 @@
 #include "guicell.h"
-
+#include <iostream>
+#include <stdio.h>
+#include <QDebug>
 
 
 GUICell::GUICell(int x, int y, int level)

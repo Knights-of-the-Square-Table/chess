@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
     Display D;
    // MainWindow w;
     QGraphicsView* view = new QGraphicsView(D.getScene());
-    view->setFixedSize(1600,1000);
+    view->setFixedSize(1800,1000);
     view->show();
 
     return a.exec(); // comment this line out for CLI
