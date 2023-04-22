@@ -22,6 +22,8 @@ class Rook: public ChessPiece
     int getPointValue(){
         return 5;
     }
+
+    bool isInCheck();
 };
 
 #endif // ROOK_H

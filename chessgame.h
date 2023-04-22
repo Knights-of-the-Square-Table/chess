@@ -27,6 +27,7 @@ class ChessGame{
     void getUserInput();
     void gameLoop();
     void getCurrentWinner();
+    bool currentPlayerCheck();
 
     char printOptionsMenu();
     void printStartOptionsMenu();

@@ -21,11 +21,13 @@ class ChessPiece{
     virtual bool isValidMove(BoardCell* target) = 0;
     virtual char getNickName() = 0;
     virtual int getPointValue() = 0;
+    virtual bool isInCheck() = 0;
 
     bool isInplay();
     void move(BoardCell* target);
     bool hasSameColor(ChessPiece* piece);
     void beCaptured();
+
 };
 
 #endif // CHESSPIECE_H

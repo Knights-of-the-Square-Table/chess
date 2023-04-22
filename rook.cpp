@@ -156,6 +156,9 @@ bool Rook::isMoveToDiffBoard(BoardCell *target)
     }
 }
 
+bool Rook::isInCheck(){
+    return false;
+}
 
 
 //maltese falcom

@@ -76,3 +76,7 @@ bool Bishop::isValidMove(BoardCell* target){
     return true;
 
 }
+
+bool Bishop::isInCheck(){
+    return false;
+}

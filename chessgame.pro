@@ -11,6 +11,7 @@ SOURCES += \
         chesspiece.cpp \
         king.cpp \
         main.cpp \
+        pawn.cpp \
         player.cpp \
         queen.cpp \
         rook.cpp
@@ -24,6 +25,7 @@ HEADERS += \
     color.h \
     king.h \
     level.h \
+    pawn.h \
     player.h \
     queen.h \
     rook.h
