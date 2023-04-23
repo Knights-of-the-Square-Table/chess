@@ -153,6 +153,12 @@ void Display::placePieces()
 //    cellList[12]->setImage(":/images/resource/blkpawn.png");
 //    cellList[13]->setImage(":/images/resource/blkpawn.png");
 
+    cellList[107]->setImage(":/images/resource/blkrook.png");
+    cellList[102]->setImage(":/images/resource/blkrook.png");
+    cellList[106]->setImage(":/images/resource/blkbishop.png");
+    cellList[103]->setImage(":/images/resource/blkbishop.png");
+    cellList[105]->setImage(":/images/resource/blkqueen.png");
+    cellList[104]->setImage(":/images/resource/blkking.png");
 
 //    //setup white pieces
 //    cellList[191]->setImage(":/images/resource/whiterook.png");
@@ -172,6 +178,12 @@ void Display::placePieces()
 //    cellList[182]->setImage(":/images/resource/whitepawn.png");
 //    cellList[183]->setImage(":/images/resource/whitepawn.png");
 
+        cellList[0]->setImage(":/images/resource/whiterook.png");
+        cellList[5]->setImage(":/images/resource/whiterook.png");
+        cellList[1]->setImage(":/images/resource/whitebishop.png");
+        cellList[4]->setImage(":/images/resource/whitebishop.png");
+        cellList[3]->setImage(":/images/resource/whitequeen.png");
+        cellList[2]->setImage(":/images/resource/whiteking.png");
 }
 
 //Chris
@@ -184,5 +196,33 @@ QGraphicsScene* Display::getScene()
 void Display::getResponse(QString response)
 {
      std::string responseString = response.toStdString();
+     qDebug() << "getResponse = " << response;
+     QString firstSpace = "";
+     QString secondSpace = "";
+     firstSpace += response[0];
+     firstSpace += response[1];
+     firstSpace += response[2];
+     secondSpace += response[3];
+     secondSpace += response[4];
+     secondSpace += response[5];
+     QString temp;
+     qDebug() << "firstSpace: " << firstSpace;
+     for (int i=0; i<cellList.length(); i++ )
+     {
+         if (cellList[i]->getName() == firstSpace)
+         {
+             qDebug() << "found the first cell";
+             temp = cellList[i]->getImage();
+             qDebug() << "Temp: " << temp;
+             cellList[i]->clearImage();
+         }
+     }
+     for (int i=0; i<cellList.length(); i++ )
+     {
+         if (cellList[i]->getName() == secondSpace)
+         {
+             cellList[i]->setImage(temp);
+         }
+     }
 }
 

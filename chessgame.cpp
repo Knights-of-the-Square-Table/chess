@@ -31,6 +31,7 @@ ChessGame::ChessGame()
     botBoard->game = this;
     topBoard->game = this;
     midBoard->game = this;
+    qDebug() << "game started";
 }
 
 
@@ -89,8 +90,8 @@ void ChessGame::printStartText()
 void ChessGame::run()
 {
 
- //   this->printStartText();
- //   this->gameLoop();
+    this->printStartText();
+    this->gameLoop();
 
 }
 
@@ -327,22 +328,29 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     //first attempt at adding 2nd board
     if(level1 == 0){
         srcCell = this->botBoard->getCell(r1, c1);
+    }else if(level1 ==1){
+        srcCell = this->midBoard->getCell(r1,c1);
     }else{
-        srcCell =   this->topBoard->getCell(r1, c1);
+        srcCell = this->topBoard->getCell(r1, c1);
     }
+
     if(level2 == 0){
         dstCell = this->botBoard->getCell(r2, c2);
+    }else if(level2 == 1){
+        dstCell = this->midBoard->getCell(r2,c2);
     }else{
         dstCell = this->topBoard->getCell(r2, c2);
     }
 
     //check that there is a piece in the cell
     if( srcCell->piece ==NULL){
+        qDebug() << "first cell clicked had no piece";
         validMove = false;
     }
             //check that the current player is trying to move their pieces and not enemy pieces
     else if(srcCell->getPiece()->color !=  this->getCurrentPlayer()->color){
             cout << "You cannot move other players pieces" << endl;
+           // qDebug() << "move not valid";
             validMove = false;
         }
     else{
@@ -355,6 +363,7 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
+
         this->printBoards();
     }
     return validMove;
@@ -367,11 +376,11 @@ BoardCell* ChessGame::getCell(int row, int col, int level)
     if(level ==0){
         cell = this->botBoard->getCell(row, col);
     }else if(level == 1){
-        //cell = this->midBoard->getCell(row, col);
-    }else
-        if(level ==2){
+        cell = this->midBoard->getCell(row, col);
+    }else if(level ==2){
         cell = this->topBoard->getCell(row, col);
-        }
+    }
+
     return cell;
 }
 
@@ -380,9 +389,9 @@ std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
 
     int row, col, level;
 
-    level = input[0]-'a';
+    level = input[2]-48;
     row = input[1]-48;
-    col = input[2]-48;
+    col = input[0]-'a';
 
     std::tuple<int,int,int> converted(row, col, level);
     return converted;
@@ -396,22 +405,56 @@ void ChessGame::getInput(QString input)
     qDebug() << "Game saw that " << input << "was clicked, and will now respond.";
 
     // If this is the first click, store it in move1
-    if (move1 == "")
-    {
-        qDebug() << "move ==0 ";
-        string tempInput = input.toStdString();
-        std::tuple<int,int,int>firstCell = convertGUIinput(tempInput);
-        BoardCell * cell;
-        cell = this->getCell(get<0>(firstCell), get<1>(firstCell), get<2>(firstCell));
+//    if (move1 == "")
+//    {
+//        qDebug() << "move ==0 ";
+//        string tempInput = input.toStdString();
+//        std::tuple<int,int,int>firstCell = convertGUIinput(tempInput);
+//        BoardCell * cell;
+//        cell = this->getCell(get<0>(firstCell), get<1>(firstCell), get<2>(firstCell));
 
 
 
-    }else{
-        // If this is the first click, store it in move1
-        if (move1 == "")
-        {
-            qDebug() << "Move has been added";
-            move1 = input.toStdString();
+//    }else{
+//        // If this is the first click, store it in move1
+//        if (move1 == "")
+//        {
+//            qDebug() << "Move has been added";
+//            move1 = input.toStdString();
+//        }
+//    }
+    std::tuple<int,int,int> fromPos;
+    std::tuple<int,int,int> toPos;
+    //Check if anything has been clicked, if not, store cell clicked in move1
+    if(move1 == ""){
+        move1 = input.toStdString();
+        //Convert move1 to check if the cell has a piece or now
+        fromPos = convertGUIinput(move1);
+//        qDebug() << this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty();
+
+
+        //resets moves if no piece in the cell
+        if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
+            qDebug() << "No piece selected";
+            resetMoves();
         }
+
+    //If first click is stored, wait for second cell click and store, convert to tuple and attempt move
+    }else{
+        move2 = input.toStdString();
+        fromPos = convertGUIinput(move1);
+        toPos = convertGUIinput(move2);
+        if(tryMove(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos), get<0>(toPos), get<1>(toPos), get<2>(toPos))){
+            this->nextTurn();
+            QString sendStr = "";
+            QString part1 = QString::fromStdString(move1);
+            QString part2 = QString::fromStdString(move2);
+            sendStr += part1;
+            sendStr += part2;
+            sendResponse(sendStr);
+        }
+        resetMoves();
     }
+
+
 }
