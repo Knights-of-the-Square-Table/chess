@@ -20,5 +20,7 @@ class Bishop : public ChessPiece
     int getPointValue(){
         return 3;
     }
+
+    bool isInCheck();
 };
 #endif // BISHOP_H

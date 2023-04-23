@@ -18,6 +18,8 @@ class Queen: public ChessPiece{
     int getPointValue(){
         return 9;
     }
+
+    bool isInCheck();
 };
 
 #endif // QUEEN_H

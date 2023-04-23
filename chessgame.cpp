@@ -359,15 +359,19 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
 
     cout << "Move: (" << c1 << ',' << r1 <<',' <<level1 << ") - (" << c2 << ',' << r2 << ',' << level2 << ")";
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
-
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
 
         this->printBoards();
     }
+
+    //print statement for checking currentPlayerCheck()
+    //cout << "is current player in check? " << currentPlayerCheck() << endl;
+
     return validMove;
 }
+
 
 //Chris
 BoardCell* ChessGame::getCell(int row, int col, int level)
@@ -458,3 +462,30 @@ void ChessGame::getInput(QString input)
 
 
 }
+
+// Method for determining whether the current player is in check -Liam
+bool ChessGame::currentPlayerCheck(){
+    bool result = false;
+    ChessBoard* boards [3] = {this->topBoard, this->botBoard, this->midBoard};
+    for(int k = 0; k < 3; k++){
+        for(int i = 0; i < ROW_COUNT; i++){
+            for(int j = 0; j < COL_COUNT; j++){
+                if(!boards[k]->cells[i][j]->isEmpty()){
+                    if(boards[k]->cells[i][j]->getPiece()->getNickName() == 'K' && getCurrentPlayer()->color == WHITE){
+                        result = boards[k]->cells[i][j]->getPiece()->isInCheck();
+                    }
+                    else if (boards[k]->cells[i][j]->getPiece()->getNickName() == 'k' && getCurrentPlayer()->color == BLACK){
+                        result = boards[k]->cells[i][j]->getPiece()->isInCheck();
+                    }
+                    if(result == true){goto end;}
+                }
+            }
+        }
+    }
+    end:
+    return result;
+}
+//Liam
+
+
+

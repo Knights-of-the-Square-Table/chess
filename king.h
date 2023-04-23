@@ -17,6 +17,8 @@ class King: public ChessPiece{
     int getPointValue(){
         return 100;
     }
+
+    bool isInCheck();
 };
 
 #endif // KING_H

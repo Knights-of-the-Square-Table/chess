@@ -24,6 +24,7 @@ SOURCES += \
         guicell.cpp \
         king.cpp \
         main.cpp \
+        pawn.cpp \
         player.cpp \
         queen.cpp \
         rook.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     guicell.h \
     king.h \
     level.h \
+    pawn.h \
     player.h \
     queen.h \
     rook.h
