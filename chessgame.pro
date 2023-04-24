@@ -24,6 +24,7 @@ SOURCES += \
         guicell.cpp \
         king.cpp \
         main.cpp \
+        mainwindow.cpp \
         pawn.cpp \
         player.cpp \
         queen.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     guicell.h \
     king.h \
     level.h \
+    mainwindow.h \
     pawn.h \
     player.h \
     queen.h \
@@ -47,3 +49,6 @@ HEADERS += \
 
 RESOURCES += \
     rsc.qrc
+
+FORMS += \
+    mainwindow.ui

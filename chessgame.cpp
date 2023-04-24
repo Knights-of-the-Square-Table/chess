@@ -202,6 +202,7 @@ void ChessGame::printStartOptionsMenu()
 
 
 //Chris
+//Converts input from cin into a tuple for tryMove() method
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 {
     //initialize the 3 int variables to store converted string
@@ -254,6 +255,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 }
 
 //Chris
+//Method validates the CLI inputs from cin
 bool ChessGame::validateInput(std::string input)
 {
 
@@ -297,6 +299,8 @@ bool ChessGame::validateInput(std::string input)
     return false;
 }
 
+//Chris
+//Method to reset string input for moves
 void ChessGame::resetMoves()
 {
     move1 = "";
@@ -374,6 +378,7 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
 
 
 //Chris
+//Method to get cell for chessGameGUI
 BoardCell* ChessGame::getCell(int row, int col, int level)
 {
     BoardCell * cell = nullptr;
@@ -388,6 +393,8 @@ BoardCell* ChessGame::getCell(int row, int col, int level)
     return cell;
 }
 
+//Chris
+//Method to convert string inputs from clicking into tuple that can be used for tryMove()
 std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
 {
 
@@ -404,29 +411,11 @@ std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
 
 
 //Chris
+
+//This method takes inputs from a click and sends a response string
 void ChessGame::getInput(QString input)
 {
-    qDebug() << "Game saw that " << input << "was clicked, and will now respond.";
 
-    // If this is the first click, store it in move1
-//    if (move1 == "")
-//    {
-//        qDebug() << "move ==0 ";
-//        string tempInput = input.toStdString();
-//        std::tuple<int,int,int>firstCell = convertGUIinput(tempInput);
-//        BoardCell * cell;
-//        cell = this->getCell(get<0>(firstCell), get<1>(firstCell), get<2>(firstCell));
-
-
-
-//    }else{
-//        // If this is the first click, store it in move1
-//        if (move1 == "")
-//        {
-//            qDebug() << "Move has been added";
-//            move1 = input.toStdString();
-//        }
-//    }
     std::tuple<int,int,int> fromPos;
     std::tuple<int,int,int> toPos;
     //Check if anything has been clicked, if not, store cell clicked in move1
@@ -434,8 +423,6 @@ void ChessGame::getInput(QString input)
         move1 = input.toStdString();
         //Convert move1 to check if the cell has a piece or now
         fromPos = convertGUIinput(move1);
-//        qDebug() << this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty();
-
 
         //resets moves if no piece in the cell
         if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
@@ -443,7 +430,7 @@ void ChessGame::getInput(QString input)
             resetMoves();
         }
 
-    //If first click is stored, wait for second cell click and store, convert to tuple and attempt move
+    //If first click is stored, wait for second cell click, convert to tuples and attempt move
     }else{
         move2 = input.toStdString();
         fromPos = convertGUIinput(move1);
@@ -455,11 +442,11 @@ void ChessGame::getInput(QString input)
             QString part2 = QString::fromStdString(move2);
             sendStr += part1;
             sendStr += part2;
-            sendResponse(sendStr);
+            emit sendResponse(sendStr);
         }
+        //after move is tried, reset moves again
         resetMoves();
     }
-
 
 }
 
