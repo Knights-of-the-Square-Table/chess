@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include "MainWindow.h"
 #include "chessgame.h"
 #include <string.h>
 #include "chessgame.h"
@@ -16,17 +17,20 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
+
     QApplication a(argc, argv);
-    Display D;
-   // MainWindow w;
-    QGraphicsView* view = new QGraphicsView(D.getScene());
-    view->setFixedSize(1800,1000);
-    view->show();
+
+    MainWindow w;
+    w.show();
+//    Display D;
+//    QGraphicsView* view = new QGraphicsView(D.getScene());
+//    view->setFixedSize(1800,1000);
+//    view->show();
 
     return a.exec(); // comment this line out for CLI
 
-    ChessGame* g = new ChessGame();
-    g->run();
+//    ChessGame* g = new ChessGame();
+//    g->run();
 
 //    return 0; //uncomment this line for CLI
 }
