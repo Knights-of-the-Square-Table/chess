@@ -12,5 +12,7 @@
         <file>resource/whitepawn.png</file>
         <file>resource/whitequeen.png</file>
         <file>resource/whiterook.png</file>
+        <file>resource/tableTop.jpg</file>
+        <file>resource/fullTable.jpg</file>
     </qresource>
 </RCC>
