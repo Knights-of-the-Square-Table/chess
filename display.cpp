@@ -234,12 +234,12 @@ void Display::getResponse(QString response)
      }
      //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
 //     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
-//     QString s = QString::number(game.players[0]->getPoints());
-//     QString scoreText = "Player 1 score: " + s;
-//     scoreWhite->setPlainText(scoreText);
-//     QString s2 = QString::number(game.players[1]->getPoints());
-//     QString scoreText2 = "Player 2 score: " + s2;
-//     scoreBlack->setPlainText(scoreText2);
+     QString s = QString::number(game.players[0]->getPoints());
+     QString scoreText = "Player 1 score: " + s;
+     scoreWhite->setPlainText(scoreText);
+     QString s2 = QString::number(game.players[1]->getPoints());
+     QString scoreText2 = "Player 2 score: " + s2;
+     scoreBlack->setPlainText(scoreText2);
 
 }
 
