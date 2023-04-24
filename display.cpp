@@ -1,7 +1,10 @@
 #include "display.h"
 #include "guicell.h"
 #include "qgraphicsitem.h"
+#include "qgraphicsview.h"
 #include <QObject>
+#include <QBrush>
+#include <QImage>
 
 
 //Chris
@@ -18,7 +21,6 @@ Display::Display()
 //Chris
 void Display::setup()
 {
-
     const int size = 6;
     int scale = size;
     //i = square, j = x pos, k = y pos
@@ -39,6 +41,8 @@ void Display::setup()
         if (black)
         {
             cell->setBrush(Qt::lightGray);
+        }else{
+            cell->setBrush(Qt::white);
         }
         black = !black;
 
@@ -71,6 +75,8 @@ void Display::setup()
         if (black)
         {
             cell->setBrush(Qt::lightGray);
+        }else{
+            cell->setBrush(Qt::white);
         }
         black = !black;
 
@@ -100,6 +106,8 @@ void Display::setup()
         if (black)
         {
             cell->setBrush(Qt::lightGray);
+        }else{
+            cell->setBrush(Qt::white);
         }
         black = !black;
 
@@ -117,17 +125,17 @@ void Display::setup()
 
     QString s = QString::number(game.players[0]->getPoints());
     QString scoreText = "Player 1 score: " + s;
-    QGraphicsTextItem * score = new QGraphicsTextItem();
-    score->setPlainText(scoreText);
-    score->setPos(1200, 575);
-    DisplayScene->addItem(score);
+    scoreWhite = new QGraphicsTextItem();
+    scoreWhite->setPlainText(scoreText);
+    scoreWhite->setPos(1200, 575);
+    DisplayScene->addItem(scoreWhite);
 
     QString s2 = QString::number(game.players[1]->getPoints());
     QString scoreText2 = "Player 2 score: " + s2;
-    QGraphicsTextItem * score2 = new QGraphicsTextItem();
-    score2->setPlainText(scoreText2);
-    score2->setPos(0, -30);
-    DisplayScene->addItem(score2);
+    scoreBlack = new QGraphicsTextItem();
+    scoreBlack->setPlainText(scoreText2);
+    scoreBlack->setPos(0, -30);
+    DisplayScene->addItem(scoreBlack);
 }
 
 
@@ -196,7 +204,7 @@ QGraphicsScene* Display::getScene()
 void Display::getResponse(QString response)
 {
      std::string responseString = response.toStdString();
-     qDebug() << "getResponse = " << response;
+     //qDebug() << "getResponse = " << response;
      QString firstSpace = "";
      QString secondSpace = "";
      firstSpace += response[0];
@@ -206,14 +214,14 @@ void Display::getResponse(QString response)
      secondSpace += response[4];
      secondSpace += response[5];
      QString temp;
-     qDebug() << "firstSpace: " << firstSpace;
+    // qDebug() << "firstSpace: " << firstSpace;
      for (int i=0; i<cellList.length(); i++ )
      {
          if (cellList[i]->getName() == firstSpace)
          {
-             qDebug() << "found the first cell";
+//             qDebug() << "found the first cell";
              temp = cellList[i]->getImage();
-             qDebug() << "Temp: " << temp;
+//              qDebug() << "Temp: " << temp;
              cellList[i]->clearImage();
          }
      }
@@ -224,5 +232,14 @@ void Display::getResponse(QString response)
              cellList[i]->setImage(temp);
          }
      }
+     //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
+//     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
+//     QString s = QString::number(game.players[0]->getPoints());
+//     QString scoreText = "Player 1 score: " + s;
+//     scoreWhite->setPlainText(scoreText);
+//     QString s2 = QString::number(game.players[1]->getPoints());
+//     QString scoreText2 = "Player 2 score: " + s2;
+//     scoreBlack->setPlainText(scoreText2);
+
 }
 
