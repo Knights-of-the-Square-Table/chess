@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string>
 #include <limits>
+#include <list>
 using namespace std;
 
 
@@ -201,6 +202,8 @@ void ChessGame::printStartOptionsMenu()
 }
 
 
+
+
 //Chris
 //Converts input from cin into a tuple for tryMove() method
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
@@ -297,6 +300,24 @@ bool ChessGame::validateInput(std::string input)
         return regex_match(input, chess3D);
     }
     return false;
+}
+
+std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
+{
+    std::vector<int> topB = cell->piece->getMovesInt(topBoard);
+    std::vector<int> midB = cell->piece->getMovesInt(midBoard);
+    std::vector<int> botB = cell->piece->getMovesInt(botBoard);
+    std::vector<int> allMoves = {};
+
+    std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
+    std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
+    std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
+
+    for(auto &i: allMoves){
+        cout << i;
+    }
+
+    return allMoves;
 }
 
 //Chris

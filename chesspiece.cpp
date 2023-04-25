@@ -1,5 +1,6 @@
 #include "chesspiece.h"
 #include "chessgame.h"
+#include <vector>
 
 ChessPiece::ChessPiece(BoardCell* cell, Color color){
     this->cell = cell;
@@ -40,5 +41,39 @@ void ChessPiece::beCaptured(){
 
 
 
+}
+
+std::vector<BoardCell *> ChessPiece::getMoves(ChessBoard *board)
+{
+    std::vector<BoardCell*> moves = {};
+    BoardCell* tempTargetCell = nullptr;
+    for(int ri=0; ri<6;ri++){
+        for(int ci=0; ci<6; ci++){
+            tempTargetCell = board->getCell(ri, ci);
+            if(cell->getPiece()->isValidMove(tempTargetCell)){
+                moves.push_back(tempTargetCell);
+            }
+        }
+    }
+    return moves;
+}
+
+std::vector<int> ChessPiece::getMovesInt(ChessBoard *board){
+    std::vector<int> movesInt = {};
+    int count = 0;
+    BoardCell* tempTargetCell = nullptr;
+    for(int ri=0; ri<6; ri++){
+        for(int ci=0; ci<6; ci++){
+            tempTargetCell = board->getCell(ri, ci);
+            if(cell->getPiece()->isValidMove(tempTargetCell)){
+                movesInt[count] = 1;
+            }
+            else{
+                movesInt[count] = 0;
+            }
+            count++;
+        }
+    }
+    return movesInt;
 }
 

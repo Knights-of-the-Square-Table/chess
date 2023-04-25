@@ -27,6 +27,8 @@ class ChessPiece{
     void move(BoardCell* target);
     bool hasSameColor(ChessPiece* piece);
     void beCaptured();
+    std::vector<BoardCell*> getMoves(ChessBoard* board);
+    std::vector<int> getMovesInt(ChessBoard* board);
 
 };
 

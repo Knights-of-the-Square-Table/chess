@@ -23,6 +23,8 @@ class Rook: public ChessPiece
         return 5;
     }
 
+    std::vector<BoardCell*> getPossibleMoves();
+
     bool isInCheck();
 };
 

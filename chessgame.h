@@ -4,6 +4,7 @@
 #include "chessboard.h"
 #include "player.h"
 #include "qobject.h"
+#include <list>
 
 #include <tuple>
 
@@ -33,12 +34,14 @@ public:
     void getCurrentWinner();
     bool currentPlayerCheck();
 
+
     char printOptionsMenu();
     void printStartOptionsMenu();
     BoardCell * getCell(int row,int col,int level);
     std::tuple<int,int,int> convertGUIinput(std::string input);
     std::tuple<int,int,int> convertInput(std::string input);
     bool validateInput(std::string input);
+    std::vector<int> getPossibleMoves(BoardCell *cell);
 
     QString guimove;
     std::string move1 = "";
