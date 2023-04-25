@@ -29,7 +29,7 @@ private:
     {
  //QString identities for each space for the 3 boards
         //8x8
-        //TODO FIX TO FIT BACKEND ORIENTATION
+
 // //topBoard:
 //        "a02", "b02", "c02", "d02", "e02", "f02", "g02", "h02",
 //        "a12", "b12", "c12", "d12", "e12", "f12", "g12", "h12",
