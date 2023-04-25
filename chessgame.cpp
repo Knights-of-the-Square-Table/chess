@@ -350,8 +350,8 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
 
     //print statement for checking currentPlayerCheck()
     //cout << "is current player in check? " << currentPlayerCheck() << endl;
-
     return validMove;
+
 }
 
 // Method for determining whether the current player is in check -Liam
