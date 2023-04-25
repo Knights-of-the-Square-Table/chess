@@ -16,25 +16,49 @@ bool Rook::isValidMove(BoardCell* target)
         return false;
     }
 
+    ChessBoard *middleB = NULL;
+    ChessBoard *topB = NULL;
+    ChessBoard *bottomB = NULL;
+    BoardCell *middleCell = NULL;
+    BoardCell *topCell = NULL;
+    BoardCell *bottomCell = NULL;
+    if(target->board->level == MIDDLE){
+        middleB = target->board->getMidBoard();
+        topCell = target->board->getCell(target->rowIndex, target->colIndex);
+        bottomCell = target->board->getCell(target->rowIndex, target->colIndex);
+    }
+
+    else if(target->board->level == TOP){
+        topB = target->board->getTopBoard();
+        middleCell = target->board->getCell(target->rowIndex, target->colIndex);
+        bottomCell = target->board->getCell(target->rowIndex, target->colIndex);
+    }
+    else if(target->board->level == BOTTOM){
+        bottomB = target->board->getBotBoard();
+        topCell = target->board->getCell(target->rowIndex, target->colIndex);
+        middleCell = target->board->getCell(target->rowIndex, target->colIndex);
+
+    }
+
     //check to see if the move is to different board
     if(isMoveToDiffBoard(target))
     {
-        if(cell->board->level == MIDDLE && abs(target->rowIndex - cell->rowIndex) > 1)
+        if(middleB && abs(target->rowIndex - cell->rowIndex) > 1)
         {
             return false;
         }
-        else if(cell->board->level == MIDDLE && abs(target->colIndex - cell->colIndex) > 1)
+        else if(middleB && abs(target->colIndex - cell->colIndex) > 1)
         {
             return false;
         }
         else if((abs(target->colIndex - cell->colIndex) == 0) && (abs(target->rowIndex - cell->rowIndex) == 0)){
             return true;
         }
-        else if(cell->board->level != MIDDLE && abs(target->rowIndex - cell->rowIndex) > 2)
+        else if(!middleB && abs(target->rowIndex - cell->rowIndex) > 2)
         {
             return false;
         }
-        else if(cell->board->level != MIDDLE && abs(target->colIndex - cell->colIndex) > 2)
+        else if(!middleB && abs(target->colIndex - cell->colIndex) > 2)
         {
             return false;
         }
@@ -47,6 +71,31 @@ bool Rook::isValidMove(BoardCell* target)
     if(!target->isEmpty() && target->piece->hasSameColor(this) ){
         return false;
     }
+
+    if(topB && !middleCell->isEmpty()
+            && !bottomCell->isEmpty()
+            && middleCell->piece->hasSameColor(this)
+            && bottomCell->piece->hasSameColor(this)){
+        return false;
+    }
+
+    if(middleB && !topCell->isEmpty()
+            && !bottomCell->isEmpty()
+            && topCell->piece->hasSameColor(this)
+            && bottomCell->piece->hasSameColor(this)){
+        return false;
+    }
+
+    if(bottomB && !middleCell->isEmpty()
+            && !topCell->isEmpty()
+            && middleCell->piece->hasSameColor(this)
+            && topCell->piece->hasSameColor(this)){
+        return false;
+    }
+
+
+
+
 
     //check mirror board to see if target cell has piece on it
     if(!target->getMirrorCell(target->rowIndex, target->colIndex)->isEmpty())

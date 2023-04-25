@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.1, 2023-04-24T19:01:29. -->
+
+
+
+<!-- Written by QtCreator 9.0.1, 2023-04-07T09:28:54. -->
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{8aab7119-9e68-423f-9ccc-e7db5e230ca9}</value>
+
+<!-- Written by QtCreator 9.0.2, 2023-04-06T20:53:20. -->
+
+<!-- Written by QtCreator 9.0.2, 2023-04-11T08:35:55. -->
+
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{63552037-a7af-45a9-a216-abb4fdbdf87b}</value>
+
+
+<!-- Written by QtCreator 9.0.1, 2023-04-22T01:20:45. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{8b332a49-ca84-4274-8966-bca742f96065}</value>
+
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -75,7 +95,15 @@
     <value type="bool" key="ClangTools.AnalyzeOpenFiles">true</value>
     <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
     <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
+
+
+    <value type="int" key="ClangTools.ParallelJobs">6</value>
+
+    <value type="int" key="ClangTools.ParallelJobs">4</value>
+
+
     <value type="int" key="ClangTools.ParallelJobs">8</value>
+
     <valuelist type="QVariantList" key="ClangTools.SelectedDirs"/>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
@@ -95,8 +123,18 @@
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="int" key="EnableQmlDebugging">0</value>
+
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\stoph\Desktop\chessProject\CLI\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/stoph/Desktop/chessProject/CLI/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\User\Development\chess\chess\..\build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/User/Development/chess/build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Debug</value>
+
+
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\liama\School\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/liama/School/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -134,8 +172,18 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
+
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\stoph\Desktop\chessProject\CLI\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/stoph/Desktop/chessProject/CLI/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Release</value>
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\User\Development\chess\chess\..\build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/User/Development/chess/build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Release</value>
+
+
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\liama\School\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Release</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/liama/School/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Release</value>
+
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -175,8 +223,18 @@
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
     <value type="int" key="EnableQmlDebugging">0</value>
+
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\stoph\Desktop\chessProject\CLI\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/stoph/Desktop/chessProject/CLI/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Profile</value>
+
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\User\Development\chess\chess\..\build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/User/Development/chess/build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Profile</value>
+
+
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\liama\School\chess\..\build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Profile</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/liama/School/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Profile</value>
+
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -236,21 +294,40 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+
+
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/stoph/Desktop/chessProject/CLI/chess/chessgame.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/stoph/Desktop/chessProject/CLI/chess/chessgame.pro</value>
+
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">chessgame2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/User/Development/chessgame/chess/chessgame.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/User/Development/chessgame/chess/chessgame.pro</value>
+
+
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/liama/School/chess/chessgame.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/liama/School/chess/chessgame.pro</value>
+
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseTerminal">true</value>
+
+
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/stoph/Desktop/chessProject/CLI/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/User/Development/chess/build-chessgame-Desktop_Qt_6_4_2_MinGW_64_bit-Debug</value>
+
+
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/liama/School/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
  </data>
  <data>
-  <variable>ProjectExplorer.Project.TargetCount</variable>
+     <variable>ProjectExplorer.Project.TargetCount</variable>
   <value type="qlonglong">1</value>
  </data>
  <data>

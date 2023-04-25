@@ -37,5 +37,8 @@ void ChessPiece::beCaptured(){
     cell->removePiece();
     //cell = NULL;
 
+
+
+
 }
 

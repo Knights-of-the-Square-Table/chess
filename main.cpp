@@ -1,18 +1,36 @@
 #include <iostream>
 #include <sstream>
+#include "MainWindow.h"
 #include "chessgame.h"
-#include "boardcell.h"
 #include <string.h>
-#include <limits>
 #include "chessgame.h"
+#include "display.h"
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+#include <QGridLayout>
+#include <QFrame>
 
 
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[]){
 
-    ChessGame* g = new ChessGame();
-    g->run();
 
-    return 0;
+    QApplication a(argc, argv);
+
+    MainWindow w;
+    w.show();
+//    Display D;
+//    QGraphicsView* view = new QGraphicsView(D.getScene());
+//    view->setFixedSize(1800,1000);
+//    view->show();
+
+    return a.exec(); // comment this line out for CLI
+
+//    ChessGame* g = new ChessGame();
+//    g->run();
+
+//    return 0; //uncomment this line for CLI
 }

@@ -2,12 +2,14 @@
 #include "chessgame.h"
 #include "chessboard.h"
 #include "player.h"
+#include "qdebug.h"
 #include <limits>
 #include <regex>
 #include<array>
 #include <cstring>
 #include <stdlib.h>
 #include <string>
+#include <limits>
 using namespace std;
 
 
@@ -29,6 +31,7 @@ ChessGame::ChessGame()
     botBoard->game = this;
     topBoard->game = this;
     midBoard->game = this;
+    qDebug() << "game started";
 }
 
 
@@ -47,6 +50,7 @@ void ChessGame::printBoard(ChessBoard* b)
     b->print();
 
 }
+
 /*****************old******************/
 //void ChessGame::printBoard(){
 //    board->print();
@@ -198,6 +202,7 @@ void ChessGame::printStartOptionsMenu()
 
 
 //Chris
+//Converts input from cin into a tuple for tryMove() method
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 {
     //initialize the 3 int variables to store converted string
@@ -250,6 +255,7 @@ std::tuple<int, int, int> ChessGame::convertInput(std::string input)
 }
 
 //Chris
+//Method validates the CLI inputs from cin
 bool ChessGame::validateInput(std::string input)
 {
 
@@ -293,6 +299,14 @@ bool ChessGame::validateInput(std::string input)
     return false;
 }
 
+//Chris
+//Method to reset string input for moves
+void ChessGame::resetMoves()
+{
+    move1 = "";
+    move2 = "";
+}
+
 Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
@@ -318,22 +332,29 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     //first attempt at adding 2nd board
     if(level1 == 0){
         srcCell = this->botBoard->getCell(r1, c1);
+    }else if(level1 ==1){
+        srcCell = this->midBoard->getCell(r1,c1);
     }else{
-        srcCell =   this->topBoard->getCell(r1, c1);
+        srcCell = this->topBoard->getCell(r1, c1);
     }
+
     if(level2 == 0){
         dstCell = this->botBoard->getCell(r2, c2);
+    }else if(level2 == 1){
+        dstCell = this->midBoard->getCell(r2,c2);
     }else{
         dstCell = this->topBoard->getCell(r2, c2);
     }
 
     //check that there is a piece in the cell
     if( srcCell->piece ==NULL){
+        qDebug() << "first cell clicked had no piece";
         validMove = false;
     }
             //check that the current player is trying to move their pieces and not enemy pieces
     else if(srcCell->getPiece()->color !=  this->getCurrentPlayer()->color){
             cout << "You cannot move other players pieces" << endl;
+           // qDebug() << "move not valid";
             validMove = false;
         }
     else{
@@ -345,12 +366,87 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
+
         this->printBoards();
     }
 
     //print statement for checking currentPlayerCheck()
     //cout << "is current player in check? " << currentPlayerCheck() << endl;
     return validMove;
+
+}
+
+
+//Chris
+//Method to get cell for chessGameGUI
+BoardCell* ChessGame::getCell(int row, int col, int level)
+{
+    BoardCell * cell = nullptr;
+    if(level ==0){
+        cell = this->botBoard->getCell(row, col);
+    }else if(level == 1){
+        cell = this->midBoard->getCell(row, col);
+    }else if(level ==2){
+        cell = this->topBoard->getCell(row, col);
+    }
+
+    return cell;
+}
+
+//Chris
+//Method to convert string inputs from clicking into tuple that can be used for tryMove()
+std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
+{
+
+    int row, col, level;
+
+    level = input[2]-48;
+    row = input[1]-48;
+    col = input[0]-'a';
+
+    std::tuple<int,int,int> converted(row, col, level);
+    return converted;
+
+}
+
+
+//Chris
+
+//This method takes inputs from a click and sends a response string
+void ChessGame::getInput(QString input)
+{
+
+    std::tuple<int,int,int> fromPos;
+    std::tuple<int,int,int> toPos;
+    //Check if anything has been clicked, if not, store cell clicked in move1
+    if(move1 == ""){
+        move1 = input.toStdString();
+        //Convert move1 to check if the cell has a piece or now
+        fromPos = convertGUIinput(move1);
+
+        //resets moves if no piece in the cell
+        if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
+            qDebug() << "No piece selected";
+            resetMoves();
+        }
+
+    //If first click is stored, wait for second cell click, convert to tuples and attempt move
+    }else{
+        move2 = input.toStdString();
+        fromPos = convertGUIinput(move1);
+        toPos = convertGUIinput(move2);
+        if(tryMove(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos), get<0>(toPos), get<1>(toPos), get<2>(toPos))){
+            this->nextTurn();
+            QString sendStr = "";
+            QString part1 = QString::fromStdString(move1);
+            QString part2 = QString::fromStdString(move2);
+            sendStr += part1;
+            sendStr += part2;
+            emit sendResponse(sendStr);
+        }
+        //after move is tried, reset moves again
+        resetMoves();
+    }
 
 }
 
@@ -377,5 +473,6 @@ bool ChessGame::currentPlayerCheck(){
     return result;
 }
 //Liam
+
 
 

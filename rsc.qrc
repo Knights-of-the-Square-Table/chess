@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>resource/blkbishop.png</file>
+        <file>resource/blkking.png</file>
+        <file>resource/blkknight.png</file>
+        <file>resource/blkpawn.png</file>
+        <file>resource/blkqueen.png</file>
+        <file>resource/blkrook.png</file>
+        <file>resource/whitebishop.png</file>
+        <file>resource/whiteking.png</file>
+        <file>resource/whiteknight.png</file>
+        <file>resource/whitepawn.png</file>
+        <file>resource/whitequeen.png</file>
+        <file>resource/whiterook.png</file>
+        <file>resource/tableTop.jpg</file>
+        <file>resource/fullTable.jpg</file>
+    </qresource>
+</RCC>
