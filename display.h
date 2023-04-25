@@ -19,6 +19,7 @@ private:
     QString move;
     void setup();
     void placePieces();
+    void resetColors();
     Color turnColor;
     QGraphicsTextItem * turn;
     QGraphicsTextItem * check;
@@ -89,6 +90,7 @@ private:
 public:
     Display();
     QGraphicsScene* getScene();
+
 
 public slots:
     void getResponse(QString response);

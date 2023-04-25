@@ -34,6 +34,7 @@ void Display::setup()
         QString spacename = spaces[i];
         GUICell * cell = new GUICell(j,k,0);
         cell->setRect(j,k,70,70);
+
         if(i%size == 0){
             black = !black;
         }
@@ -44,6 +45,11 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
+
         black = !black;
 
         j += 70;
@@ -78,6 +84,9 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
         black = !black;
 
         j += 70;
@@ -109,6 +118,10 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
         black = !black;
 
         j += 70;
@@ -195,6 +208,18 @@ void Display::placePieces()
 }
 
 //Chris
+void Display::resetColors()
+{
+   for(int i = 0; i < cellList.size(); i++){
+       if(cellList[i]->getColor()){
+           cellList[i]->setBrush(Qt::lightGray);
+       }else{
+           cellList[i]->setBrush(Qt::white);
+       }
+   }
+}
+
+//Chris
 QGraphicsScene* Display::getScene()
 {
     return DisplayScene;
@@ -203,43 +228,50 @@ QGraphicsScene* Display::getScene()
 //Chris
 void Display::getResponse(QString response)
 {
-     std::string responseString = response.toStdString();
-     //qDebug() << "getResponse = " << response;
-     QString firstSpace = "";
-     QString secondSpace = "";
-     firstSpace += response[0];
-     firstSpace += response[1];
-     firstSpace += response[2];
-     secondSpace += response[3];
-     secondSpace += response[4];
-     secondSpace += response[5];
-     QString temp;
-    // qDebug() << "firstSpace: " << firstSpace;
-     for (int i=0; i<cellList.length(); i++ )
-     {
-         if (cellList[i]->getName() == firstSpace)
-         {
-//             qDebug() << "found the first cell";
-             temp = cellList[i]->getImage();
-//              qDebug() << "Temp: " << temp;
-             cellList[i]->clearImage();
-         }
-     }
-     for (int i=0; i<cellList.length(); i++ )
-     {
-         if (cellList[i]->getName() == secondSpace)
-         {
-             cellList[i]->setImage(temp);
-         }
-     }
-     //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
-//     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
-     QString s = QString::number(game.players[0]->getPoints());
-     QString scoreText = "Player 1 score: " + s;
-     scoreWhite->setPlainText(scoreText);
-     QString s2 = QString::number(game.players[1]->getPoints());
-     QString scoreText2 = "Player 2 score: " + s2;
-     scoreBlack->setPlainText(scoreText2);
+    qDebug() << response;
+    std::string temp1 = response.toStdString();
+    if(temp1 == "Invalid"){
+        resetColors();
+    }else{
 
+         std::string responseString = response.toStdString();
+         //qDebug() << "getResponse = " << response;
+         QString firstSpace = "";
+         QString secondSpace = "";
+         firstSpace += response[0];
+         firstSpace += response[1];
+         firstSpace += response[2];
+         secondSpace += response[3];
+         secondSpace += response[4];
+         secondSpace += response[5];
+         QString temp;
+        // qDebug() << "firstSpace: " << firstSpace;
+         for (int i=0; i<cellList.length(); i++ )
+         {
+             if (cellList[i]->getName() == firstSpace)
+             {
+    //             qDebug() << "found the first cell";
+                 temp = cellList[i]->getImage();
+    //              qDebug() << "Temp: " << temp;
+                 cellList[i]->clearImage();
+             }
+         }
+         for (int i=0; i<cellList.length(); i++ )
+         {
+             if (cellList[i]->getName() == secondSpace)
+             {
+                 cellList[i]->setImage(temp);
+             }
+         }
+         resetColors();
+         //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
+    //     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
+         QString s = QString::number(game.players[0]->getPoints());
+         QString scoreText = "Player 1 score: " + s;
+         scoreWhite->setPlainText(scoreText);
+         QString s2 = QString::number(game.players[1]->getPoints());
+         QString scoreText2 = "Player 2 score: " + s2;
+         scoreBlack->setPlainText(scoreText2);
+    }
 }
 
