@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <QDebug>
 
-
+//Chris
 GUICell::GUICell(int x, int y, int level)
 {
 
@@ -14,29 +14,29 @@ GUICell::GUICell(int x, int y, int level)
     piece.setParentItem(this);
 
 }
-
+//Chris
+//Used for detecting if the cell has been clicked
 void GUICell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
     //Player must left click to emit signal
     if(e->buttons() == Qt::LeftButton){
          qDebug() << "You clicked " << name;
+         setBrush(Qt::green);
          emit sendSignal(name);
     }
-
-
-
 }
 
+//Chris
 void GUICell::setName(QString n)
 {
     name = n;
 }
-
+//Chris
 QString GUICell::getName()
 {
     return name;
 }
-
+//Chris
 void GUICell::setImage(QString path)
 {
     image = path;
@@ -44,13 +44,25 @@ void GUICell::setImage(QString path)
     piece.setPos(xCoord, yCoord);
     piece.show();
 }
-
+//Chris
 QString GUICell::getImage()
 {
     return image;
 }
-
+//Chris
 void GUICell::clearImage()
 {
     piece.hide();
+}
+
+//Chris
+//Helper method for setting a default color for cells
+void GUICell::setColor(bool isBlack)
+{
+    this->isBlack = isBlack;
+}
+
+bool GUICell::getColor()
+{
+    return isBlack;
 }
