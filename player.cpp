@@ -22,7 +22,7 @@ int Player::getPoints(){
     }
     else{
         for(int i=0; i<int(capturedPieces.size()); i++){
-        total += capturedPieces[i]->getPointValue();
+            total += capturedPieces[i]->getPointValue();
         }
     }
     return total;

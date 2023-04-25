@@ -19,10 +19,12 @@ public:
     int getPointValue(){
         return 1;
     }
+    bool hasMoved = 0;
 
     bool isInCheck();
 
     bool isValidAttack(BoardCell* target);
+    bool isValidForward(BoardCell* target);
 };
 
 #endif // PAWN_H
