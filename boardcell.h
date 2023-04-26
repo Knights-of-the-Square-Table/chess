@@ -4,6 +4,7 @@
 #include "color.h"
 #include "chesspiece.h"
 #include "chessboard.h"
+#include <vector>
 
 class ChessBoard;
 class ChessPiece;
@@ -14,6 +15,7 @@ class BoardCell {
     ChessBoard* board;
     int rowIndex;
     int colIndex;
+    Level level;
 
     ChessPiece* piece;
 
@@ -26,6 +28,7 @@ class BoardCell {
     bool hasPiece(Color color);
     ChessPiece* getPiece();
     BoardCell* getMirrorCell(int rowIndex, int colIndex);
+    std::vector<BoardCell*> getMirrorCells(int rowIndex, int colIndex);
 
 
 };
