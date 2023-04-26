@@ -1,5 +1,6 @@
 #include "boardcell.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ BoardCell::BoardCell(ChessBoard* board, int rowIndex, int colIndex){
     this->rowIndex = rowIndex;
     this->colIndex = colIndex;
     this->piece = NULL;
+    this->level = board->level;
 
 }
 
@@ -37,4 +39,17 @@ BoardCell *BoardCell::getMirrorCell(int rowIndex, int colIndex)
     return this->board->getMirrorBoard()->getCell(rowIndex, colIndex);
 }
 
+std::vector<BoardCell*> BoardCell::getMirrorCells(int rowIndex, int colIndex){
+    std::vector<BoardCell*> v = {};
+    if(this->level == TOP){
+        return v = {this->board->getMidBoard()->getCell(rowIndex, colIndex), this->board->getBotBoard()->getCell(rowIndex, colIndex)};
+    }else if(this->level == MIDDLE){
+        return v = {this->board->getTopBoard()->getCell(rowIndex, colIndex), this->board->getBotBoard()->getCell(rowIndex, colIndex)};
+    }
+    else{
+        return v = {this->board->getTopBoard()->getCell(rowIndex, colIndex), this->board->getMidBoard()->getCell(rowIndex, colIndex)};
+    }
+
+
+}
 
