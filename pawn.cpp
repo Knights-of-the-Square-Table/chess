@@ -92,6 +92,9 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         //Check to see if the piece is still in play
         if(!isInplay()){return false;}
 
+        //Can't attack an empty square (move diagonally)
+        if(target->isEmpty()){return false;}
+
         //Check to see if target cell has chesspiece with the same color
         if(!target->isEmpty() && target->piece->hasSameColor(this) ){return false;}
 

@@ -34,12 +34,12 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
         new Bishop( getCell(0,4), WHITE );
         new Rook(   getCell(0,5), WHITE );
 
-      /*new Pawn(   getCell(1,0), WHITE );
+        new Pawn(   getCell(1,0), WHITE );
         new Pawn(   getCell(1,1), WHITE );
         new Pawn(   getCell(1,2), WHITE );
         new Pawn(   getCell(1,3), WHITE );
         new Pawn(   getCell(1,4), WHITE );
-        new Pawn(   getCell(1,5), WHITE );*/
+        new Pawn(   getCell(1,5), WHITE );
     }
 
     else if(level == BOTTOM){
@@ -50,12 +50,12 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
         new Bishop( getCell(5,4), BLACK );
         new Rook(   getCell(5,5), BLACK );
 
-      /*new Pawn(   getCell(4,0), BLACK );
+        new Pawn(   getCell(4,0), BLACK );
         new Pawn(   getCell(4,1), BLACK );
         new Pawn(   getCell(4,2), BLACK );
         new Pawn(   getCell(4,3), BLACK );
         new Pawn(   getCell(4,4), BLACK );
-        new Pawn(   getCell(4,5), BLACK );*/
+        new Pawn(   getCell(4,5), BLACK );
     }
 
 

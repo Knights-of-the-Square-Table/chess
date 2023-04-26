@@ -167,6 +167,12 @@ void Display::placePieces()
     cellList[103]->setImage(":/images/resource/blkbishop.png");
     cellList[105]->setImage(":/images/resource/blkqueen.png");
     cellList[104]->setImage(":/images/resource/blkking.png");
+    cellList[101]->setImage(":/images/resource/blkpawn.png");
+    cellList[100]->setImage(":/images/resource/blkpawn.png");
+    cellList[99]->setImage(":/images/resource/blkpawn.png");
+    cellList[98]->setImage(":/images/resource/blkpawn.png");
+    cellList[97]->setImage(":/images/resource/blkpawn.png");
+    cellList[96]->setImage(":/images/resource/blkpawn.png");
 
 //    //setup white pieces
 //    cellList[191]->setImage(":/images/resource/whiterook.png");
@@ -192,6 +198,13 @@ void Display::placePieces()
         cellList[4]->setImage(":/images/resource/whitebishop.png");
         cellList[3]->setImage(":/images/resource/whitequeen.png");
         cellList[2]->setImage(":/images/resource/whiteking.png");
+        cellList[6]->setImage(":/images/resource/whitepawn.png");
+        cellList[7]->setImage(":/images/resource/whitepawn.png");
+        cellList[8]->setImage(":/images/resource/whitepawn.png");
+        cellList[9]->setImage(":/images/resource/whitepawn.png");
+        cellList[10]->setImage(":/images/resource/whitepawn.png");
+        cellList[11]->setImage(":/images/resource/whitepawn.png");
+
 }
 
 //Chris
