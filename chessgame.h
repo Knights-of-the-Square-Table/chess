@@ -47,6 +47,8 @@ public:
     std::string move1 = "";
     std::string move2 = "";
     Color guiTurn = WHITE;
+    std::vector<int> standardMoves;
+    QVector<int> possibleMoves;
     void switchGuiTurn();
     void resetMoves();
 
@@ -63,6 +65,7 @@ public slots:
 
 signals:
     void sendResponse(QString response);
+    void sendMoves(QVector<int> moves);
 };
 
 #endif // CHESSGAME_H

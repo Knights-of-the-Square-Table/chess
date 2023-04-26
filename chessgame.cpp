@@ -304,11 +304,14 @@ bool ChessGame::validateInput(std::string input)
 
 std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
 {
-    std::vector<int> topB = cell->piece->getMovesInt(topBoard);
+    qDebug() << "got into getpossiblemoves";
+    qDebug() << cell->getPiece()->getMovesInt(topBoard);
+    std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
+    qDebug() << "got top cell board";
     std::vector<int> midB = cell->piece->getMovesInt(midBoard);
     std::vector<int> botB = cell->piece->getMovesInt(botBoard);
     std::vector<int> allMoves = {};
-
+    qDebug() << "initialized topb, midb, botb";
     std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
     std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
     std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
@@ -451,7 +454,14 @@ void ChessGame::getInput(QString input)
             emit sendResponse("Invalid");
             resetMoves();
         }else{
+           // qDebug() << "trying to get possible moves";
+            standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
+         //   qDebug() << "trying to convert to QVector";
+            possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
+            emit sendMoves(possibleMoves);
             emit sendResponse("Paint moves");
+           // qDebug() << "attempting to emit possible moves";
+
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move

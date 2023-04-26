@@ -12,6 +12,7 @@ Display::Display()
 {
     // Connect Game signal with Display slot
     QObject::connect(&game, SIGNAL(sendResponse(QString)), this, SLOT(getResponse(QString)));
+    QObject::connect(&game, SIGNAL(sendMoves(QVector<int>)), this, SLOT(getMoves(QVector<int>)));
     DisplayScene = new QGraphicsScene();
     setup();
     placePieces();
@@ -245,8 +246,9 @@ void Display::getResponse(QString response)
     //a piece has been selected, iterate over its available moves
     }else if(temp1 == "Paint moves"){
         //once we have the vector ready, this method will access it and iterate over it
-        std::vector<int> moveList = {6, 12,18,24, 36, 72, 42, 84};
-        highLightMoves(moveList);
+        qDebug() << "attemping to paint moves";
+
+        highLightMoves(possibleMoves);
 
     //the move was successful, perform the image swap
     }else{
@@ -291,4 +293,11 @@ void Display::getResponse(QString response)
          scoreBlack->setPlainText(scoreText2);
     }
 }
+
+void Display::getMoves(QVector<int> moves)
+{
+    qDebug() << "moves received";
+    this->possibleMoves = std::vector<int>(moves.begin(), moves.end());
+}
+
 

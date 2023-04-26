@@ -21,6 +21,7 @@ private:
     void placePieces();
     void resetColors();
     void highLightMoves(std::vector<int> moveList);
+    std::vector<int> possibleMoves;
     Color turnColor;
     QGraphicsTextItem * turn;
     QGraphicsTextItem * check;
@@ -95,6 +96,7 @@ public:
 
 public slots:
     void getResponse(QString response);
+    void getMoves(QVector<int> moves);
 };
 
 
