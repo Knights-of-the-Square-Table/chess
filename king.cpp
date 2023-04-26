@@ -38,6 +38,11 @@ bool King::isValidMove(BoardCell* target) {
         return false;
     }
 
+    //The King can move directly up and down the boards as long as the prior conditions pass
+    if((abs(dstColIndex - srcColIndex) == 0) && (abs(dstRowIndex - srcRowIndex) == 0)){
+        return true;
+    }
+
     //Check the other boards to make sure a cell is not occupied
     if(!target->board->getMirrorBoard()->getCell(dstRowIndex, dstColIndex)->isEmpty()){
         if(!target->piece->hasSameColor(this)){
@@ -49,7 +54,7 @@ bool King::isValidMove(BoardCell* target) {
         }
     }
 
-    //Need to check if the King is in check or checkmate
+
 
     //If all other checks pass, the move is valid!
     return true;

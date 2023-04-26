@@ -12,6 +12,7 @@ Display::Display()
 {
     // Connect Game signal with Display slot
     QObject::connect(&game, SIGNAL(sendResponse(QString)), this, SLOT(getResponse(QString)));
+    QObject::connect(&game, SIGNAL(sendMoves(QVector<int>)), this, SLOT(getMoves(QVector<int>)));
     DisplayScene = new QGraphicsScene();
     setup();
     placePieces();
@@ -34,6 +35,7 @@ void Display::setup()
         QString spacename = spaces[i];
         GUICell * cell = new GUICell(j,k,0);
         cell->setRect(j,k,70,70);
+
         if(i%size == 0){
             black = !black;
         }
@@ -44,6 +46,11 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
+
         black = !black;
 
         j += 70;
@@ -78,6 +85,9 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
         black = !black;
 
         j += 70;
@@ -109,6 +119,10 @@ void Display::setup()
         }else{
             cell->setBrush(Qt::white);
         }
+
+        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
+        cell->setColor(black);
+
         black = !black;
 
         j += 70;
@@ -208,6 +222,26 @@ void Display::placePieces()
 }
 
 //Chris
+void Display::resetColors()
+{
+   for(int i = 0; i < cellList.size(); i++){
+       if(cellList[i]->getColor()){
+           cellList[i]->setBrush(Qt::lightGray);
+       }else{
+           cellList[i]->setBrush(Qt::white);
+       }
+   }
+}
+
+//Chris
+void Display::highLightMoves(std::vector<int> moveList)
+{
+    for(unsigned int i = 0; i < moveList.size(); i++){
+        cellList[moveList[i]]->setBrush(Qt::green);
+    }
+}
+
+//Chris
 QGraphicsScene* Display::getScene()
 {
     return DisplayScene;
@@ -216,43 +250,67 @@ QGraphicsScene* Display::getScene()
 //Chris
 void Display::getResponse(QString response)
 {
-     std::string responseString = response.toStdString();
-     //qDebug() << "getResponse = " << response;
-     QString firstSpace = "";
-     QString secondSpace = "";
-     firstSpace += response[0];
-     firstSpace += response[1];
-     firstSpace += response[2];
-     secondSpace += response[3];
-     secondSpace += response[4];
-     secondSpace += response[5];
-     QString temp;
-    // qDebug() << "firstSpace: " << firstSpace;
-     for (int i=0; i<cellList.length(); i++ )
-     {
-         if (cellList[i]->getName() == firstSpace)
-         {
-//             qDebug() << "found the first cell";
-             temp = cellList[i]->getImage();
-//              qDebug() << "Temp: " << temp;
-             cellList[i]->clearImage();
-         }
-     }
-     for (int i=0; i<cellList.length(); i++ )
-     {
-         if (cellList[i]->getName() == secondSpace)
-         {
-             cellList[i]->setImage(temp);
-         }
-     }
-     //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
-//     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
-     QString s = QString::number(game.players[0]->getPoints());
-     QString scoreText = "Player 1 score: " + s;
-     scoreWhite->setPlainText(scoreText);
-     QString s2 = QString::number(game.players[1]->getPoints());
-     QString scoreText2 = "Player 2 score: " + s2;
-     scoreBlack->setPlainText(scoreText2);
+    qDebug() << response;
+    std::string temp1 = response.toStdString();
+    //resets colors if an invalid move was chosen
+    if(temp1 == "Invalid"){
+        resetColors();
 
+    //a piece has been selected, iterate over its available moves
+    }else if(temp1 == "Paint moves"){
+        //once we have the vector ready, this method will access it and iterate over it
+        qDebug() << "attemping to paint moves";
+
+        highLightMoves(possibleMoves);
+
+    //the move was successful, perform the image swap
+    }else{
+
+         std::string responseString = response.toStdString();
+         //qDebug() << "getResponse = " << response;
+         QString firstSpace = "";
+         QString secondSpace = "";
+         firstSpace += response[0];
+         firstSpace += response[1];
+         firstSpace += response[2];
+         secondSpace += response[3];
+         secondSpace += response[4];
+         secondSpace += response[5];
+         QString temp;
+        // qDebug() << "firstSpace: " << firstSpace;
+         for (int i=0; i<cellList.length(); i++ )
+         {
+             if (cellList[i]->getName() == firstSpace)
+             {
+    //             qDebug() << "found the first cell";
+                 temp = cellList[i]->getImage();
+    //              qDebug() << "Temp: " << temp;
+                 cellList[i]->clearImage();
+             }
+         }
+         for (int i=0; i<cellList.length(); i++ )
+         {
+             if (cellList[i]->getName() == secondSpace)
+             {
+                 cellList[i]->setImage(temp);
+             }
+         }
+         resetColors();
+         //update score buggy, crashing when game.players[].getPoints() is called after a piece is taken
+    //     qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
+         QString s = QString::number(game.players[0]->getPoints());
+         QString scoreText = "Player 1 score: " + s;
+         scoreWhite->setPlainText(scoreText);
+         QString s2 = QString::number(game.players[1]->getPoints());
+         QString scoreText2 = "Player 2 score: " + s2;
+         scoreBlack->setPlainText(scoreText2);
+    }
 }
+
+void Display::getMoves(QVector<int> moves)
+{
+    qDebug() << "moves received";
+    this->possibleMoves = std::vector<int>(moves.begin(), moves.end());
+}
+
 

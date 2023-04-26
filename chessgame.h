@@ -4,6 +4,7 @@
 #include "chessboard.h"
 #include "player.h"
 #include "qobject.h"
+#include <list>
 
 #include <tuple>
 
@@ -33,17 +34,21 @@ public:
     void getCurrentWinner();
     bool currentPlayerCheck();
 
+
     char printOptionsMenu();
     void printStartOptionsMenu();
     BoardCell * getCell(int row,int col,int level);
     std::tuple<int,int,int> convertGUIinput(std::string input);
     std::tuple<int,int,int> convertInput(std::string input);
     bool validateInput(std::string input);
+    std::vector<int> getPossibleMoves(BoardCell *cell);
 
     QString guimove;
     std::string move1 = "";
     std::string move2 = "";
     Color guiTurn = WHITE;
+    std::vector<int> standardMoves;
+    QVector<int> possibleMoves;
     void switchGuiTurn();
     void resetMoves();
 
@@ -60,6 +65,7 @@ public slots:
 
 signals:
     void sendResponse(QString response);
+    void sendMoves(QVector<int> moves);
 };
 
 #endif // CHESSGAME_H

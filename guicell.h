@@ -20,6 +20,8 @@ public:
     void setImage(QString path);
     QString getImage();
     void clearImage();
+    void setColor(bool isBlack);
+    bool getColor();
 
 private:
     QString name;
@@ -27,6 +29,7 @@ private:
     QString image;
     int xCoord;
     int yCoord;
+    bool isBlack;
     //Might change boardLevel to something else if it makes more sense
     int boardLevel;
 

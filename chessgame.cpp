@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string>
 #include <limits>
+#include <list>
 using namespace std;
 
 
@@ -201,6 +202,8 @@ void ChessGame::printStartOptionsMenu()
 }
 
 
+
+
 //Chris
 //Converts input from cin into a tuple for tryMove() method
 std::tuple<int, int, int> ChessGame::convertInput(std::string input)
@@ -297,6 +300,27 @@ bool ChessGame::validateInput(std::string input)
         return regex_match(input, chess3D);
     }
     return false;
+}
+
+std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
+{
+    qDebug() << "got into getpossiblemoves";
+    qDebug() << cell->getPiece()->getMovesInt(topBoard);
+    std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
+    qDebug() << "got top cell board";
+    std::vector<int> midB = cell->piece->getMovesInt(midBoard);
+    std::vector<int> botB = cell->piece->getMovesInt(botBoard);
+    std::vector<int> allMoves = {};
+    qDebug() << "initialized topb, midb, botb";
+    std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
+    std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
+    std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
+
+    for(auto &i: allMoves){
+        cout << i;
+    }
+
+    return allMoves;
 }
 
 //Chris
@@ -427,7 +451,17 @@ void ChessGame::getInput(QString input)
         //resets moves if no piece in the cell
         if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
             qDebug() << "No piece selected";
+            emit sendResponse("Invalid");
             resetMoves();
+        }else{
+           // qDebug() << "trying to get possible moves";
+            standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
+         //   qDebug() << "trying to convert to QVector";
+            possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
+            emit sendMoves(possibleMoves);
+            emit sendResponse("Paint moves");
+           // qDebug() << "attempting to emit possible moves";
+
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move
@@ -443,6 +477,9 @@ void ChessGame::getInput(QString input)
             sendStr += part1;
             sendStr += part2;
             emit sendResponse(sendStr);
+        }else{
+            emit sendResponse("Invalid");
+            resetMoves();
         }
         //after move is tried, reset moves again
         resetMoves();

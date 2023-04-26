@@ -19,6 +19,9 @@ private:
     QString move;
     void setup();
     void placePieces();
+    void resetColors();
+    void highLightMoves(std::vector<int> moveList);
+    std::vector<int> possibleMoves;
     Color turnColor;
     QGraphicsTextItem * turn;
     QGraphicsTextItem * check;
@@ -90,8 +93,10 @@ public:
     Display();
     QGraphicsScene* getScene();
 
+
 public slots:
     void getResponse(QString response);
+    void getMoves(QVector<int> moves);
 };
 
 
