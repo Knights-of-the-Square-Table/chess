@@ -36,11 +36,16 @@ bool Queen::isValidMove(BoardCell* target){
     int vertDifference = dstRowIndex - srcRowIndex;
     int horizDifference = dstColIndex - srcColIndex;
 
-    //If the Bishop is moving between boards, the legal moves change
+    //If the Queen is moving between boards, the legal moves change
     if(srcBoardIndex != dstBoardIndex){
         int boardMove = abs(dstBoardIndex - srcBoardIndex);
 
-        //if the Bishop moves one board level, it can move one cell away
+        //the Queen can move directly up and down when moving between boards
+        if((abs(dstColIndex - srcColIndex) == 0) && (abs(dstRowIndex - srcRowIndex) == 0)){
+            return true;
+        }
+
+        //if the Queen moves one board level, it can move one cell away
         if (boardMove == 1){
             if(abs(vertDifference) > 1){
                 return false;
@@ -49,18 +54,17 @@ bool Queen::isValidMove(BoardCell* target){
             else if(abs(horizDifference) > 1){
                 return false;
             }
+
         }
 
-        //if the Bishop moves two board levels, it can move two cells away
+        //if the Queen moves two board levels, it must move two cells away
         else if(boardMove == 2){
-            if(abs(vertDifference) > 2){
+            if(abs(vertDifference) != 2 && abs(horizDifference) != 2){
                 return false;
             }
 
-            else if(abs(horizDifference) > 2){
-                return false;
-            }
         }
+
     }
 
     //Check to see if the move is diagonal, horizontal, or vertical

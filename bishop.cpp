@@ -61,7 +61,7 @@ bool Bishop::isValidMove(BoardCell* target){
 
         //if the Bishop moves two board levels, it can move two cells away
         else if(boardMove == 2){
-            if(abs(vertDifference) > 2){
+            if(abs(vertDifference) > 2 || abs(vertDifference) < 2){
                 return false;
             }
         }

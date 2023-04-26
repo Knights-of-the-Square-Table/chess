@@ -393,8 +393,8 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
 
     //print statement for checking currentPlayerCheck()
     //cout << "is current player in check? " << currentPlayerCheck() << endl;
-
     return validMove;
+
 }
 
 
@@ -448,6 +448,7 @@ void ChessGame::getInput(QString input)
         //resets moves if no piece in the cell
         if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
             qDebug() << "No piece selected";
+            emit sendResponse("Invalid");
             resetMoves();
         }
 
@@ -464,6 +465,9 @@ void ChessGame::getInput(QString input)
             sendStr += part1;
             sendStr += part2;
             emit sendResponse(sendStr);
+        }else{
+            emit sendResponse("Invalid");
+            resetMoves();
         }
         //after move is tried, reset moves again
         resetMoves();
