@@ -21,7 +21,7 @@ void GUICell::mousePressEvent(QGraphicsSceneMouseEvent *e)
     //Player must left click to emit signal
     if(e->buttons() == Qt::LeftButton){
          qDebug() << "You clicked " << name;
-         setBrush(Qt::green);
+         setBrush(Qt::darkGreen);
          emit sendSignal(name);
     }
 }

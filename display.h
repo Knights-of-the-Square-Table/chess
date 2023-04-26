@@ -20,6 +20,7 @@ private:
     void setup();
     void placePieces();
     void resetColors();
+    void highLightMoves(std::vector<int> moveList);
     Color turnColor;
     QGraphicsTextItem * turn;
     QGraphicsTextItem * check;
