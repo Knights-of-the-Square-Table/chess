@@ -220,6 +220,14 @@ void Display::resetColors()
 }
 
 //Chris
+void Display::highLightMoves(std::vector<int> moveList)
+{
+    for(unsigned int i = 0; i < moveList.size(); i++){
+        cellList[moveList[i]]->setBrush(Qt::green);
+    }
+}
+
+//Chris
 QGraphicsScene* Display::getScene()
 {
     return DisplayScene;
@@ -230,8 +238,17 @@ void Display::getResponse(QString response)
 {
     qDebug() << response;
     std::string temp1 = response.toStdString();
+    //resets colors if an invalid move was chosen
     if(temp1 == "Invalid"){
         resetColors();
+
+    //a piece has been selected, iterate over its available moves
+    }else if(temp1 == "Paint moves"){
+        //once we have the vector ready, this method will access it and iterate over it
+        std::vector<int> moveList = {6, 12,18,24, 36, 72, 42, 84};
+        highLightMoves(moveList);
+
+    //the move was successful, perform the image swap
     }else{
 
          std::string responseString = response.toStdString();

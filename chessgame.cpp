@@ -450,6 +450,8 @@ void ChessGame::getInput(QString input)
             qDebug() << "No piece selected";
             emit sendResponse("Invalid");
             resetMoves();
+        }else{
+            emit sendResponse("Paint moves");
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move
