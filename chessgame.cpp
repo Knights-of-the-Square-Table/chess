@@ -309,6 +309,7 @@ std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
     std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
     qDebug() << "got top cell board";
     std::vector<int> midB = cell->piece->getMovesInt(midBoard);
+    qDebug() << "got mid board";
     std::vector<int> botB = cell->piece->getMovesInt(botBoard);
     std::vector<int> allMoves = {};
     qDebug() << "initialized topb, midb, botb";
