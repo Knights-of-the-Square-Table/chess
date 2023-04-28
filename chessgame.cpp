@@ -304,22 +304,22 @@ bool ChessGame::validateInput(std::string input)
 
 std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
 {
-    qDebug() << "got into getpossiblemoves";
-    qDebug() << cell->getPiece()->getMovesInt(topBoard);
+ //   qDebug() << "got into getpossiblemoves";
+ //   qDebug() << cell->getPiece()->getMovesInt(topBoard);
     std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
-    qDebug() << "got top cell board";
+//    qDebug() << "got top cell board";
     std::vector<int> midB = cell->piece->getMovesInt(midBoard);
-    qDebug() << "got mid board";
+//    qDebug() << "got mid board";
     std::vector<int> botB = cell->piece->getMovesInt(botBoard);
     std::vector<int> allMoves = {};
-    qDebug() << "initialized topb, midb, botb";
+ //   qDebug() << "initialized topb, midb, botb";
     std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
     std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
     std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
 
-    for(auto &i: allMoves){
-        cout << i;
-    }
+//    for(auto &i: allMoves){
+//        cout << i;
+//    }
 
     return allMoves;
 }
