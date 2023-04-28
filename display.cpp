@@ -8,7 +8,7 @@
 #include <QImage>
 #include <QFont>
 
-int boardSize = 6;
+int boardSize = 8;
 //Chris
 Display::Display()
 {
@@ -40,10 +40,10 @@ if(boardSize==8){
 //    setup white pieces
     cellList[0]->setImage(":/images/resource/whiterook.png");
     cellList[7]->setImage(":/images/resource/whiterook.png");
-    cellList[1]->setImage(":/images/resource/whitebishop.png");
-    cellList[6]->setImage(":/images/resource/whitebishop.png");
-    cellList[2]->setImage(":/images/resource/whiteknight.png");
-    cellList[5]->setImage(":/images/resource/whiteknight.png");
+    cellList[2]->setImage(":/images/resource/whitebishop.png");
+    cellList[5]->setImage(":/images/resource/whitebishop.png");
+    cellList[1]->setImage(":/images/resource/whiteknight.png");
+    cellList[6]->setImage(":/images/resource/whiteknight.png");
     cellList[4]->setImage(":/images/resource/whitequeen.png");
     cellList[3]->setImage(":/images/resource/whiteking.png");
     cellList[14]->setImage(":/images/resource/whitepawn.png");
@@ -59,10 +59,10 @@ if(boardSize==8){
 //    setup black pieces
     cellList[191]->setImage(":/images/resource/blkrook.png");
     cellList[184]->setImage(":/images/resource/blkrook.png");
-    cellList[190]->setImage(":/images/resource/blkbishop.png");
-    cellList[185]->setImage(":/images/resource/blkbishop.png");
-    cellList[189]->setImage(":/images/resource/blkknight.png");
-    cellList[186]->setImage(":/images/resource/blkknight.png");
+    cellList[189]->setImage(":/images/resource/blkbishop.png");
+    cellList[186]->setImage(":/images/resource/blkbishop.png");
+    cellList[190]->setImage(":/images/resource/blkknight.png");
+    cellList[185]->setImage(":/images/resource/blkknight.png");
     cellList[188]->setImage(":/images/resource/blkqueen.png");
     cellList[187]->setImage(":/images/resource/blkking.png");
     cellList[176]->setImage(":/images/resource/blkpawn.png");
@@ -529,7 +529,7 @@ void Display::getMoves(QVector<int> moves)
 void Display::on_exitButton_clicked()
 {
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(nullptr, " ", "Are you sure you want to exit the game?", QMessageBox::Yes | QMessageBox::No);
+    reply = QMessageBox::question(nullptr, "Quit Application", "Are you sure you want to exit the game?", QMessageBox::Yes | QMessageBox::No);
 
     if(reply == QMessageBox::Yes){
         QApplication::quit();
@@ -541,7 +541,7 @@ void Display::onNewGameClick()
 {
 
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(nullptr, " ", "Are you sure you want to create a new game? This cannot be undone", QMessageBox::Yes | QMessageBox::No);
+    reply = QMessageBox::question(nullptr, "Caution", "Are you sure you want to create a new game? This cannot be undone!", QMessageBox::Yes | QMessageBox::No);
 
     if(reply == QMessageBox::Yes){
         game.resetGame();
