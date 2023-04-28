@@ -3,6 +3,7 @@
 #include "qdebug.h"
 #include <vector>
 
+
 ChessPiece::ChessPiece(BoardCell* cell, Color color){
     this->cell = cell;
     this->color = color;
@@ -48,8 +49,8 @@ std::vector<BoardCell *> ChessPiece::getMoves(ChessBoard *board)
 {
     std::vector<BoardCell*> moves = {};
     BoardCell* tempTargetCell = nullptr;
-    for(int ri=0; ri<6;ri++){
-        for(int ci=0; ci<6; ci++){
+    for(int ri=0; ri<ROW_COUNT;ri++){
+        for(int ci=0; ci<COL_COUNT; ci++){
             tempTargetCell = board->getCell(ri, ci);
             if(cell->getPiece()->isValidMove(tempTargetCell)){
                 moves.push_back(tempTargetCell);
@@ -65,18 +66,18 @@ std::vector<int> ChessPiece::getMovesInt(ChessBoard *board){
 
     BoardCell* tempTargetCell = nullptr;
 
-    for(int ri=0; ri<6; ri++){
-        for(int ci=0; ci<6; ci++){
+    for(int ri=0; ri<ROW_COUNT; ri++){
+        for(int ci=0; ci<COL_COUNT; ci++){
             tempTargetCell = board->getCell(ri, ci);
 
             if(cell->getPiece()->isValidMove(tempTargetCell)){
 
                 if(board->level == TOP){
-                    movesInt.push_back(ri * 6 + ci);
+                    movesInt.push_back(ri * COL_COUNT + ci);
                 }else if(board->level == MIDDLE){
-                    movesInt.push_back(ri *6 + ci + 36);
+                    movesInt.push_back(ri *COL_COUNT + ci + 64);
                 }else if(board->level == BOTTOM){
-                    movesInt.push_back(ri * 6 + ci + 72);
+                    movesInt.push_back(ri * COL_COUNT + ci + 128);
                 }
 
             }

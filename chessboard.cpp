@@ -27,12 +27,20 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
     // Create and place Rocks
 
     if(level == TOP){
-        new Rook(   getCell(0,0), WHITE );
-        new Bishop( getCell(0,1), WHITE );
-        new King(   getCell(0,2), WHITE );
-        new Queen(  getCell(0,3), WHITE );
-        new Bishop( getCell(0,4), WHITE );
-        new Rook(   getCell(0,5), WHITE );
+        new Rook(getCell(0, 0), WHITE);
+     //   new Knight(getCell(0, 1), WHITE);
+        new Bishop(getCell(0, 2), WHITE);
+        new King(getCell(0, 3), WHITE);
+        new Queen(getCell(0, 4), WHITE);
+        new Bishop(getCell(0, 5), WHITE);
+    //    new Knight(getCell(0, 6), WHITE);
+        new Rook(getCell(0, 7), WHITE);
+//        new Rook(   getCell(0,0), WHITE );
+//        new Bishop( getCell(0,1), WHITE );
+//        new King(   getCell(0,2), WHITE );
+//        new Queen(  getCell(0,3), WHITE );
+//        new Bishop( getCell(0,4), WHITE );
+//        new Rook(   getCell(0,5), WHITE );
 
       /*new Pawn(   getCell(1,0), WHITE );
         new Pawn(   getCell(1,1), WHITE );
@@ -43,12 +51,20 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
     }
 
     else if(level == BOTTOM){
-        new Rook(   getCell(5,0), BLACK );
-        new Bishop( getCell(5,1), BLACK );
-        new King(   getCell(5,2), BLACK );
-        new Queen(  getCell(5,3), BLACK );
-        new Bishop( getCell(5,4), BLACK );
-        new Rook(   getCell(5,5), BLACK );
+        new Rook(   getCell(7,0), BLACK );
+  //      new Knight(getCell(7,1), BLACK);
+        new Bishop( getCell(7,2), BLACK );
+        new King(   getCell(7,3), BLACK );
+        new Queen(  getCell(7,4), BLACK );
+        new Bishop( getCell(7,5), BLACK );
+    //    new Knight(getCell(7,6), BLACK);
+        new Rook(   getCell(7,7), BLACK );
+//        new Rook(   getCell(5,0), BLACK );
+//        new Bishop( getCell(5,1), BLACK );
+//        new King(   getCell(5,2), BLACK );
+//        new Queen(  getCell(5,3), BLACK );
+//        new Bishop( getCell(5,4), BLACK );
+//        new Rook(   getCell(5,5), BLACK );
 
       /*new Pawn(   getCell(4,0), BLACK );
         new Pawn(   getCell(4,1), BLACK );
@@ -90,15 +106,15 @@ BoardCell* ChessBoard::getCell(int rowIndex, int colIndex){
 //}
 
 void ChessBoard::print(){
-    string divider = "  _________________________";
-    string empty = "   ";
-    string center = "               ";
+    string divider = "  _________________________________";
+    string empty = "       ";
+    string center = "                   ";
     string boardLevelFrontSpace = "     ";
     string boardLevelEndSpace = "    ";
     string boardLevel = this->printBoardLevel(this->level);
     cout << endl << endl;
 //    cout << divider << endl;
-    cout << center <<"  | a | b | c | d | e | f |" << endl;
+    cout << center <<"  | a | b | c | d | e | f | g | h |" << endl;
     cout << center << divider << endl;
     for (int ri = 0; ri < ROW_COUNT; ri++){
         if(ri==2){
@@ -122,7 +138,7 @@ void ChessBoard::print(){
         cout << ri+1 << "|" << endl;
         cout << center << divider << endl;
     }
-    cout << center << "  | a | b | c | d | e | f |" << endl;
+    cout << center << "  | a | b | c | d | e | f | g | h |" << endl;
         cout << endl << endl;
 
 }
