@@ -26,6 +26,7 @@ private:
     void placePieces();
     void resetColors();
     void highLightMoves(std::vector<int> moveList);
+    void resetDisplay();
     std::vector<int> possibleMoves;
 
     std::vector<GUICell*> whiteCaptures;

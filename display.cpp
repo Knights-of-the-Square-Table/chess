@@ -120,6 +120,30 @@ void Display::highLightMoves(std::vector<int> moveList)
     }
 }
 
+//Chris
+void Display::resetDisplay()
+{
+    //reset images for captures pieces
+    for(int i = 0; i < 15; i++){
+        whiteCaptures[i]->setImage("");
+        blackCaptures[i]->setImage("");
+    }
+    int i = 0;
+    //reset images in main boards based on the board size
+    while(i < boardSize*boardSize * 3){
+        cellList[i]->setImage("");
+        i++;
+    }
+    QString s = QString::number(game.players[0]->getPoints());
+    QString scoreText = "White score: " + s;
+    scoreWhite->setPlainText(scoreText);
+    QString s2 = QString::number(game.players[1]->getPoints());
+    QString scoreText2 = "Black score: " + s2;
+    scoreBlack->setPlainText(scoreText2);
+
+    placePieces();
+}
+
 
 //Chris
 //Creates the board layout for the GUI, connecting the cells to the game object
@@ -293,7 +317,7 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         whiteCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
+        cell->setRect(j,k,60,60);
         j+=60;
         if (j == 60*8)
         {
@@ -310,7 +334,7 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         blackCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
+        cell->setRect(j,k,60,60);
         j+=60;
         if (j == 60*8+1280)
         {
@@ -517,6 +541,8 @@ void Display::onMenuButtonClick()
 {
   //  main->view->hide();
     QMessageBox::information(nullptr, "This is information", "The information");
+    game.resetGame();
+    resetDisplay();
 }
 
 

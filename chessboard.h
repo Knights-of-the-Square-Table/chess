@@ -33,8 +33,6 @@ class ChessBoard
     std::string printBoardLevel(Level level);
 
 
-
-
 };
 
 #endif // CHESSBOARD_H

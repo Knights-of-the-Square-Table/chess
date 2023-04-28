@@ -91,8 +91,8 @@ void ChessGame::printStartText()
 void ChessGame::run()
 {
 
-    this->printStartText();
-    this->gameLoop();
+  //  this->printStartText();
+    //this->gameLoop();
 
 }
 
@@ -335,6 +335,22 @@ void ChessGame::resetMoves()
 Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
+
+void ChessGame::resetGame()
+{
+    //free board memory
+    free(topBoard);
+    free(midBoard);
+    free(botBoard);
+    //create 3 new boards
+    topBoard = new ChessBoard(this, TOP);
+    midBoard = new ChessBoard(this, MIDDLE);
+    botBoard = new ChessBoard(this, BOTTOM);
+    players[0]->resetScore();
+    players[1]->resetScore();
+    currentPlayerIndex = 0;
+}
+
 
 void ChessGame::getCurrentWinner(){
     if (this->players[0]->getPoints() == this->players[1]->getPoints()){
