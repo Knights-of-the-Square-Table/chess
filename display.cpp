@@ -140,7 +140,7 @@ void Display::resetDisplay()
     QString s2 = QString::number(game.players[1]->getPoints());
     QString scoreText2 = "Black score: " + s2;
     scoreBlack->setPlainText(scoreText2);
-
+    statusTracker->setPlainText("New Game Created");
     placePieces();
 }
 
@@ -376,7 +376,7 @@ void Display::buttonAndTextLayout()
 
     //Game Status tracker
     QString status = "Game status goes here";
-    QGraphicsTextItem * statusTracker = new QGraphicsTextItem();
+    statusTracker = new QGraphicsTextItem();
     statusTracker->setPlainText(status);
     statusTracker->setFont(QFont("times", 25));
     statusTracker->setPos(720, 650);
@@ -414,11 +414,11 @@ void Display::buttonAndTextLayout()
     QObject::connect(exitButton, SIGNAL(clicked()), this, SLOT(on_exitButton_clicked()));
     DisplayScene->addWidget(exitButton);
 
-    menuButton = new QPushButton();
-    menuButton->setGeometry(1490,650,120,35);
-    menuButton->setText("Main Menu");
-    QObject::connect(menuButton, SIGNAL(clicked()), this, SLOT(onMenuButtonClick()));
-    DisplayScene->addWidget(menuButton);
+    newGameButton = new QPushButton();
+    newGameButton->setGeometry(1490,650,120,35);
+    newGameButton->setText("Main Menu");
+    QObject::connect(newGameButton, SIGNAL(clicked()), this, SLOT(onNewGameClick()));
+    DisplayScene->addWidget(newGameButton);
 }
 
 //Chris
@@ -537,7 +537,7 @@ void Display::on_exitButton_clicked()
 }
 
 
-void Display::onMenuButtonClick()
+void Display::onNewGameClick()
 {
   //  main->view->hide();
     QMessageBox::information(nullptr, "This is information", "The information");

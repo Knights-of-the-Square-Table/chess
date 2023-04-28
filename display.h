@@ -36,8 +36,9 @@ private:
     QGraphicsTextItem * check;
     QGraphicsTextItem * scoreWhite;
     QGraphicsTextItem * scoreBlack;
+    QGraphicsTextItem * statusTracker;
 
-    QPushButton *exitButton, *menuButton;
+    QPushButton *exitButton, *newGameButton;
 
     void createBoards();
     void createCapureArea();
@@ -116,7 +117,7 @@ public slots:
     void getResponse(QString response);
     void getMoves(QVector<int> moves);
     void on_exitButton_clicked();
-    void onMenuButtonClick();
+    void onNewGameClick();
 };
 
 
