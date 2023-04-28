@@ -308,17 +308,17 @@ void Display::createCapureArea()
 void Display::buttonAndTextLayout()
 {
     QString s = QString::number(game.players[0]->getPoints());
-    QString scoreText = "Black score: " + s;
+    QString scoreText = "White score: " + s;
     scoreWhite = new QGraphicsTextItem();
     scoreWhite->setPlainText(scoreText);
-    scoreWhite->setPos(1200, -30);
+    scoreWhite->setPos(480, -30);
     DisplayScene->addItem(scoreWhite);
 
     QString s2 = QString::number(game.players[1]->getPoints());
-    QString scoreText2 = "White score: " + s2;
+    QString scoreText2 = "Black score: " + s2;
     scoreBlack = new QGraphicsTextItem();
     scoreBlack->setPlainText(scoreText2);
-    scoreBlack->setPos(480, -30);
+    scoreBlack->setPos(1200, -30);
     DisplayScene->addItem(scoreBlack);
 
 
@@ -422,21 +422,25 @@ void Display::getResponse(QString response)
          resetColors();
 
 //        qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
-         QString s = QString::number(game.players[1]->getPoints());
-         QString scoreText = "Black score: " + s;
+         QString s = QString::number(game.players[0]->getPoints());
+         QString scoreText = "White score: " + s;
          scoreWhite->setPlainText(scoreText);
-         QString s2 = QString::number(game.players[0]->getPoints());
-         QString scoreText2 = "White score: " + s2;
+         QString s2 = QString::number(game.players[1]->getPoints());
+         QString scoreText2 = "Black score: " + s2;
          scoreBlack->setPlainText(scoreText2);
     }
 }
 
+//Chris
+//Slot to update current possible moves from a selected piece
 void Display::getMoves(QVector<int> moves)
 {
-    qDebug() << "moves received";
+    //qDebug() << "moves received";
     this->possibleMoves = std::vector<int>(moves.begin(), moves.end());
 }
 
+//Chris
+//Method to confirm the user wants to exit application when hitting "Quit" button
 void Display::on_exitButton_clicked()
 {
     QMessageBox::StandardButton reply;
