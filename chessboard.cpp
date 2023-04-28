@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 
 #include "chessboard.h"
 #include "boardcell.h"
@@ -7,6 +7,7 @@
 #include "king.h"
 #include "queen.h"
 #include "pawn.h"
+#include "knight.h"
 
 
 using namespace std;
@@ -28,12 +29,12 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
 
     if(level == TOP){
         new Rook(getCell(0, 0), WHITE);
-     //   new Knight(getCell(0, 1), WHITE);
+        new Knight(getCell(0, 1), WHITE);
         new Bishop(getCell(0, 2), WHITE);
         new King(getCell(0, 3), WHITE);
         new Queen(getCell(0, 4), WHITE);
         new Bishop(getCell(0, 5), WHITE);
-    //    new Knight(getCell(0, 6), WHITE);
+        new Knight(getCell(0, 6), WHITE);
         new Rook(getCell(0, 7), WHITE);
 //        new Rook(   getCell(0,0), WHITE );
 //        new Bishop( getCell(0,1), WHITE );
@@ -42,22 +43,24 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
 //        new Bishop( getCell(0,4), WHITE );
 //        new Rook(   getCell(0,5), WHITE );
 
-      /*new Pawn(   getCell(1,0), WHITE );
+        new Pawn(   getCell(1,0), WHITE );
         new Pawn(   getCell(1,1), WHITE );
         new Pawn(   getCell(1,2), WHITE );
         new Pawn(   getCell(1,3), WHITE );
         new Pawn(   getCell(1,4), WHITE );
-        new Pawn(   getCell(1,5), WHITE );*/
+        new Pawn(   getCell(1,5), WHITE );
+        new Pawn( getCell(1,6), WHITE);
+        new Pawn( getCell(1,7), WHITE);
     }
 
     else if(level == BOTTOM){
         new Rook(   getCell(7,0), BLACK );
-  //      new Knight(getCell(7,1), BLACK);
+        new Knight(getCell(7,1), BLACK);
         new Bishop( getCell(7,2), BLACK );
         new King(   getCell(7,3), BLACK );
         new Queen(  getCell(7,4), BLACK );
         new Bishop( getCell(7,5), BLACK );
-    //    new Knight(getCell(7,6), BLACK);
+        new Knight(getCell(7,6), BLACK);
         new Rook(   getCell(7,7), BLACK );
 //        new Rook(   getCell(5,0), BLACK );
 //        new Bishop( getCell(5,1), BLACK );
@@ -66,12 +69,14 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
 //        new Bishop( getCell(5,4), BLACK );
 //        new Rook(   getCell(5,5), BLACK );
 
-      /*new Pawn(   getCell(4,0), BLACK );
-        new Pawn(   getCell(4,1), BLACK );
-        new Pawn(   getCell(4,2), BLACK );
-        new Pawn(   getCell(4,3), BLACK );
-        new Pawn(   getCell(4,4), BLACK );
-        new Pawn(   getCell(4,5), BLACK );*/
+      new Pawn(   getCell(6,0), BLACK );
+        new Pawn(   getCell(6,1), BLACK );
+        new Pawn(   getCell(6,2), BLACK );
+        new Pawn(   getCell(6,3), BLACK );
+        new Pawn(   getCell(6,4), BLACK );
+        new Pawn(   getCell(6,5), BLACK );
+        new Pawn(getCell(6, 6), BLACK);
+        new Pawn(getCell(6,7), BLACK);
     }
 
 

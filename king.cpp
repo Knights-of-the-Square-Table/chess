@@ -89,3 +89,14 @@ bool King::isInCheck(){
     fin:
     return result;
 }
+
+//Goal: at every turn in a game, if the king is in check,
+//the move has to get the king out of check,
+//if no move possible to get out of check, end of game other player wins
+
+//how to check if king is in check at beginning of turn:
+//use the getpossiblemoves list and see if the kings cell is one of the cells in the list
+//for the oponent players moves
+bool King::isInCheck(BoardCell* mockTarget){
+
+}
