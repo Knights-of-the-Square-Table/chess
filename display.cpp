@@ -32,6 +32,7 @@ void Display::setup()
 
 
 //Chris
+//Places piece images on the board
 void Display::placePieces()
 {
 
