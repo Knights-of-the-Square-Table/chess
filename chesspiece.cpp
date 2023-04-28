@@ -63,7 +63,6 @@ std::vector<BoardCell *> ChessPiece::getMoves(ChessBoard *board)
 std::vector<int> ChessPiece::getMovesInt(ChessBoard *board){
     std::vector<int> movesInt = {};
     int count = 0;
-
     BoardCell* tempTargetCell = nullptr;
 
     for(int ri=0; ri<6; ri++){
@@ -71,7 +70,6 @@ std::vector<int> ChessPiece::getMovesInt(ChessBoard *board){
             tempTargetCell = board->getCell(ri, ci);
 
             if(cell->getPiece()->isValidMove(tempTargetCell)){
-
                 if(board->level == TOP){
                     movesInt.push_back(ri * 6 + ci);
                 }else if(board->level == MIDDLE){

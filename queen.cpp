@@ -36,17 +36,41 @@ bool Queen::isValidMove(BoardCell* target){
     int vertDifference = dstRowIndex - srcRowIndex;
     int horizDifference = dstColIndex - srcColIndex;
 
+    //Create vector that holds the two cells mirroring the target cell
+    std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
+
+    // Check if the target cell has the chesspiece with the same color on every board
+    if(!target->isEmpty() && target->piece->hasSameColor(this) ){
+        cout << "target cell empty or not";
+        return false;
+    }else if(!mirrorCells[0]->isEmpty() && mirrorCells[0]->piece->hasSameColor(this)){
+        return false;
+    }else if(!mirrorCells[1]->isEmpty() && mirrorCells[1]->piece->hasSameColor(this)){
+        return false;
+    }
+
+    //Define the number of boards that are being traveled across
+    int boardMove = abs(dstBoardIndex - srcBoardIndex);
+
+    //Check to make sure the mirror of the target cell is clear on other boards
+    if(boardMove == 0){
+        if((!mirrorCells[0]->isEmpty() && !mirrorCells[0]->hasPiece(this->color))
+                    || (!mirrorCells[1]->isEmpty() && !mirrorCells[1]->hasPiece(this->color))){
+
+                    return false;
+
+                }
+    }
+
     //If the Queen is moving between boards, the legal moves change
     if(srcBoardIndex != dstBoardIndex){
-        int boardMove = abs(dstBoardIndex - srcBoardIndex);
-
         //the Queen can move directly up and down when moving between boards
         if((abs(dstColIndex - srcColIndex) == 0) && (abs(dstRowIndex - srcRowIndex) == 0)){
             return true;
         }
 
         //if the Queen moves one board level, it can move one cell away
-        if (boardMove == 1){
+        if(boardMove == 1){
             if(abs(vertDifference) > 1){
                 return false;
             }
@@ -54,6 +78,14 @@ bool Queen::isValidMove(BoardCell* target){
             else if(abs(horizDifference) > 1){
                 return false;
             }
+
+            //this condition will ensure that the Queen cannot sit between pieces on different boards
+            if((!mirrorCells[0]->isEmpty() && !mirrorCells[0]->hasPiece(this->color))
+                        || (!mirrorCells[1]->isEmpty() && !mirrorCells[1]->hasPiece(this->color))){
+
+                        return false;
+
+                    }
 
         }
 
@@ -80,13 +112,17 @@ bool Queen::isValidMove(BoardCell* target){
         int ci = srcColIndex;
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             BoardCell* c =  target->board->getCell(ri, ci);
-            BoardCell* mirror = target->board->getMirrorBoard()->getCell(ri, ci);
+            std::vector<BoardCell*> mirrorCells = c->getMirrorCells(ri, ci);
 
             if(!c->isEmpty()){
                 return false;
             }
 
-            else if(!mirror->isEmpty()){
+            else if(!mirrorCells[0]->isEmpty()){
+                return false;
+            }
+
+            else if(!mirrorCells[1]->isEmpty()){
                 return false;
             }
         }
@@ -100,13 +136,17 @@ bool Queen::isValidMove(BoardCell* target){
         int ri = srcRowIndex;
         for(int ci = minColIndex; ci <= maxColIndex; ci++){
             BoardCell* c =  target->board->getCell(ri, ci);
-            BoardCell* mirror = target->board->getMirrorBoard()->getCell(ri, ci);
+            std::vector<BoardCell*> mirrorCells = c->getMirrorCells(ri, ci);
 
             if(!c->isEmpty()){
                 return false;
             }
 
-            else if(!mirror->isEmpty()){
+            else if(!mirrorCells[0]->isEmpty()){
+                return false;
+            }
+
+            else if(!mirrorCells[1]->isEmpty()){
                 return false;
             }
         }
@@ -123,13 +163,17 @@ bool Queen::isValidMove(BoardCell* target){
         //iterate through the diagonal pieces and make sure they are not occupied
         for(int i = 1; i < moveLength; i++){
             BoardCell* c = target->board->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
-            BoardCell* mirror = target->board->getMirrorBoard()->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+            std::vector<BoardCell*> mirrorCells = c->getMirrorCells(srcRowIndex + (i*x), srcColIndex + (i*y));
 
             if(!c->isEmpty()){
                 return false;
             }
 
-            else if(!mirror->isEmpty()){
+            else if(!mirrorCells[0]->isEmpty()){
+                return false;
+            }
+
+            else if(!mirrorCells[1]->isEmpty()){
                 return false;
             }
 

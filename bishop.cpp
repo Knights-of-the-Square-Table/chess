@@ -48,6 +48,28 @@ bool Bishop::isValidMove(BoardCell* target){
         return false;
     }
 
+    //Create vector that holds the two cells mirroring the target cell
+    std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
+
+
+    // Check if the target cell has the chesspiece with the same color on every board
+    if(!target->isEmpty() && target->piece->hasSameColor(this) ){
+        cout << "target cell empty or not";
+        return false;
+    }else if(!mirrorCells[0]->isEmpty() && mirrorCells[0]->piece->hasSameColor(this)){
+        return false;
+    }else if(!mirrorCells[1]->isEmpty() && mirrorCells[1]->piece->hasSameColor(this)){
+        return false;
+    }
+
+    //this condition will ensure that the Bishop cannot sit under/over pieces on different boards
+    if((!mirrorCells[0]->isEmpty() && !mirrorCells[0]->hasPiece(this->color))
+                || (!mirrorCells[1]->isEmpty() && !mirrorCells[1]->hasPiece(this->color))){
+
+                return false;
+
+            }
+
     //If the Bishop is moving between boards, the legal moves change
     if(srcBoardIndex != dstBoardIndex){
         int boardMove = abs(dstBoardIndex - srcBoardIndex);
@@ -79,13 +101,17 @@ bool Bishop::isValidMove(BoardCell* target){
         //iterate through the diagonal pieces and make sure they are not occupied
         for(int i = 1; i < moveLength; i++){
             BoardCell* c = target->board->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
-            BoardCell* d = target->board->getMirrorBoard()->getCell(srcRowIndex + (i*x), srcColIndex + (i*y));
+            std::vector<BoardCell*> mirrorCells = c->getMirrorCells(srcRowIndex + (i*x), srcColIndex + (i*y));
 
             if(!c->isEmpty()){
                 return false;
             }
 
-            else if(!d->isEmpty()){
+            else if(!mirrorCells[0]->isEmpty()){
+                return false;
+            }
+
+            else if(!mirrorCells[1]->isEmpty()){
                 return false;
             }
 

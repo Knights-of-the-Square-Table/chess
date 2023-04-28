@@ -16,82 +16,7 @@ bool Rook::isValidMove(BoardCell* target)
         return false;
     }
 
-//    ChessBoard *middleB = NULL;
-//    ChessBoard *topB = NULL;
-//    ChessBoard *bottomB = NULL;
-//    BoardCell *middleCell = NULL;
-//    BoardCell *topCell = NULL;
-//    BoardCell *bottomCell = NULL;
-//    if(target->board->level == MIDDLE){
-//        middleB = target->board->getMidBoard();
-//        topCell = target->board->getCell(target->rowIndex, target->colIndex);
-//        bottomCell = target->board->getCell(target->rowIndex, target->colIndex);
-//    }
 
-//    else if(target->board->level == TOP){
-//        topB = target->board->getTopBoard();
-//        middleCell = target->board->getCell(target->rowIndex, target->colIndex);
-//        bottomCell = target->board->getCell(target->rowIndex, target->colIndex);
-//    }
-//    else if(target->board->level == BOTTOM){
-//        bottomB = target->board->getBotBoard();
-//        topCell = target->board->getCell(target->rowIndex, target->colIndex);
-//        middleCell = target->board->getCell(target->rowIndex, target->colIndex);
-
-//    }
-
-//    //check to see if the move is to different board
-//    if(isMoveToDiffBoard(target))
-//    {
-//        if(middleB && abs(target->rowIndex - cell->rowIndex) > 1)
-//        {
-//            return false;
-//        }
-//        else if(middleB && abs(target->colIndex - cell->colIndex) > 1)
-//        {
-//            return false;
-//        }
-//        else if((abs(target->colIndex - cell->colIndex) == 0) && (abs(target->rowIndex - cell->rowIndex) == 0)){
-//            return true;
-//        }
-//        else if(!middleB && abs(target->rowIndex - cell->rowIndex) > 2)
-//        {
-//            return false;
-//        }
-//        else if(!middleB && abs(target->colIndex - cell->colIndex) > 2)
-//        {
-//            return false;
-//        }
-//        else {
-//            return true;
-//        }
-//    }
-
-//    // Check if the target cell has the chesspiece with the same color
-//    if(!target->isEmpty() && target->piece->hasSameColor(this) ){
-//        return false;
-//    }
-
-//    if(topB && !middleCell->isEmpty()
-//            && !bottomCell->isEmpty()
-//            && middleCell->piece->hasSameColor(this)
-//            && bottomCell->piece->hasSameColor(this)){
-//        return false;
-//    }
-
-//    if(middleB && !topCell->isEmpty()
-//            && !bottomCell->isEmpty()
-//            && topCell->piece->hasSameColor(this)
-//            && bottomCell->piece->hasSameColor(this)){
-//        return false;
-//    }
-
-//    if(bottomB && !middleCell->isEmpty()
-//            && !topCell->isEmpty()
-//            && middleCell->piece->hasSameColor(this)
-//            && topCell->piece->hasSameColor(this)){
-//        return false;
-//    }
 
     int srcRowIndex = cell->rowIndex;
     int srcColIndex = cell->colIndex;
@@ -120,14 +45,12 @@ bool Rook::isValidMove(BoardCell* target)
         }
     }
 
-    cout << "got here!";
 
     std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
 
 
     // Check if the target cell has the chesspiece with the same color
     if(!target->isEmpty() && target->piece->hasSameColor(this) ){
-        cout << "target cell empty or not";
         return false;
     }else if(!mirrorCells[0]->isEmpty() && mirrorCells[0]->piece->hasSameColor(this)){
         return false;
@@ -135,40 +58,15 @@ bool Rook::isValidMove(BoardCell* target)
         return false;
     }
 
-
-    if(boardDistance == 0) {
-        if((!mirrorCells[0]->isEmpty() && !mirrorCells[0]->hasPiece(this->color))
-            || (!mirrorCells[1]->isEmpty() && !mirrorCells[1]->hasPiece(this->color))){
-
-            return false;
-
-        }
-
-    }
-
-
-
-
-    //check mirror board to see if target cell has piece on it
-    if(!target->getMirrorCell(target->rowIndex, target->colIndex)->isEmpty())
-    {
+    if((!mirrorCells[0]->isEmpty() && !mirrorCells[0]->hasPiece(this->color))
+        || (!mirrorCells[1]->isEmpty() && !mirrorCells[1]->hasPiece(this->color))){
         return false;
     }
-
-
-
 
     if(!this->isPathClear(target))
     {
             return false;
     }
-
-
-    bool clear = this->isPathClear(target);
-    cout << &clear << endl;
-
-
-
 
    return true;
 }
@@ -186,10 +84,6 @@ bool Rook::isPathClear(BoardCell *target)
     if ( srcRowIndex != dstRowIndex && srcColIndex != dstColIndex){
         return false;
     }
-
-
-
-
     //
     // Case 1 - vertical: both soruce and target have the same column index
     // - - - - - -
@@ -208,7 +102,6 @@ bool Rook::isPathClear(BoardCell *target)
         for(int ri = minRowIndex; ri <= maxRowIndex; ri++){
             BoardCell* c =  target->board->getCell(ri, ci);
             std::vector<BoardCell*> mc = c->getMirrorCells(ri, ci);
-//            BoardCell* mirrorC = target->getMirrorCell(ri, ci);
             if(!c->isEmpty()){
                 return false;
             }
@@ -237,8 +130,6 @@ bool Rook::isPathClear(BoardCell *target)
 
             BoardCell* c =  target->board->getCell(ri, ci);
              std::vector<BoardCell*> mc = c->getMirrorCells(ri, ci);
-
-//            BoardCell* mirrorC = target->getMirrorCell(ri, ci);
             if(!c->isEmpty()){
                 return false;
             }
@@ -259,7 +150,6 @@ bool Rook::isMoveToDiffBoard(BoardCell *target)
 {
     if (this->cell->board->level == target->board->level)
     {
-        cout << "same board";
         return false;
     }
     else{
@@ -274,6 +164,3 @@ bool Rook::isValidAttack(BoardCell* target){
 bool Rook::isInCheck(){
     return false;
 }
-
-
-//maltese falcom
