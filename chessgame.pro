@@ -23,6 +23,7 @@ SOURCES += \
         display.cpp \
         guicell.cpp \
         king.cpp \
+        knight.cpp \
         main.cpp \
         mainwindow.cpp \
         pawn.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     display.h \
     guicell.h \
     king.h \
+    knight.h \
     level.h \
     mainwindow.h \
     pawn.h \
