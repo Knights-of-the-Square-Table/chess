@@ -293,7 +293,7 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         whiteCaptures.push_back(cell);
-        cell->setRect(j,k,60,60);
+        cell->setRect(j,k,0,0);
         j+=60;
         if (j == 60*8)
         {
@@ -310,7 +310,7 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         blackCaptures.push_back(cell);
-        cell->setRect(j,k,60,60);
+        cell->setRect(j,k,0,0);
         j+=60;
         if (j == 60*8+1280)
         {
@@ -326,11 +326,13 @@ void Display::createCapureArea()
 //This sets up the rest of the game window with buttons and text areas
 void Display::buttonAndTextLayout()
 {
-
+    //add logo
     GUICell * logo = new GUICell(0,0,5);
-    logo->setRect(780, -180, 60,60);
-    logo->setBrush(Qt::white);
+    logo->setRect(780, -180, 0,0);
+    //displayed as point until we have a logo
     DisplayScene->addItem(logo);
+
+
     //Score trackers
     QString s = QString::number(game.players[0]->getPoints());
     QString scoreText = "White score: " + s;
