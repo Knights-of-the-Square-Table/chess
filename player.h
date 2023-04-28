@@ -16,6 +16,7 @@ class Player
     void addCapturedPiece(ChessPiece* piece);
     Color getColor();
     int getPoints();
+    void resetScore();
 };
 
 #endif // PLAYER_H

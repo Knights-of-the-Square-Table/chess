@@ -91,8 +91,8 @@ void ChessGame::printStartText()
 void ChessGame::run()
 {
 
-    this->printStartText();
-    this->gameLoop();
+  //  this->printStartText();
+    //this->gameLoop();
 
 }
 
@@ -304,22 +304,22 @@ bool ChessGame::validateInput(std::string input)
 
 std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
 {
-    qDebug() << "got into getpossiblemoves";
-    qDebug() << cell->getPiece()->getMovesInt(topBoard);
+ //   qDebug() << "got into getpossiblemoves";
+ //   qDebug() << cell->getPiece()->getMovesInt(topBoard);
     std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
-    qDebug() << "got top cell board";
+//    qDebug() << "got top cell board";
     std::vector<int> midB = cell->piece->getMovesInt(midBoard);
-    qDebug() << "got mid board";
+//    qDebug() << "got mid board";
     std::vector<int> botB = cell->piece->getMovesInt(botBoard);
     std::vector<int> allMoves = {};
-    qDebug() << "initialized topb, midb, botb";
+ //   qDebug() << "initialized topb, midb, botb";
     std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
     std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
     std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
 
-    for(auto &i: allMoves){
-        cout << i;
-    }
+//    for(auto &i: allMoves){
+//        cout << i;
+//    }
 
     return allMoves;
 }
@@ -335,6 +335,22 @@ void ChessGame::resetMoves()
 Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
+
+void ChessGame::resetGame()
+{
+    //free board memory
+    free(topBoard);
+    free(midBoard);
+    free(botBoard);
+    //create 3 new boards
+    topBoard = new ChessBoard(this, TOP);
+    midBoard = new ChessBoard(this, MIDDLE);
+    botBoard = new ChessBoard(this, BOTTOM);
+    players[0]->resetScore();
+    players[1]->resetScore();
+    currentPlayerIndex = 0;
+}
+
 
 void ChessGame::getCurrentWinner(){
     if (this->players[0]->getPoints() == this->players[1]->getPoints()){
