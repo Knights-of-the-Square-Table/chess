@@ -12,6 +12,7 @@
 #include <QWidget>
 #include <QApplication>
 
+
 //Chris
 class Display: public QObject
 {

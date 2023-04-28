@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QBrush>
 #include <QImage>
-#include "mainwindow.h"
+#include <QFont>
 
 int boardSize = 6;
 //Chris
@@ -136,6 +136,22 @@ void Display::createBoards()
     i = 0;
     j = 0;
     k = 0;
+    if(boardSize ==8){
+        QGraphicsRectItem * topBorder = new QGraphicsRectItem();
+        topBorder->setRect(-7,-2, 569, 569);
+        topBorder->setBrush(Qt::black);
+        DisplayScene->addItem(topBorder);
+
+        QGraphicsRectItem * midBorder = new QGraphicsRectItem();
+        midBorder->setRect(593,-2, 569, 569);
+        midBorder->setBrush(Qt::black);
+        DisplayScene->addItem(midBorder);
+
+        QGraphicsRectItem * botBorder = new QGraphicsRectItem();
+        botBorder->setRect(1193,-2, 569, 569);
+        botBorder->setBrush(Qt::black);
+        DisplayScene->addItem(botBorder);
+    }
     for(i = 0; i < size*size; i++){
         QString spacename;
         if(boardSize == 8){
@@ -260,6 +276,9 @@ void Display::createBoards()
         DisplayScene->addItem(cell);
         QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
     }
+
+
+    //TODO setup board labels here
 }
 
 //Chris
@@ -274,14 +293,14 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         whiteCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
+        cell->setRect(j,k,60,60);
         j+=60;
         if (j == 60*8)
         {
             j = 0;
             k += 60;
         }
-
+     //   cell->setBrush(Qt::white);
         DisplayScene->addItem(cell);
     }
 
@@ -291,7 +310,7 @@ void Display::createCapureArea()
 
         GUICell * cell = new GUICell(j,k,5);
         blackCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
+        cell->setRect(j,k,60,60);
         j+=60;
         if (j == 60*8+1280)
         {
@@ -307,32 +326,72 @@ void Display::createCapureArea()
 //This sets up the rest of the game window with buttons and text areas
 void Display::buttonAndTextLayout()
 {
+
+    GUICell * logo = new GUICell(0,0,5);
+    logo->setRect(780, -180, 60,60);
+    logo->setBrush(Qt::white);
+    DisplayScene->addItem(logo);
+    //Score trackers
     QString s = QString::number(game.players[0]->getPoints());
     QString scoreText = "White score: " + s;
     scoreWhite = new QGraphicsTextItem();
     scoreWhite->setPlainText(scoreText);
-    scoreWhite->setPos(480, -30);
+    scoreWhite->setFont(QFont("times", 16));
+    scoreWhite->setPos(420, -30);
     DisplayScene->addItem(scoreWhite);
 
     QString s2 = QString::number(game.players[1]->getPoints());
     QString scoreText2 = "Black score: " + s2;
     scoreBlack = new QGraphicsTextItem();
     scoreBlack->setPlainText(scoreText2);
+    scoreBlack->setFont(QFont("times", 16));
     scoreBlack->setPos(1200, -30);
     DisplayScene->addItem(scoreBlack);
+
+    //Game Status tracker
+    QString status = "Game status goes here";
+    QGraphicsTextItem * statusTracker = new QGraphicsTextItem();
+    statusTracker->setPlainText(status);
+    statusTracker->setFont(QFont("times", 25));
+    statusTracker->setPos(720, 650);
+    DisplayScene->addItem(statusTracker);
+
+
+    //Add board labels
+    QString boardName = "TOP BOARD";
+    QGraphicsTextItem * topBoard = new QGraphicsTextItem();
+    topBoard->setPlainText(boardName);
+    topBoard->setFont(QFont("times", 20));
+    topBoard->setPos(200, 565);
+    DisplayScene->addItem(topBoard);
+
+    boardName = "MIDDLE BOARD";
+    QGraphicsTextItem * midBoard = new QGraphicsTextItem();
+    midBoard->setPlainText(boardName);
+    midBoard->setFont(QFont("times", 20));
+    midBoard->setPos(780, 565);
+    DisplayScene->addItem(midBoard);
+
+    boardName = "BOTTOM BOARD";
+    QGraphicsTextItem * botBoard = new QGraphicsTextItem();
+    botBoard->setPlainText(boardName);
+    botBoard->setFont(QFont("times", 20));
+    botBoard->setPos(1377, 565);
+    DisplayScene->addItem(botBoard);
 
 
     //Added buttons for additional functionality
 
     exitButton = new QPushButton();
-    exitButton->setGeometry(1640,620,120,35);
+    exitButton->setGeometry(1640,650,120,35);
     exitButton->setText("Quit");
     QObject::connect(exitButton, SIGNAL(clicked()), this, SLOT(on_exitButton_clicked()));
     DisplayScene->addWidget(exitButton);
 
     menuButton = new QPushButton();
-    menuButton->setGeometry(1490,620,120,35);
+    menuButton->setGeometry(1490,650,120,35);
     menuButton->setText("Main Menu");
+    QObject::connect(menuButton, SIGNAL(clicked()), this, SLOT(onMenuButtonClick()));
     DisplayScene->addWidget(menuButton);
 }
 
@@ -346,7 +405,7 @@ QGraphicsScene* Display::getScene()
 //This method updates the UI for every action the user makes in the game
 void Display::getResponse(QString response)
 {
-    qDebug() << response;
+    //qDebug() << response;
     std::string temp1 = response.toStdString();
     //resets colors if an invalid move was chosen
     if(temp1 == "Invalid"){
@@ -355,7 +414,7 @@ void Display::getResponse(QString response)
     //a piece has been selected, iterate over its available moves
     }else if(temp1 == "Paint moves"){
         //once we have the vector ready, this method will access it and iterate over it
-        qDebug() << "attemping to paint moves";
+       // qDebug() << "attemping to paint moves";
 
         highLightMoves(possibleMoves);
 
@@ -454,7 +513,8 @@ void Display::on_exitButton_clicked()
 
 void Display::onMenuButtonClick()
 {
-
+  //  main->view->hide();
+    QMessageBox::information(nullptr, "This is information", "The information");
 }
 
 
