@@ -17,11 +17,15 @@ class ChessPiece{
     BoardCell* cell;
     Color color;
     ChessPiece(BoardCell* cell, Color color);
+    bool hasMoved = 0;
 
     virtual bool isValidMove(BoardCell* target) = 0;
+    virtual bool isValidAttack(BoardCell* target) = 0;
     virtual char getNickName() = 0;
     virtual int getPointValue() = 0;
     virtual bool isInCheck() = 0;
+
+
 
     bool isInplay();
     void move(BoardCell* target);

@@ -6,6 +6,7 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
 
     //Liam
     bool Pawn::isValidMove(BoardCell* target){
+        cout << isValidAttack(target) << " " << isValidForward(target) << endl;
         if(isValidAttack(target) || isValidForward(target)){
             return true;
         }
@@ -41,6 +42,14 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         //Check to see if pawn is trying to move past more than 1 board
         if(abs(dstBoardIndex - srcBoardIndex) > 1){return false;}
 
+        //Check to see if piece is moving under/over another piece
+        std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
+        for(int i = 0; i < int (mirrorCells.size()); i++){
+            if(!mirrorCells[i]->isEmpty()){
+                return false;
+            }
+        }
+
         //moving straight up/down
         if((srcRowIndex == dstRowIndex) && (srcColIndex == dstColIndex) && ((srcBoardIndex + 1 == dstBoardIndex) || (srcBoardIndex - 1 == dstBoardIndex))){
             return true;
@@ -50,11 +59,10 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
             if(srcRowIndex == ROW_COUNT-1 && srcBoardIndex == 0){return false;} //If piece is at the end of the board (White side)
 
             if((this->hasMoved == false) && (srcRowIndex + 1 == dstRowIndex || srcRowIndex + 2 == dstRowIndex) && (srcColIndex == dstColIndex)){
-                this->hasMoved = true;
                 return true;
             }
 
-            if((this->hasMoved == true) && (srcRowIndex + 1 == dstRowIndex)){
+            if((this->hasMoved == true) && (srcRowIndex + 1 == dstRowIndex) && (srcColIndex == dstColIndex)){
                 return true;
             }
         }
@@ -63,11 +71,10 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
             if(srcRowIndex == ROW_COUNT-1 && srcBoardIndex == 2){return false;} //If piece is at the end of the board
 
             if((this->hasMoved == false) && (srcRowIndex - 1 == dstRowIndex || srcRowIndex - 2 == dstRowIndex) && (srcColIndex == dstColIndex)){
-                this->hasMoved = true;
                 return true;
             }
 
-            if((this->hasMoved == true) && (srcRowIndex - 1 == dstRowIndex)){
+            if((this->hasMoved == true) && (srcRowIndex - 1 == dstRowIndex) && (srcColIndex == dstColIndex)){
                 return true;
             }
         }
@@ -93,7 +100,9 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         if(!isInplay()){return false;}
 
         //Can't attack an empty square (move diagonally)
-        if(target->isEmpty()){return false;}
+        if(target->isEmpty()){
+            return false;
+        }
 
         //Check to see if target cell has chesspiece with the same color
         if(!target->isEmpty() && target->piece->hasSameColor(this) ){return false;}

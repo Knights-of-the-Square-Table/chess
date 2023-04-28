@@ -395,7 +395,7 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     }
 
     //print statement for checking currentPlayerCheck()
-    //cout << "is current player in check? " << currentPlayerCheck() << endl;
+    cout << "is current player in check? " << currentPlayerCheck() << endl;
     return validMove;
 
 }
@@ -489,25 +489,25 @@ void ChessGame::getInput(QString input)
 
 // Method for determining whether the current player is in check -Liam
 bool ChessGame::currentPlayerCheck(){
-    bool result = false;
     ChessBoard* boards [3] = {this->topBoard, this->botBoard, this->midBoard};
     for(int k = 0; k < 3; k++){
         for(int i = 0; i < ROW_COUNT; i++){
             for(int j = 0; j < COL_COUNT; j++){
                 if(!boards[k]->cells[i][j]->isEmpty()){
-                    if(boards[k]->cells[i][j]->getPiece()->getNickName() == 'K' && getCurrentPlayer()->color == WHITE){
-                        result = boards[k]->cells[i][j]->getPiece()->isInCheck();
+                    qDebug() << "found a piece";
+                    if((boards[k]->cells[i][j]->getPiece()->color == WHITE) && (getCurrentPlayer()->color == WHITE) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
+                        qDebug() << "found a white king";
+                        if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
                     }
-                    else if (boards[k]->cells[i][j]->getPiece()->getNickName() == 'k' && getCurrentPlayer()->color == BLACK){
-                        result = boards[k]->cells[i][j]->getPiece()->isInCheck();
+                    if ((boards[k]->cells[i][j]->getPiece()->color == BLACK) && (getCurrentPlayer()->color == BLACK) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
+                        qDebug() << "found a black king";
+                        if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
                     }
-                    if(result == true){goto end;}
                 }
             }
         }
     }
-    end:
-    return result;
+    return false;
 }
 //Liam
 

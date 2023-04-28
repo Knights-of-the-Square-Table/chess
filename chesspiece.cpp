@@ -27,6 +27,7 @@ void ChessPiece::move(BoardCell* target){
     target->placePiece(this);
 
     this->cell = target;
+    this->hasMoved = true;
 }
 
 bool ChessPiece::hasSameColor(ChessPiece* piece){

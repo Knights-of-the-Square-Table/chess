@@ -63,19 +63,22 @@ bool King::isValidMove(BoardCell* target) {
 
 //Checks all pieces on each board and see's if any of them are attacking the king -Liam
 bool King::isInCheck(){
-    bool result = false;
+
     ChessBoard* boards [3] = {this->cell->board->game->topBoard, this->cell->board->game->botBoard, this->cell->board->game->midBoard};
     for(int k = 0; k < 3; k++){
         for(int i = 0; i < ROW_COUNT; i++){
             for(int j = 0; j < COL_COUNT; j++){
-                if(!boards[k]->cells[i][j]->isEmpty() && (boards[k]->cells[i][j]->getPiece()->color == this->color)){
-                    result = boards[k]->cells[i][j]->getPiece()->isValidMove(this->cell);
-                    if(result == true){goto fin;}
+                if(!(boards[k]->cells[i][j]->isEmpty()) && !(boards[k]->cells[i][j]->getPiece()->color == this->color)){
+                    if(boards[k]->cells[i][j]->getPiece()->isValidMove(this->cell)){
+                        return true;
+                    }
                 }
             }
         }
     }
+    return false;
+}
 
-    fin:
-    return result;
+bool King::isValidAttack(BoardCell* target){
+    return false;
 }

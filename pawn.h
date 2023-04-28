@@ -19,7 +19,6 @@ public:
     int getPointValue(){
         return 1;
     }
-    bool hasMoved = 0;
 
     bool isInCheck();
 
