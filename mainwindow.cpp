@@ -27,7 +27,7 @@ void MainWindow::on_exitButton_clicked()
 void MainWindow::on_playButton_clicked()
 {
     hide();
-    QGraphicsView* view = new QGraphicsView(D->getScene());
+    view = new QGraphicsView(D->getScene());
    // view->setMaximumSize(1920, 1080);
  //   view->maximumSize();
     view->resize(1366,768);
