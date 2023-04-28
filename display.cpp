@@ -416,7 +416,7 @@ void Display::buttonAndTextLayout()
 
     newGameButton = new QPushButton();
     newGameButton->setGeometry(1490,650,120,35);
-    newGameButton->setText("Main Menu");
+    newGameButton->setText("New Game");
     QObject::connect(newGameButton, SIGNAL(clicked()), this, SLOT(onNewGameClick()));
     DisplayScene->addWidget(newGameButton);
 }
@@ -539,10 +539,15 @@ void Display::on_exitButton_clicked()
 
 void Display::onNewGameClick()
 {
-  //  main->view->hide();
-    QMessageBox::information(nullptr, "This is information", "The information");
-    game.resetGame();
-    resetDisplay();
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(nullptr, " ", "Are you sure you want to create a new game? This cannot be undone", QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::Yes){
+        game.resetGame();
+        resetDisplay();
+    }
+
 }
 
 
