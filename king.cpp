@@ -30,8 +30,19 @@ bool King::isValidMove(BoardCell* target) {
     int dstColIndex = target->colIndex;
 
     //Define variables to store difference between source and target cell
-    int vertDifference = dstRowIndex - srcRowIndex;
-    int horizDifference = dstColIndex - srcColIndex;
+    int vertDifference = abs(dstRowIndex - srcRowIndex);
+    int horizDifference = abs(dstColIndex - srcColIndex);
+
+    //Define the source and destination boards
+    int srcBoardIndex = this->cell->board->level;
+    int dstBoardIndex = target->board->level;
+
+    //Define the number of boards that are being traveled across
+    int boardMove = abs(dstBoardIndex - srcBoardIndex);
+
+    if(boardMove > 1){
+        return false;
+    }
 
     //The distance of the King's move cannot be greater than 1
     if(vertDifference > 1 || horizDifference > 1){
@@ -43,18 +54,17 @@ bool King::isValidMove(BoardCell* target) {
         return true;
     }
 
+    //Define vector hold mirror cells of the target
+    std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
+
     //Check the other boards to make sure a cell is not occupied
-    if(!target->board->getMirrorBoard()->getCell(dstRowIndex, dstColIndex)->isEmpty()){
-        if(!target->piece->hasSameColor(this)){
-            return true;
-        }
-
-        else {
-            return false;
-        }
+    if(!target->isEmpty() && target->piece->hasSameColor(this) ){
+        return false;
+    }else if(!mirrorCells[0]->isEmpty() && mirrorCells[0]->piece->hasSameColor(this)){
+        return false;
+    }else if(!mirrorCells[1]->isEmpty() && mirrorCells[1]->piece->hasSameColor(this)){
+        return false;
     }
-
-
 
     //If all other checks pass, the move is valid!
     return true;
