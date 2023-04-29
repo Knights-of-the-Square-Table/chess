@@ -328,17 +328,17 @@ void Display::createCapureArea()
         DisplayScene->addItem(cell);
     }
 
-    j = 1280;
+    j = 1700;
     k = -130;
     for(int i = 0; i <15; i++){
 
         GUICell * cell = new GUICell(j,k,5);
         blackCaptures.push_back(cell);
         cell->setRect(j,k,60,60);
-        j+=60;
-        if (j == 60*8+1280)
+        j-=60;
+        if (j == 1220)
         {
-            j = 1340;
+            j = 1700;
             k += 60;
         }
 
