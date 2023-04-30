@@ -11,9 +11,11 @@ class Player
     public:
     Color color;
     std::vector<ChessPiece*> capturedPieces;
+    std::vector<ChessPiece*> myPieces;
 
     Player(Color color);
     void addCapturedPiece(ChessPiece* piece);
+    void addMyPiece(ChessPiece* piece);
     Color getColor();
     int getPoints();
 };

@@ -395,8 +395,6 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
         this->printBoards();
     }
 
-    //print statement for checking currentPlayerCheck()
-    cout << "is current player in check? " << currentPlayerCheck() << endl;
     return validMove;
 
 }
@@ -495,13 +493,10 @@ bool ChessGame::currentPlayerCheck(){
         for(int i = 0; i < ROW_COUNT; i++){
             for(int j = 0; j < COL_COUNT; j++){
                 if(!boards[k]->cells[i][j]->isEmpty()){
-                    qDebug() << "found a piece";
                     if((boards[k]->cells[i][j]->getPiece()->color == WHITE) && (getCurrentPlayer()->color == WHITE) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
-                        qDebug() << "found a white king";
                         if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
                     }
                     if ((boards[k]->cells[i][j]->getPiece()->color == BLACK) && (getCurrentPlayer()->color == BLACK) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
-                        qDebug() << "found a black king";
                         if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
                     }
                 }

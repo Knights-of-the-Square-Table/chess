@@ -42,6 +42,11 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         //Check to see if pawn is trying to move past more than 1 board
         if(abs(dstBoardIndex - srcBoardIndex) > 1){return false;}
 
+        //moving straight up/down
+        if((srcRowIndex == dstRowIndex) && (srcColIndex == dstColIndex) && ((srcBoardIndex + 1 == dstBoardIndex) || (srcBoardIndex - 1 == dstBoardIndex))){
+            return true;
+        }
+
         //Check to see if piece is moving under/over another piece
         std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
         for(int i = 0; i < int (mirrorCells.size()); i++){
@@ -50,15 +55,20 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
             }
         }
 
-        //moving straight up/down
-        if((srcRowIndex == dstRowIndex) && (srcColIndex == dstColIndex) && ((srcBoardIndex + 1 == dstBoardIndex) || (srcBoardIndex - 1 == dstBoardIndex))){
-            return true;
+        if((hasMoved == false) && !this->pathClearDblMove()){
+            return false;
         }
 
+
+
         if (this->color == WHITE){
+
             if(srcRowIndex == ROW_COUNT-1 && srcBoardIndex == 0){return false;} //If piece is at the end of the board (White side)
 
-            if((this->hasMoved == false) && (srcRowIndex + 1 == dstRowIndex || srcRowIndex + 2 == dstRowIndex) && (srcColIndex == dstColIndex)){
+            if((this->hasMoved == false) &&
+              (srcRowIndex + 1 == dstRowIndex || srcRowIndex + 2 == dstRowIndex) &&
+              (srcColIndex == dstColIndex)){
+
                 return true;
             }
 
@@ -70,7 +80,10 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         else if(this->color == BLACK){ //
             if(srcRowIndex == ROW_COUNT-1 && srcBoardIndex == 2){return false;} //If piece is at the end of the board
 
-            if((this->hasMoved == false) && (srcRowIndex - 1 == dstRowIndex || srcRowIndex - 2 == dstRowIndex) && (srcColIndex == dstColIndex)){
+            if((this->hasMoved == false) &&
+               (srcRowIndex - 1 == dstRowIndex || srcRowIndex - 2 == dstRowIndex) &&
+               (srcColIndex == dstColIndex)){
+
                 return true;
             }
 
@@ -171,3 +184,24 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         return false;
     }
 
+    bool Pawn::pathClearDblMove(){
+        if(this->color == WHITE){
+            std::vector<BoardCell*> mirrorCellsW = this->cell->getMirrorCells(this->cell->rowIndex + 1, this->cell->colIndex);
+            std::vector<BoardCell*> mirrorCells = this->cell->getMirrorCells(this->cell->rowIndex + 2, this->cell->colIndex );
+            for(int i = 0; i < int (mirrorCells.size()); i++){
+                if((mirrorCells[i]->isEmpty()) && !(mirrorCellsW[i]->isEmpty())){
+                    return false;
+                }
+            }
+        }
+        else{ //this->color == BLACK
+            std::vector<BoardCell*> mirrorCellsB = this->cell->getMirrorCells(this->cell->rowIndex - 1, this->cell->colIndex);
+            std::vector<BoardCell*> mirrorCells = this->cell->getMirrorCells(this->cell->rowIndex - 2, this->cell->colIndex );
+            for(int i = 0; i < int (mirrorCells.size()); i++){
+                if((mirrorCells[i]->isEmpty()) && !(mirrorCellsB[i]->isEmpty())){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
