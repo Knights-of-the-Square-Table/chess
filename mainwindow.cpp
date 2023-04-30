@@ -33,6 +33,11 @@ void MainWindow::on_playButton_clicked()
 {
     hide();
     view = new QGraphicsView(D->getScene());
+
+
+
+
+
     view->resize(1366,680);
    // view->resize(1920,1080);
     view->setBackgroundBrush(QBrush(QImage(":/images/resource/whiteBackground.jpg")));
