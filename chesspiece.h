@@ -27,6 +27,7 @@ class ChessPiece{
     void beCaptured();
     std::vector<BoardCell*> getMoves(ChessBoard* board);
     std::vector<int> getMovesInt(ChessBoard* board);
+    std::vector<ChessPiece*> getOpponentPieces(ChessBoard* board);
 
 };
 

@@ -86,3 +86,13 @@ std::vector<int> ChessPiece::getMovesInt(ChessBoard *board){
     return movesInt;
 }
 
+std::vector<ChessPiece *> ChessPiece::getOpponentPieces(ChessBoard *board)
+{
+    std::vector<ChessPiece*> opponentPieces = {};
+    for(int ri = 0; ri < ROW_COUNT; ri++){
+        for(int ci = 0; ci < COL_COUNT; ci++){
+
+        }
+    }
+}
+

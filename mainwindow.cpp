@@ -30,7 +30,7 @@ void MainWindow::on_playButton_clicked()
     view = new QGraphicsView(D->getScene());
    // view->setMaximumSize(1920, 1080);
  //   view->maximumSize();
-    view->resize(1366,768);
+    view->resize(1366,680);
    // view->resize(1920,1080);
     view->setBackgroundBrush(QBrush(QImage(":/images/resource/fullTable.jpg")));
     view->show();
