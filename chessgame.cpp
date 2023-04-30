@@ -470,14 +470,13 @@ void ChessGame::getInput(QString input)
             qDebug() << "No piece selected";
             emit sendResponse("Invalid");
             resetMoves();
-        }else{
-           // qDebug() << "trying to get possible moves";
+        }else
+            if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
             standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
-         //   qDebug() << "trying to convert to QVector";
             possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
             emit sendMoves(possibleMoves);
             emit sendResponse("Paint moves");
-           // qDebug() << "attempting to emit possible moves";
+
 
         }
 
