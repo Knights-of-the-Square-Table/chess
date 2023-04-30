@@ -162,21 +162,21 @@ void Display::createBoards()
     bool black = true;
     //Set up for TopBoard
     i = 0;
-    j = -30;
+    j = 80;
     k = 260;
     if(boardSize ==8){
         QGraphicsRectItem * topBorder = new QGraphicsRectItem();
-        topBorder->setRect(-37,258, 569, 569);
+        topBorder->setRect(73,258, 569, 569);
         topBorder->setBrush(Qt::black);
         DisplayScene->addItem(topBorder);
 
         QGraphicsRectItem * midBorder = new QGraphicsRectItem();
-        midBorder->setRect(563,258, 569, 569);
+        midBorder->setRect(673,258, 569, 569);
         midBorder->setBrush(Qt::black);
         DisplayScene->addItem(midBorder);
 
         QGraphicsRectItem * botBorder = new QGraphicsRectItem();
-        botBorder->setRect(1163,258, 569, 569);
+        botBorder->setRect(1273,258, 569, 569);
         botBorder->setBrush(Qt::black);
         DisplayScene->addItem(botBorder);
     }
@@ -210,9 +210,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 70*size-30)
+        if (j == 70*size+80)
         {
-            j = -30;
+            j = 80;
             k += 70;
         }
         cell->setName(spacename);
@@ -223,7 +223,7 @@ void Display::createBoards()
 
     black = true;
     //Set up for Middle Board
-    j = 70*size +40-30;
+    j = 70*size +40+80;
     k = 260;
     scale *= size;
     for(i = 0; i < size*size; i++){
@@ -254,9 +254,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 70*size+ 70*size +40 -30)
+        if (j == 70*size+ 70*size +40 +80)
         {
-            j = 70*size +40 -30;
+            j = 70*size +40 +80;
             k += 70;
         }
         cell->setName(spacename);
@@ -265,7 +265,7 @@ void Display::createBoards()
         QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
     }
     //Set up for Bottom Board
-    j = 2 * (70*size +40)-30;
+    j = 2 * (70*size +40)+80;
     k = 260;
     scale += size*size;
     for(i = 0; i < size*size; i++){
@@ -296,9 +296,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 3 * (70 * size) + 80 -30)
+        if (j == 3 * (70 * size) + 80 +80)
         {
-            j = 2*(70*size+40)-30;
+            j = 2*(70*size+40)+80;
             k += 70;
         }
         cell->setName(spacename);
@@ -315,7 +315,7 @@ void Display::createBoards()
 //Creates the capture pieces areas for each player
 void Display::createCapureArea()
 {
-    int j = -30;
+    int j = 80;
     int k = 130;
 
     //setup white captured pieces
@@ -325,16 +325,16 @@ void Display::createCapureArea()
         whiteCaptures.push_back(cell);
         cell->setRect(j,k,0,0);
         j+=60;
-        if (j == 60*8-30)
+        if (j == 60*8 +80)
         {
-            j = -30;
+            j = 80;
             k += 60;
         }
      //   cell->setBrush(Qt::white);
         DisplayScene->addItem(cell);
     }
 
-    j = 1670;
+    j = 1750;
     k = 130;
     for(int i = 0; i <15; i++){
 
@@ -342,9 +342,9 @@ void Display::createCapureArea()
         blackCaptures.push_back(cell);
         cell->setRect(j,k,0,0);
         j-=60;
-        if (j == 1190)
+        if (j == 1270)
         {
-            j = 1670;
+            j = 1750;
             k += 60;
         }
 
@@ -369,38 +369,58 @@ void Display::buttonAndTextLayout()
     // set a scaled pixmap to a w x h window keeping its aspect ratio
     logo->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
     logo->setPixmap(pix);
-    logo->move(770, 60);
-
+    logo->move(880, 60);
     DisplayScene->addWidget(logo);
 
 
 
     //Score trackers
+//    QLabel *scoreWhiteLabel = new QLabel(nullptr);
+//    scoreWhiteLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
+//    scoreWhiteLabel->setFixedHeight(20);
+//    scoreWhiteLabel->setFixedWidth(145);
+//    scoreWhiteLabel->move(390, 238);
+//    DisplayScene->addWidget(scoreWhiteLabel);
+
     QString s = QString::number(game.players[0]->getPoints());
     QString scoreText = "White score: " + s;
     scoreWhite = new QGraphicsTextItem();
     scoreWhite->setPlainText(scoreText);
     scoreWhite->setFont(QFont("times", 16));
-    scoreWhite->setDefaultTextColor(Qt::blue);
-    scoreWhite->setPos(390, 230);
+    scoreWhite->setDefaultTextColor(Qt::white);
+    scoreWhite->setPos(500, 230);
     DisplayScene->addItem(scoreWhite);
+
+//    QLabel *scoreBlackLabel = new QLabel(nullptr);
+//    scoreBlackLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
+//    scoreBlackLabel->setFixedHeight(20);
+//    scoreBlackLabel->setFixedWidth(145);
+//    scoreBlackLabel->move(1164, 238);
+//    DisplayScene->addWidget(scoreBlackLabel);
 
     QString s2 = QString::number(game.players[1]->getPoints());
     QString scoreText2 = "Black score: " + s2;
     scoreBlack = new QGraphicsTextItem();
     scoreBlack->setPlainText(scoreText2);
     scoreBlack->setFont(QFont("times", 16));
-    scoreBlack->setDefaultTextColor(Qt::blue);
-    scoreBlack->setPos(1170, 230);
+    scoreBlack->setDefaultTextColor(Qt::white);
+    scoreBlack->setPos(1275, 230);
     DisplayScene->addItem(scoreBlack);
 
     //Game Status tracker
+//    QLabel *statusLabel = new QLabel(nullptr);
+//    statusLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
+//    statusLabel->setFixedHeight(28);
+//    statusLabel->setFixedWidth(340);
+//    statusLabel->move(690, 890);
+//    DisplayScene->addWidget(statusLabel);
+
     QString status = "Game status goes here";
     statusTracker = new QGraphicsTextItem();
     statusTracker->setPlainText(status);
-   // statusTracker->setDefaultTextColor(Qt::white);
+    statusTracker->setDefaultTextColor(Qt::white);
     statusTracker->setFont(QFont("times", 25));
-    statusTracker->setPos(690,880);
+    statusTracker->setPos(830,890);
     DisplayScene->addItem(statusTracker);
 
 
@@ -410,40 +430,42 @@ void Display::buttonAndTextLayout()
     topBoard->setPlainText(boardName);
     topBoard->setFont(QFont("times", 20));
     topBoard->setDefaultTextColor(Qt::white);
-    topBoard->setPos(190, 825);
+    topBoard->setPos(300, 825);
     DisplayScene->addItem(topBoard);
 
     boardName = "MIDDLE BOARD";
     QGraphicsTextItem * midBoard = new QGraphicsTextItem();
     midBoard->setPlainText(boardName);
     midBoard->setFont(QFont("times", 20));
-    midBoard->setPos(750, 825);
+    midBoard->setDefaultTextColor(Qt::white);
+    midBoard->setPos(860, 825);
     DisplayScene->addItem(midBoard);
 
     boardName = "BOTTOM BOARD";
     QGraphicsTextItem * botBoard = new QGraphicsTextItem();
     botBoard->setPlainText(boardName);
     botBoard->setFont(QFont("times", 20));
-    botBoard->setPos(1307, 825);
+    botBoard->setDefaultTextColor(Qt::white);
+    botBoard->setPos(1417, 825);
     DisplayScene->addItem(botBoard);
 
 
     //Added buttons for additional functionality
 
     exitButton = new QPushButton();
-    exitButton->setGeometry(1610,910,120,35);
+    exitButton->setGeometry(1720,910,120,35);
     exitButton->setText("Quit");
     QObject::connect(exitButton, SIGNAL(clicked()), this, SLOT(on_exitButton_clicked()));
     DisplayScene->addWidget(exitButton);
 
     newGameButton = new QPushButton();
-    newGameButton->setGeometry(1460,910,120,35);
+    newGameButton->setGeometry(1570,910,120,35);
     newGameButton->setText("New Game");
     QObject::connect(newGameButton, SIGNAL(clicked()), this, SLOT(onNewGameClick()));
     DisplayScene->addWidget(newGameButton);
 
     infoButton = new QPushButton();
-    infoButton->setGeometry(35, 910, 120, 35);
+    infoButton->setGeometry(145, 910, 120, 35);
     infoButton->setText("Instructions");
     QObject::connect(infoButton, SIGNAL(clicked()), this, SLOT(onInfoButtonClick()));
     DisplayScene->addWidget(infoButton);
@@ -452,11 +474,11 @@ void Display::buttonAndTextLayout()
 
     //Setup a checkbox and location for it
     QPoint * point = new QPoint();
-    point->setX(220);
+    point->setX(330);
     point->setY(923);
     QGraphicsTextItem * checkBoxText = new QGraphicsTextItem();
     checkBoxText->setPlainText("Show moves");
-    checkBoxText->setPos(231, 913);
+    checkBoxText->setPos(341, 913);
     checkBoxText->setFont(QFont("times", 14));
     checkBoxText->setDefaultTextColor(Qt::white);
     highLight = new QCheckBox();

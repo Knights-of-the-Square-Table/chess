@@ -40,7 +40,7 @@ void MainWindow::on_playButton_clicked()
 
     view->resize(1366,680);
    // view->resize(1920,1080);
-    view->setBackgroundBrush(QBrush(QImage(":/images/resource/test4.jpg")));
+    view->setBackgroundBrush(QBrush(QImage(":/images/resource/test2.jpg")));
     view->setWindowTitle("3D Chess");
     view->show();
 
