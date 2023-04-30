@@ -6,8 +6,6 @@
 #include "color.h"
 #include "chessgame.h"
 
-
-
 class BoardCell;
 class ChessGame;
 
@@ -33,6 +31,7 @@ class ChessPiece{
     void beCaptured();
     std::vector<BoardCell*> getMoves(ChessBoard* board);
     std::vector<int> getMovesInt(ChessBoard* board);
+    std::vector<ChessPiece*> getOpponentPieces(ChessBoard* board);
 
 };
 

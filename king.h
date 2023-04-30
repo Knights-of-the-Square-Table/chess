@@ -20,6 +20,8 @@ class King: public ChessPiece{
 
     bool isValidAttack(BoardCell* target);
     bool isInCheck();
+
+    bool isInCheck(BoardCell* mockTarget);
 };
 
 #endif // KING_H

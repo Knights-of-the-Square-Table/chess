@@ -3,12 +3,17 @@
 #include "qgraphicsview.h"
 #include "ui_mainwindow.h"
 #include <stdlib.h>
- #include <QUrl>
+#include <QUrl>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QPixmap bkgnd(":/images/resource/logo.jpg");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, bkgnd);
+    this->setPalette(palette);
 }
 
 MainWindow::~MainWindow()
@@ -28,11 +33,15 @@ void MainWindow::on_playButton_clicked()
 {
     hide();
     view = new QGraphicsView(D->getScene());
-   // view->setMaximumSize(1920, 1080);
- //   view->maximumSize();
-    view->resize(1366,768);
+
+
+
+
+
+    view->resize(1366,680);
    // view->resize(1920,1080);
-    view->setBackgroundBrush(QBrush(QImage(":/images/resource/fullTable.jpg")));
+    view->setBackgroundBrush(QBrush(QImage(":/images/resource/test2.jpg")));
+    view->setWindowTitle("3D Chess");
     view->show();
 
 }

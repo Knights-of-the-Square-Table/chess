@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.1, 2023-04-29T15:24:09. -->
+<!-- Written by QtCreator 9.0.2, 2023-04-27T17:22:04. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -236,15 +236,24 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/liama/School/chess/chessgame.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/liama/School/chess/chessgame.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/stoph/Desktop/chessProject/CLI/chess/chessgame.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/stoph/Desktop/chessProject/CLI/chess/chessgame.pro</value>
+>>>>>>> 30723656f80092d69b3509b4d8c06bf0096a9cf9
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+<<<<<<< HEAD
     <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/liama/School/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/stoph/Desktop/chessProject/CLI/build-chessgame-Desktop_Qt_5_15_2_MinGW_32_bit-Debug</value>
+>>>>>>> 30723656f80092d69b3509b4d8c06bf0096a9cf9
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

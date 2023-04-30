@@ -26,26 +26,28 @@ bool Rook::isValidMove(BoardCell* target)
     int srcBoardIndex = cell->board->level;
     int dstBoardIndex = target->board->level;
 
-    int rowDistance = abs(srcRowIndex - dstRowIndex);
-    int colDistance = abs(srcColIndex - dstColIndex);
+    int colDistance = srcRowIndex - dstRowIndex;
+    int rowDistance = srcColIndex - dstColIndex;
     int boardDistance = abs(srcBoardIndex - dstBoardIndex);
+    int moveDistance = abs(colDistance-rowDistance);
 
     //check to see if the move is to different board
     if(boardDistance > 0)
     {
         if(boardDistance == 1){
-            if(rowDistance > 1 || colDistance > 1){
+            if(abs(rowDistance) > 1 || abs(colDistance) > 1){
                 return false;
             }
         }
-        if(boardDistance == 2){
-            if((rowDistance > 2 || rowDistance < 2 )|| colDistance > 2){
-                return false;
-            }
-        }
+
+        else if(boardDistance == 2){
+
+                if(moveDistance > 2 || moveDistance < 2){
+                    return false;
+                }
     }
 
-
+}
     std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
 
 

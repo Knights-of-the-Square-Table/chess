@@ -31,3 +31,9 @@ int Player::getPoints(){
     }
     return total;
 }
+
+//Chris
+void Player::resetScore()
+{
+    capturedPieces.clear();
+}

@@ -53,7 +53,7 @@ public:
     void resetMoves();
 
     Player* getCurrentPlayer();
-
+    void resetGame();
     //3d version stuff************
     void printBoards();
     void printBoard(ChessBoard* b);

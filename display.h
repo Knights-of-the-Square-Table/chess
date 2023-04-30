@@ -26,6 +26,7 @@ private:
     void placePieces();
     void resetColors();
     void highLightMoves(std::vector<int> moveList);
+    void resetDisplay();
     std::vector<int> possibleMoves;
 
     std::vector<GUICell*> whiteCaptures;
@@ -35,8 +36,10 @@ private:
     QGraphicsTextItem * check;
     QGraphicsTextItem * scoreWhite;
     QGraphicsTextItem * scoreBlack;
+    QGraphicsTextItem * statusTracker;
 
-    QPushButton *exitButton, *menuButton;
+    QPushButton *exitButton, *newGameButton, *infoButton;
+    QCheckBox *highLight;
 
     void createBoards();
     void createCapureArea();
@@ -115,7 +118,9 @@ public slots:
     void getResponse(QString response);
     void getMoves(QVector<int> moves);
     void on_exitButton_clicked();
-    void onMenuButtonClick();
+    void onNewGameClick();
+    void onInfoButtonClick();
+    bool onCheckBoxChecked();
 };
 
 
