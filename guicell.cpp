@@ -53,6 +53,7 @@ QString GUICell::getImage()
 void GUICell::clearImage()
 {
     piece.hide();
+    this->setImage("");
 }
 
 //Chris

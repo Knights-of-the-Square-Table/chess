@@ -398,6 +398,7 @@ void Display::buttonAndTextLayout()
     QString status = "Game status goes here";
     statusTracker = new QGraphicsTextItem();
     statusTracker->setPlainText(status);
+   // statusTracker->setDefaultTextColor(Qt::white);
     statusTracker->setFont(QFont("times", 25));
     statusTracker->setPos(690,880);
     DisplayScene->addItem(statusTracker);
@@ -408,7 +409,8 @@ void Display::buttonAndTextLayout()
     QGraphicsTextItem * topBoard = new QGraphicsTextItem();
     topBoard->setPlainText(boardName);
     topBoard->setFont(QFont("times", 20));
-    topBoard->setPos(170, 825);
+    topBoard->setDefaultTextColor(Qt::white);
+    topBoard->setPos(190, 825);
     DisplayScene->addItem(topBoard);
 
     boardName = "MIDDLE BOARD";
@@ -456,6 +458,7 @@ void Display::buttonAndTextLayout()
     checkBoxText->setPlainText("Show moves");
     checkBoxText->setPos(231, 913);
     checkBoxText->setFont(QFont("times", 14));
+    checkBoxText->setDefaultTextColor(Qt::white);
     highLight = new QCheckBox();
     highLight->setChecked(true);
     highLight->setCheckable(true);
