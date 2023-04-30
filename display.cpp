@@ -605,6 +605,7 @@ void Display::onInfoButtonClick()
 {
     //create infoWindow
     instruction * window = new instruction();
+   // window->show();
 }
 
 //Chris
