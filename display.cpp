@@ -1,12 +1,15 @@
 #include "display.h"
 #include "guicell.h"
+#include "instruction.h"
 #include "qapplication.h"
+#include "qcheckbox.h"
 #include "qgraphicsitem.h"
 #include "qgraphicsview.h"
 #include <QObject>
 #include <QBrush>
 #include <QImage>
 #include <QFont>
+#include <QLabel>
 
 int boardSize = 8;
 //Chris
@@ -17,6 +20,7 @@ Display::Display()
     QObject::connect(&game, SIGNAL(sendMoves(QVector<int>)), this, SLOT(getMoves(QVector<int>)));
     DisplayScene = new QGraphicsScene();
     setup();
+
 }
 
 
@@ -158,24 +162,26 @@ void Display::createBoards()
     bool black = true;
     //Set up for TopBoard
     i = 0;
-    j = 0;
-    k = 0;
+    j = -30;
+    k = 260;
     if(boardSize ==8){
         QGraphicsRectItem * topBorder = new QGraphicsRectItem();
-        topBorder->setRect(-7,-2, 569, 569);
+        topBorder->setRect(-37,258, 569, 569);
         topBorder->setBrush(Qt::black);
         DisplayScene->addItem(topBorder);
 
         QGraphicsRectItem * midBorder = new QGraphicsRectItem();
-        midBorder->setRect(593,-2, 569, 569);
+        midBorder->setRect(563,258, 569, 569);
         midBorder->setBrush(Qt::black);
         DisplayScene->addItem(midBorder);
 
         QGraphicsRectItem * botBorder = new QGraphicsRectItem();
-        botBorder->setRect(1193,-2, 569, 569);
+        botBorder->setRect(1163,258, 569, 569);
         botBorder->setBrush(Qt::black);
         DisplayScene->addItem(botBorder);
     }
+
+
     for(i = 0; i < size*size; i++){
         QString spacename;
         if(boardSize == 8){
@@ -204,9 +210,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 70*size)
+        if (j == 70*size-30)
         {
-            j = 0;
+            j = -30;
             k += 70;
         }
         cell->setName(spacename);
@@ -217,8 +223,8 @@ void Display::createBoards()
 
     black = true;
     //Set up for Middle Board
-    j = 70*size +40;
-    k = 0;
+    j = 70*size +40-30;
+    k = 260;
     scale *= size;
     for(i = 0; i < size*size; i++){
 
@@ -248,9 +254,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 70*size+ 70*size +40)
+        if (j == 70*size+ 70*size +40 -30)
         {
-            j = 70*size +40;
+            j = 70*size +40 -30;
             k += 70;
         }
         cell->setName(spacename);
@@ -259,8 +265,8 @@ void Display::createBoards()
         QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
     }
     //Set up for Bottom Board
-    j = 2 * (70*size +40);
-    k = 0;
+    j = 2 * (70*size +40)-30;
+    k = 260;
     scale += size*size;
     for(i = 0; i < size*size; i++){
         QString spacename;
@@ -290,9 +296,9 @@ void Display::createBoards()
         black = !black;
 
         j += 70;
-        if (j == 3 * (70 * size) + 80)
+        if (j == 3 * (70 * size) + 80 -30)
         {
-            j = 2*(70*size+40);
+            j = 2*(70*size+40)-30;
             k += 70;
         }
         cell->setName(spacename);
@@ -309,36 +315,36 @@ void Display::createBoards()
 //Creates the capture pieces areas for each player
 void Display::createCapureArea()
 {
-    int j = 0;
-    int k = -130;
+    int j = -30;
+    int k = 130;
 
     //setup white captured pieces
     for(int i = 0; i <15; i++){
 
         GUICell * cell = new GUICell(j,k,5);
         whiteCaptures.push_back(cell);
-        cell->setRect(j,k,60,60);
+        cell->setRect(j,k,0,0);
         j+=60;
-        if (j == 60*8)
+        if (j == 60*8-30)
         {
-            j = 0;
+            j = -30;
             k += 60;
         }
      //   cell->setBrush(Qt::white);
         DisplayScene->addItem(cell);
     }
 
-    j = 1700;
-    k = -130;
+    j = 1670;
+    k = 130;
     for(int i = 0; i <15; i++){
 
         GUICell * cell = new GUICell(j,k,5);
         blackCaptures.push_back(cell);
-        cell->setRect(j,k,60,60);
+        cell->setRect(j,k,0,0);
         j-=60;
-        if (j == 1220)
+        if (j == 1190)
         {
-            j = 1700;
+            j = 1670;
             k += 60;
         }
 
@@ -351,10 +357,22 @@ void Display::createCapureArea()
 void Display::buttonAndTextLayout()
 {
     //add logo
-    GUICell * logo = new GUICell(0,0,5);
-    logo->setRect(780, -180, 0,0);
-    //displayed as point until we have a logo
-    DisplayScene->addItem(logo);
+
+    QLabel *logo = new QLabel(nullptr);
+    logo->setAttribute(Qt::WA_TranslucentBackground);
+    logo->setFixedHeight(200);
+    logo->setFixedWidth(300);
+    QPixmap pix(":/images/resource/transparentLogoSmall.png");
+    // get label dimensions
+    int h = logo->height();
+    int w = logo->width();
+    // set a scaled pixmap to a w x h window keeping its aspect ratio
+    logo->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+    logo->setPixmap(pix);
+    logo->move(770, 60);
+
+    DisplayScene->addWidget(logo);
+
 
 
     //Score trackers
@@ -363,7 +381,8 @@ void Display::buttonAndTextLayout()
     scoreWhite = new QGraphicsTextItem();
     scoreWhite->setPlainText(scoreText);
     scoreWhite->setFont(QFont("times", 16));
-    scoreWhite->setPos(420, -30);
+    scoreWhite->setDefaultTextColor(Qt::blue);
+    scoreWhite->setPos(390, 230);
     DisplayScene->addItem(scoreWhite);
 
     QString s2 = QString::number(game.players[1]->getPoints());
@@ -371,7 +390,8 @@ void Display::buttonAndTextLayout()
     scoreBlack = new QGraphicsTextItem();
     scoreBlack->setPlainText(scoreText2);
     scoreBlack->setFont(QFont("times", 16));
-    scoreBlack->setPos(1200, -30);
+    scoreBlack->setDefaultTextColor(Qt::blue);
+    scoreBlack->setPos(1170, 230);
     DisplayScene->addItem(scoreBlack);
 
     //Game Status tracker
@@ -379,7 +399,7 @@ void Display::buttonAndTextLayout()
     statusTracker = new QGraphicsTextItem();
     statusTracker->setPlainText(status);
     statusTracker->setFont(QFont("times", 25));
-    statusTracker->setPos(720, 650);
+    statusTracker->setPos(690,880);
     DisplayScene->addItem(statusTracker);
 
 
@@ -388,37 +408,63 @@ void Display::buttonAndTextLayout()
     QGraphicsTextItem * topBoard = new QGraphicsTextItem();
     topBoard->setPlainText(boardName);
     topBoard->setFont(QFont("times", 20));
-    topBoard->setPos(200, 565);
+    topBoard->setPos(170, 825);
     DisplayScene->addItem(topBoard);
 
     boardName = "MIDDLE BOARD";
     QGraphicsTextItem * midBoard = new QGraphicsTextItem();
     midBoard->setPlainText(boardName);
     midBoard->setFont(QFont("times", 20));
-    midBoard->setPos(780, 565);
+    midBoard->setPos(750, 825);
     DisplayScene->addItem(midBoard);
 
     boardName = "BOTTOM BOARD";
     QGraphicsTextItem * botBoard = new QGraphicsTextItem();
     botBoard->setPlainText(boardName);
     botBoard->setFont(QFont("times", 20));
-    botBoard->setPos(1377, 565);
+    botBoard->setPos(1307, 825);
     DisplayScene->addItem(botBoard);
 
 
     //Added buttons for additional functionality
 
     exitButton = new QPushButton();
-    exitButton->setGeometry(1640,650,120,35);
+    exitButton->setGeometry(1610,910,120,35);
     exitButton->setText("Quit");
     QObject::connect(exitButton, SIGNAL(clicked()), this, SLOT(on_exitButton_clicked()));
     DisplayScene->addWidget(exitButton);
 
     newGameButton = new QPushButton();
-    newGameButton->setGeometry(1490,650,120,35);
+    newGameButton->setGeometry(1460,910,120,35);
     newGameButton->setText("New Game");
     QObject::connect(newGameButton, SIGNAL(clicked()), this, SLOT(onNewGameClick()));
     DisplayScene->addWidget(newGameButton);
+
+    infoButton = new QPushButton();
+    infoButton->setGeometry(35, 910, 120, 35);
+    infoButton->setText("Instructions");
+    QObject::connect(infoButton, SIGNAL(clicked()), this, SLOT(onInfoButtonClick()));
+    DisplayScene->addWidget(infoButton);
+
+
+
+    //Setup a checkbox and location for it
+    QPoint * point = new QPoint();
+    point->setX(220);
+    point->setY(923);
+    QGraphicsTextItem * checkBoxText = new QGraphicsTextItem();
+    checkBoxText->setPlainText("Show moves");
+    checkBoxText->setPos(231, 913);
+    checkBoxText->setFont(QFont("times", 14));
+    highLight = new QCheckBox();
+    highLight->setChecked(true);
+    highLight->setCheckable(true);
+    highLight->move(*point);
+    QObject::connect(highLight, SIGNAL(stateChanged(int)), this, SLOT(onCheckBoxChecked()));
+    DisplayScene->addItem(checkBoxText);
+    DisplayScene->addWidget(highLight);
+
+
 }
 
 //Chris
@@ -441,8 +487,10 @@ void Display::getResponse(QString response)
     }else if(temp1 == "Paint moves"){
         //once we have the vector ready, this method will access it and iterate over it
        // qDebug() << "attemping to paint moves";
+        if(onCheckBoxChecked()){
+            highLightMoves(possibleMoves);
+        }
 
-        highLightMoves(possibleMoves);
 
     //the move was successful, perform the image swap
     }else{
@@ -536,7 +584,8 @@ void Display::on_exitButton_clicked()
     }
 }
 
-
+//Chris
+//New game button click asks for confirmation before reseting game state
 void Display::onNewGameClick()
 {
 
@@ -549,5 +598,22 @@ void Display::onNewGameClick()
     }
 
 }
+
+//Chris
+//Open window with instructions about the game, the app and maybe have some pictures to help demonstrate
+void Display::onInfoButtonClick()
+{
+    //create infoWindow
+    instruction * window = new instruction();
+}
+
+//Chris
+//Checkbox to enable/disable move options when a piece is selected
+bool Display::onCheckBoxChecked()
+{
+    return highLight->isChecked();
+}
+
+
 
 
