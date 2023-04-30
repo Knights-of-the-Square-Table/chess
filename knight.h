@@ -17,6 +17,8 @@ class Knight : public ChessPiece
 
     bool isValidMove(BoardCell* target);
 
+    bool isValidAttack(BoardCell* target);
+
     int getPointValue(){
         return 3;
     }
