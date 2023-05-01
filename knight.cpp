@@ -71,10 +71,6 @@ bool Knight::isValidMove(BoardCell* target){
                 return false;
             }
 
-            if(srcColIndex != dstColIndex){
-                return false;
-            }
-
             else if(srcRowIndex == dstRowIndex){
                 if(abs(vertDifference) == 2){
                     return true;
