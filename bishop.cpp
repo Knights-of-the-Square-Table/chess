@@ -124,6 +124,4 @@ bool Bishop::isValidMove(BoardCell* target){
 
 }
 
-bool Bishop::isInCheck(){
-    return false;
-}
+

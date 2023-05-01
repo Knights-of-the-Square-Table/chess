@@ -5,6 +5,7 @@
 #include "boardcell.h"
 
 
+
 class Pawn: public ChessPiece{
 
 public:
@@ -21,7 +22,7 @@ public:
     }
     bool hasMoved = 0;
 
-    bool isInCheck();
+
 
     bool isValidAttack(BoardCell* target);
     bool isValidForward(BoardCell* target);

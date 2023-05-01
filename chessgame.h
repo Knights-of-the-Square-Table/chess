@@ -6,10 +6,13 @@
 #include "qobject.h"
 #include <list>
 
+
 #include <tuple>
 
 class ChessBoard;
 class Player;
+
+
 class ChessGame : public QObject{
 
     Q_OBJECT
@@ -42,6 +45,9 @@ public:
     std::tuple<int,int,int> convertInput(std::string input);
     bool validateInput(std::string input);
     std::vector<int> getPossibleMoves(BoardCell *cell);
+    std::vector<ChessBoard*> getBoards();
+    BoardCell* getKingLocation(char nickname, Color color);
+    void doTempMove(BoardCell* srcCell, BoardCell* dstCell);
 
     QString guimove;
     std::string move1 = "";
@@ -49,8 +55,11 @@ public:
     Color guiTurn = WHITE;
     std::vector<int> standardMoves;
     QVector<int> possibleMoves;
+    bool check = false;
     void switchGuiTurn();
     void resetMoves();
+    bool isCurrentPlayerInCheck();
+    std::vector<ChessPiece*> getCurrentPlayerPieces(BoardCell* src);
 
     Player* getCurrentPlayer();
     void resetGame();

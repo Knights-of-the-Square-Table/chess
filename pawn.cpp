@@ -12,10 +12,7 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         return false;
     }
 
-    // Liam
-    bool Pawn::isInCheck(){
-        return false;
-    }
+
 
     // Liam
     bool Pawn::isValidForward(BoardCell* target){
@@ -158,4 +155,5 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
 
         return false;
     }
+
 

@@ -6,6 +6,7 @@
 #include "boardcell.h"
 
 
+
 class Bishop : public ChessPiece
 {
     public:
@@ -21,6 +22,6 @@ class Bishop : public ChessPiece
         return 3;
     }
 
-    bool isInCheck();
+
 };
 #endif // BISHOP_H

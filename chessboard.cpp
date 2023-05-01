@@ -36,12 +36,7 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
         new Bishop(getCell(0, 5), WHITE);
         new Knight(getCell(0, 6), WHITE);
         new Rook(getCell(0, 7), WHITE);
-//        new Rook(   getCell(0,0), WHITE );
-//        new Bishop( getCell(0,1), WHITE );
-//        new King(   getCell(0,2), WHITE );
-//        new Queen(  getCell(0,3), WHITE );
-//        new Bishop( getCell(0,4), WHITE );
-//        new Rook(   getCell(0,5), WHITE );
+
 
         new Pawn(   getCell(1,0), WHITE );
         new Pawn(   getCell(1,1), WHITE );
@@ -62,12 +57,7 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
         new Bishop( getCell(7,5), BLACK );
         new Knight(getCell(7,6), BLACK);
         new Rook(   getCell(7,7), BLACK );
-//        new Rook(   getCell(5,0), BLACK );
-//        new Bishop( getCell(5,1), BLACK );
-//        new King(   getCell(5,2), BLACK );
-//        new Queen(  getCell(5,3), BLACK );
-//        new Bishop( getCell(5,4), BLACK );
-//        new Rook(   getCell(5,5), BLACK );
+
 
       new Pawn(   getCell(6,0), BLACK );
         new Pawn(   getCell(6,1), BLACK );
@@ -94,28 +84,13 @@ BoardCell* ChessBoard::getCell(int rowIndex, int colIndex){
     return cells[rowIndex][colIndex];
 }
 
-//void ChessBoard::print(){
-//    for(int ri = 0; ri < ROW_COUNT; ri++){
-//        for(int ci = 0; ci < COL_COUNT; ci++){
-//            BoardCell* cell = getCell(ri,ci);
-//            if(cell->isEmpty()) {
-//                cout << " - ";
-//            } else {
-//                char nickName = cell->piece->getNickName();
-//                cout << ' ' << nickName << ' ';
-//            }
-//        }
-//        cout << endl;
-//    }
-
-//}
-
+//Olga
 void ChessBoard::print(){
     string divider = "  _________________________________";
-    string empty = "       ";
+    string empty = "   ";
     string center = "                   ";
     string boardLevelFrontSpace = "     ";
-    string boardLevelEndSpace = "    ";
+    string boardLevelEndSpace = "        ";
     string boardLevel = this->printBoardLevel(this->level);
     cout << endl << endl;
 //    cout << divider << endl;
@@ -147,7 +122,7 @@ void ChessBoard::print(){
         cout << endl << endl;
 
 }
-
+ //Olga - for 2 board version, returns the mirror board
 ChessBoard *ChessBoard::getMirrorBoard()
 {
     if(this->level==TOP){
@@ -158,21 +133,23 @@ ChessBoard *ChessBoard::getMirrorBoard()
     }
 }
 
+//Olga
 ChessBoard *ChessBoard::getTopBoard()
 {
     return this->game->topBoard;
 }
 
+//Olga
 ChessBoard *ChessBoard::getBotBoard()
 {
     return this->game->botBoard;
 }
-
+ //Olga
 ChessBoard *ChessBoard::getMidBoard()
 {
     return this->game->midBoard;
 }
-
+//Olga
 string ChessBoard::printBoardLevel(Level level)
 {
     if(level == TOP)
@@ -189,26 +166,8 @@ string ChessBoard::printBoardLevel(Level level)
     }
 }
 
-/*
-
-___________________________
-|_| a | b | c | d | e | f |
----------------------------
-|1|   |   |   |   |   |   |
----------------------------
-|2|   |   |   |   |   |   |
----------------------------
-|3|   |   |   |   |   |   |
----------------------------
-|4|   |   |   |   |   |   |
----------------------------
-|5|   |   |   |   |   |   |
----------------------------
-|6|   |   |   |   |   |   |
-___________________________
 
 
 
 
 
-*/

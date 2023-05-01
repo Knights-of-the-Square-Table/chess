@@ -117,6 +117,3 @@ bool Knight::isValidMove(BoardCell* target){
     return true;
 }
 
-bool Knight::isInCheck(){
-    return false;
-}

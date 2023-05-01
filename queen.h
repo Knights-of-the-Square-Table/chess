@@ -5,6 +5,7 @@
 #include "chesspiece.h"
 #include "boardcell.h"
 
+
 class Queen: public ChessPiece{
     public:
     Queen(BoardCell* cell, Color color);
@@ -19,7 +20,7 @@ class Queen: public ChessPiece{
         return 9;
     }
 
-    bool isInCheck();
+
 };
 
 #endif // QUEEN_H
