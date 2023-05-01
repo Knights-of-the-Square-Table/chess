@@ -63,6 +63,7 @@ void GUICell::setColor(bool isBlack)
     this->isBlack = isBlack;
 }
 
+//Chris
 bool GUICell::getColor()
 {
     return isBlack;

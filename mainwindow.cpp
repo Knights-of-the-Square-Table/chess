@@ -1,3 +1,6 @@
+//Chris
+//This is the opening window when the application is started
+
 #include "mainwindow.h"
 #include "display.h"
 #include "qgraphicsview.h"
@@ -33,10 +36,6 @@ void MainWindow::on_playButton_clicked()
 {
     hide();
     view = new QGraphicsView(D->getScene());
-
-
-
-
 
    view->resize(1366,680);
    // view->resize(1920,1000);

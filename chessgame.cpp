@@ -336,6 +336,8 @@ Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
 
+//Chris
+//creates 3 new boards and resets player scores
 void ChessGame::resetGame()
 {
     //free board memory
