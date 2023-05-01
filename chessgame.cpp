@@ -352,6 +352,8 @@ Player* ChessGame::getCurrentPlayer(){
     return players[currentPlayerIndex];
 }
 
+//Chris
+//creates 3 new boards and resets player scores
 void ChessGame::resetGame()
 {
     //free board memory
@@ -517,6 +519,7 @@ void ChessGame::getInput(QString input)
             qDebug() << "No piece selected";
             emit sendResponse("Invalid");
             resetMoves();
+
         }else{
             qDebug() << "trying to get possible moves";
             standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
@@ -525,11 +528,20 @@ void ChessGame::getInput(QString input)
             emit sendMoves(possibleMoves);
             emit sendResponse("Paint moves");
             qDebug() << "attempting to emit possible moves";
+}
+//        }else
+//            if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
+//            standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
+//            possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
+//            emit sendMoves(possibleMoves);
+//            emit sendResponse("Paint moves");
+
+
 
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move
-    }else{
+    else{
         move2 = input.toStdString();
         fromPos = convertGUIinput(move1);
         toPos = convertGUIinput(move2);
@@ -551,6 +563,7 @@ void ChessGame::getInput(QString input)
 
 }
 
+
 //Olga - returns a vector of all the current player pieces
 std::vector<ChessPiece*> ChessGame::getCurrentPlayerPieces(BoardCell* src){
     std::vector<ChessPiece*> pieces = src->getPiece()->getMyPieces();
@@ -565,6 +578,7 @@ bool ChessGame::isCurrentPlayerInCheck(){
     King* king = (King*)this->getKingLocation(nickname,this->getCurrentPlayer()->getColor())->getPiece();
     bool isCheck = king->isInCheck();
     return isCheck;
+
 }
 
 

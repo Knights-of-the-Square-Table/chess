@@ -30,6 +30,7 @@ void ChessPiece::move(BoardCell* target){
     target->placePiece(this);
 
     this->cell = target;
+    this->hasMoved = true;
 }
 
 //Olga - temp move to see if king is in check

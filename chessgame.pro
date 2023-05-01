@@ -22,6 +22,7 @@ SOURCES += \
         chesspiece.cpp \
         display.cpp \
         guicell.cpp \
+        instruction.cpp \
         king.cpp \
         knight.cpp \
         main.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     color.h \
     display.h \
     guicell.h \
+    instruction.h \
     king.h \
     knight.h \
     level.h \
@@ -53,4 +55,5 @@ RESOURCES += \
     rsc.qrc
 
 FORMS += \
+    instruction.ui \
     mainwindow.ui

@@ -53,6 +53,7 @@ QString GUICell::getImage()
 void GUICell::clearImage()
 {
     piece.hide();
+    this->setImage("");
 }
 
 //Chris
@@ -62,6 +63,7 @@ void GUICell::setColor(bool isBlack)
     this->isBlack = isBlack;
 }
 
+//Chris
 bool GUICell::getColor()
 {
     return isBlack;

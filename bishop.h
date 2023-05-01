@@ -23,5 +23,8 @@ class Bishop : public ChessPiece
     }
 
 
+    bool isInCheck();
+    bool isValidAttack(BoardCell* target);
+
 };
 #endif // BISHOP_H

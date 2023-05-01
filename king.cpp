@@ -72,6 +72,9 @@ bool King::isValidMove(BoardCell* target) {
 
 }
 
+bool King::isValidAttack(BoardCell* target){
+    return false;
+}
 
 
 //Goal: at every turn in a game, if the king is in check,

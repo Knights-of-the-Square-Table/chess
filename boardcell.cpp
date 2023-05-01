@@ -1,6 +1,7 @@
 #include "boardcell.h"
 #include <iostream>
 #include <vector>
+#include "chesspiece.h"
 
 using namespace std;
 //Olga

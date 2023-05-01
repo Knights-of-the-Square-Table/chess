@@ -20,6 +20,7 @@ class King: public ChessPiece{
         return 100;
     }
 
+    bool isValidAttack(BoardCell* target);
     bool isInCheck();
 
     bool isInCheckMate();

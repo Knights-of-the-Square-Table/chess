@@ -125,3 +125,8 @@ bool Bishop::isValidMove(BoardCell* target){
 }
 
 
+
+bool Bishop::isValidAttack(BoardCell* target){
+    return isValidMove(target);
+}
+

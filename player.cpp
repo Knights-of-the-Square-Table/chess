@@ -11,6 +11,10 @@ void Player::addCapturedPiece(ChessPiece* piece){
     capturedPieces.push_back(piece);
 }
 
+void Player::addMyPiece(ChessPiece* piece){
+    myPieces.push_back(piece);
+}
+
 Color Player::getColor(){
     return color;
 }

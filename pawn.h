@@ -20,10 +20,9 @@ public:
     int getPointValue(){
         return 1;
     }
-    bool hasMoved = 0;
 
-
-
+    bool isInCheck();
+    bool pathClearDblMove();
     bool isValidAttack(BoardCell* target);
     bool isValidForward(BoardCell* target);
 };

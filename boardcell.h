@@ -2,7 +2,6 @@
 #define BOARDCELL_H
 
 #include "color.h"
-#include "chesspiece.h"
 #include "chessboard.h"
 #include <vector>
 

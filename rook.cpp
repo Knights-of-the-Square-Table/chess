@@ -159,7 +159,7 @@ bool Rook::isMoveToDiffBoard(BoardCell *target)
     }
 }
 
-
-
-
+bool Rook::isValidAttack(BoardCell* target){
+    return isValidMove(target);
+}
 

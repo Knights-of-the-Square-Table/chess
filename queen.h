@@ -21,6 +21,9 @@ class Queen: public ChessPiece{
     }
 
 
+    bool isInCheck();
+    bool isValidAttack(BoardCell* target);
+
 };
 
 #endif // QUEEN_H
