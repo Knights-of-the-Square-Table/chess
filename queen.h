@@ -5,6 +5,7 @@
 #include "chesspiece.h"
 #include "boardcell.h"
 
+
 class Queen: public ChessPiece{
     public:
     Queen(BoardCell* cell, Color color);
@@ -19,8 +20,10 @@ class Queen: public ChessPiece{
         return 9;
     }
 
+
     bool isInCheck();
     bool isValidAttack(BoardCell* target);
+
 };
 
 #endif // QUEEN_H

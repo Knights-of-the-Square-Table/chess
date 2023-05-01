@@ -5,6 +5,7 @@
 #include "boardcell.h"
 
 
+
 class Pawn: public ChessPiece{
 
 public:

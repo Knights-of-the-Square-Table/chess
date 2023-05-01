@@ -186,10 +186,9 @@ bool Queen::isValidMove(BoardCell* target){
 
 }
 
+
 bool Queen::isValidAttack(BoardCell* target){
     return isValidMove(target);
 }
 
-bool Queen::isInCheck(){
-    return false;
-}
+

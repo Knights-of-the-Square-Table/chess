@@ -3,6 +3,8 @@
 
 #include "chesspiece.h"
 #include "boardcell.h"
+enum Color;
+class ChessPiece;
 
 class King: public ChessPiece{
     public:
@@ -21,7 +23,7 @@ class King: public ChessPiece{
     bool isValidAttack(BoardCell* target);
     bool isInCheck();
 
-    bool isInCheck(BoardCell* mockTarget);
+    bool isInCheckMate();
 };
 
 #endif // KING_H

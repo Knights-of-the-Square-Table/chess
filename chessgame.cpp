@@ -11,6 +11,7 @@
 #include <string>
 #include <limits>
 #include <list>
+#include "king.h"
 using namespace std;
 
 
@@ -302,27 +303,42 @@ bool ChessGame::validateInput(std::string input)
     return false;
 }
 
+//Olga - returns possible moves for each board
 std::vector<int> ChessGame::getPossibleMoves(BoardCell *cell)
 {
- //   qDebug() << "got into getpossiblemoves";
- //   qDebug() << cell->getPiece()->getMovesInt(topBoard);
+//    qDebug() << "got into getpossiblemoves";
+//    qDebug() << cell->getPiece()->getMovesInt(topBoard);
     std::vector<int> topB = cell->getPiece()->getMovesInt(topBoard);
 //    qDebug() << "got top cell board";
     std::vector<int> midB = cell->piece->getMovesInt(midBoard);
 //    qDebug() << "got mid board";
     std::vector<int> botB = cell->piece->getMovesInt(botBoard);
     std::vector<int> allMoves = {};
- //   qDebug() << "initialized topb, midb, botb";
+//    qDebug() << "initialized topb, midb, botb";
     std::copy(topB.begin(), topB.end(), std::back_inserter(allMoves));
     std::copy(midB.begin(), midB.end(), std::back_inserter(allMoves));
     std::copy(botB.begin(), botB.end(), std::back_inserter(allMoves));
 
+//    cout << "----ALL MOVES"<<endl;
 //    for(auto &i: allMoves){
-//        cout << i;
+//        cout << i<< ',';
 //    }
+//    cout << endl;
 
     return allMoves;
 }
+
+//Olga - returns all boards
+std::vector<ChessBoard*> ChessGame::getBoards(){
+    std::vector<ChessBoard*> boards = {this->botBoard, this->midBoard, this->topBoard};
+    return boards;
+}
+
+
+
+
+
+//}
 
 //Chris
 //Method to reset string input for moves
@@ -400,20 +416,53 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
            // qDebug() << "move not valid";
             validMove = false;
         }
+
+
     else{
-        validMove = srcCell->piece->isValidMove(dstCell);
+
+
+        validMove = srcCell->piece->isValidNoCheck(dstCell);
     }
+
+
 
     cout << "Move: (" << c1 << ',' << r1 <<',' <<level1 << ") - (" << c2 << ',' << r2 << ',' << level2 << ")";
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
     //move the piece if it is a valid move
     if (validMove){
         srcCell->piece->move(dstCell);
+        cout << "=============================="<<endl;
+
+
 
         this->printBoards();
+
+
     }
 
+
     return validMove;
+
+}
+
+
+//Olga - returns the cell that the king is on for current player
+BoardCell * ChessGame::getKingLocation(char nickname, Color color){
+    BoardCell* kinglocation = NULL;
+    int size = this->getBoards().size();
+    for (int i = 0; i < size; i++){
+        for (int ri = 0; ri < ROW_COUNT; ri++){
+            for(int ci = 0; ci < COL_COUNT; ci++){
+                BoardCell* temp = this->getCell(ri, ci, i);
+                if(temp->piece == NULL){continue;}
+                if(temp->piece->getNickName() == nickname && temp->hasPiece(color)){
+                    kinglocation = temp;
+                }
+            }
+        }
+    }
+
+    return kinglocation;
 
 }
 
@@ -470,18 +519,29 @@ void ChessGame::getInput(QString input)
             qDebug() << "No piece selected";
             emit sendResponse("Invalid");
             resetMoves();
-        }else
-            if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
+
+        }else{
+            qDebug() << "trying to get possible moves";
             standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
+            qDebug() << "trying to convert to QVector";
             possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
             emit sendMoves(possibleMoves);
             emit sendResponse("Paint moves");
+            qDebug() << "attempting to emit possible moves";
+}
+//        }else
+//            if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
+//            standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
+//            possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
+//            emit sendMoves(possibleMoves);
+//            emit sendResponse("Paint moves");
+
 
 
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move
-    }else{
+    else{
         move2 = input.toStdString();
         fromPos = convertGUIinput(move1);
         toPos = convertGUIinput(move2);
@@ -503,26 +563,22 @@ void ChessGame::getInput(QString input)
 
 }
 
-// Method for determining whether the current player is in check -Liam
-bool ChessGame::currentPlayerCheck(){
-    ChessBoard* boards [3] = {this->topBoard, this->botBoard, this->midBoard};
-    for(int k = 0; k < 3; k++){
-        for(int i = 0; i < ROW_COUNT; i++){
-            for(int j = 0; j < COL_COUNT; j++){
-                if(!boards[k]->cells[i][j]->isEmpty()){
-                    if((boards[k]->cells[i][j]->getPiece()->color == WHITE) && (getCurrentPlayer()->color == WHITE) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
-                        if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
-                    }
-                    if ((boards[k]->cells[i][j]->getPiece()->color == BLACK) && (getCurrentPlayer()->color == BLACK) && (boards[k]->cells[i][j]->getPiece()->getNickName() == 'K')){
-                        if(boards[k]->cells[i][j]->getPiece()->isInCheck() == true){return true;}
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
-//Liam
 
+//Olga - returns a vector of all the current player pieces
+std::vector<ChessPiece*> ChessGame::getCurrentPlayerPieces(BoardCell* src){
+    std::vector<ChessPiece*> pieces = src->getPiece()->getMyPieces();
+    return pieces;
+
+}
+
+//Olga - returns bool if current player is in check
+bool ChessGame::isCurrentPlayerInCheck(){
+
+    char nickname = this->getCurrentPlayer()->getColor() == WHITE ? 'K':'k';
+    King* king = (King*)this->getKingLocation(nickname,this->getCurrentPlayer()->getColor())->getPiece();
+    bool isCheck = king->isInCheck();
+    return isCheck;
+
+}
 
 

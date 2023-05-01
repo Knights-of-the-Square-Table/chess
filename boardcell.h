@@ -28,6 +28,8 @@ class BoardCell {
     ChessPiece* getPiece();
     BoardCell* getMirrorCell(int rowIndex, int colIndex);
     std::vector<BoardCell*> getMirrorCells(int rowIndex, int colIndex);
+//    ChessPiece* tempRemovePiece();
+
 
 
 };

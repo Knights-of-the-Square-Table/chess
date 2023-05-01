@@ -1,5 +1,6 @@
 //King class - Christian Liechty
 
+#include <iostream>
 #include <algorithm>
 #include "king.h"
 #include "chessboard.h"
@@ -71,27 +72,10 @@ bool King::isValidMove(BoardCell* target) {
 
 }
 
-//Checks all pieces on each board and see's if any of them are attacking the king -Liam
-bool King::isInCheck(){
-
-    ChessBoard* boards [3] = {this->cell->board->game->topBoard, this->cell->board->game->botBoard, this->cell->board->game->midBoard};
-    for(int k = 0; k < 3; k++){
-        for(int i = 0; i < ROW_COUNT; i++){
-            for(int j = 0; j < COL_COUNT; j++){
-                if(!(boards[k]->cells[i][j]->isEmpty()) && !(boards[k]->cells[i][j]->getPiece()->color == this->color)){
-                    if(boards[k]->cells[i][j]->getPiece()->isValidMove(this->cell)){
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
-
 bool King::isValidAttack(BoardCell* target){
     return false;
 }
+
 
 //Goal: at every turn in a game, if the king is in check,
 //the move has to get the king out of check,
@@ -104,8 +88,44 @@ bool King::isValidAttack(BoardCell* target){
 //if king is in check, go through all your pieces and possible moves for those pieces
 //and "pretend" to move them to that spot,
 //then once again search the
-bool King::isInCheck(BoardCell* mockTarget){
+//Olga - returns true if the king is in check
+bool King::isInCheck(){
+    std::vector<ChessPiece*> opponentPieces = this->getOpponentPieces();
+    int size = opponentPieces.size();
+    for(int i = 0; i < size; i++){
+        ChessPiece* p = opponentPieces.at(i);
+        if(p->isValidMove(this->cell)){
+            cout << "KING IS IN CHECK";
 
+            return true;
+        }
+    }
+    return false;
+}
+
+//Olga - returns true if the king is in checkmate
+bool King::isInCheckMate(){
+    if(!this->isInCheck()){
+        return false;
+    }
+    //iterate through all my pieces and try to do temp move by each of my pieces
+    //and check to see if the king is still in check
+    std::vector<ChessPiece*> myPieces = this->getMyPieces();
+
+    for(int i = 0; i < myPieces.size(); i++){
+        ChessPiece* p = myPieces.at(i);
+        std::vector<BoardCell*> validMoves = p->getAllMoves();
+        for(int j=0; j < validMoves.size(); j++){
+            p->tempMove(validMoves.at(j));
+            bool isCheck = this->isInCheck();
+            p->undoTempMove();
+
+            if(!isCheck){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 

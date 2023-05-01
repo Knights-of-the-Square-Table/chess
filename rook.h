@@ -4,6 +4,7 @@
 #include "chesspiece.h"
 #include "boardcell.h"
 
+
 class Rook: public ChessPiece
 {
     public:
@@ -25,8 +26,10 @@ class Rook: public ChessPiece
 
     std::vector<BoardCell*> getPossibleMoves();
 
+
     bool isInCheck();
     bool isValidAttack(BoardCell* target);
+
 };
 
 #endif // ROOK_H

@@ -4,6 +4,7 @@
 
 #include "chesspiece.h"
 #include "boardcell.h"
+#include "color.h"
 
 class Knight : public ChessPiece
 {
@@ -12,7 +13,7 @@ class Knight : public ChessPiece
     Knight(BoardCell* cell, Color color);
 
     char getNickName() {
-        return color == WHITE ? 'K' : 'k';
+        return color == WHITE ? 'N' : 'n';
     }
 
     bool isValidMove(BoardCell* target);
@@ -23,7 +24,6 @@ class Knight : public ChessPiece
         return 3;
     }
 
-    bool isInCheck();
 };
 
 #endif // KNIGHT_H

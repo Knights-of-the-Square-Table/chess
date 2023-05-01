@@ -141,6 +141,5 @@ bool Knight::isValidAttack(BoardCell* target){
     return isValidMove(target);
 }
 
-bool Knight::isInCheck(){
-    return false;
-}
+
+

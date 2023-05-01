@@ -163,6 +163,3 @@ bool Rook::isValidAttack(BoardCell* target){
     return isValidMove(target);
 }
 
-bool Rook::isInCheck(){
-    return false;
-}

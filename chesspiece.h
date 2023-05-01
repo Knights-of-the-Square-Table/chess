@@ -8,6 +8,7 @@
 
 class BoardCell;
 class ChessGame;
+enum Color;
 
 class ChessPiece{
 
@@ -15,13 +16,15 @@ class ChessPiece{
     BoardCell* cell;
     Color color;
     ChessPiece(BoardCell* cell, Color color);
+    BoardCell * tempStartCell;
+    ChessPiece* tempRemovedPiece;
     bool hasMoved = 0;
+
 
     virtual bool isValidMove(BoardCell* target) = 0;
     virtual bool isValidAttack(BoardCell* target) = 0;
     virtual char getNickName() = 0;
     virtual int getPointValue() = 0;
-    virtual bool isInCheck() = 0;
 
 
 
@@ -31,7 +34,17 @@ class ChessPiece{
     void beCaptured();
     std::vector<BoardCell*> getMoves(ChessBoard* board);
     std::vector<int> getMovesInt(ChessBoard* board);
-    std::vector<ChessPiece*> getOpponentPieces(ChessBoard* board);
+
+    //these methods are for if king is in check
+    std::vector<ChessPiece*> getOpponentPieces();
+    void tempMove(BoardCell* tempTarget);
+    void undoTempMove();
+    bool isValidNoCheck(BoardCell* target);
+
+
+
+    std::vector<ChessPiece*> getMyPieces();
+    std::vector<BoardCell*> getAllMoves();
 
 };
 
