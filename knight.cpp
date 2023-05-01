@@ -36,23 +36,8 @@ bool Knight::isValidMove(BoardCell* target){
     int dstBoardIndex = target->board->level;
 
     //Define variables to store difference between source and target cell
-    int vertDifference = abs(dstRowIndex - srcRowIndex);
-    int horizDifference = abs(dstColIndex - srcColIndex);
-
-    //Move validation for Knight
-    if(vertDifference == 2 && horizDifference != 1){
-        return false;
-    }
-
-    //Move validation for Knight
-    if(horizDifference == 2 && vertDifference != 1){
-        return false;
-    }
-
-    //Move validation for Knight
-    if(horizDifference > 2 || vertDifference > 2){
-        return false;
-    }
+    int vertDifference = dstRowIndex - srcRowIndex;
+    int horizDifference = dstColIndex - srcColIndex;
 
     //Create vector that holds the two cells mirroring the target cell
     std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
@@ -75,41 +60,80 @@ bool Knight::isValidMove(BoardCell* target){
             }
 
 
-   //If the Knight is moving between boards, the legal moves change
+//   //If the Knight is moving between boards, the legal moves change
     if(srcBoardIndex != dstBoardIndex){
         int boardMove = abs(dstBoardIndex - srcBoardIndex);
 
         //if the Knight moves one board level, it can move two cells horizontal or vertical
         if(boardMove == 1){
-            if(vertDifference != 2){
-                return false;
-            }
-
-            else if(horizDifference != 2){
-                return false;
-            }
-
             //checks to make sure the move is not diagonal
-            else if(vertDifference == horizDifference){
+            if(abs(vertDifference) == abs(horizDifference)){
                 return false;
             }
+
+            if(srcColIndex != dstColIndex){
+                return false;
+            }
+
+            else if(srcRowIndex == dstRowIndex){
+                if(abs(vertDifference) == 2){
+                    return true;
+                }
+            }
+
+            else if(srcColIndex == dstColIndex){
+                if(abs(horizDifference) == 2){
+                    return true;
+                }
+            }
+
+
         }
 
         else if(boardMove == 2){
-            if(vertDifference != 1){
+            if(abs(vertDifference) == abs(horizDifference)){
                 return false;
             }
 
-            else if(horizDifference != 1){
-                return false;
+            else if(abs(vertDifference) > 1 || abs(vertDifference) < 1){
+                if(abs(vertDifference) == 1){
+                    return true;
+                }
+
             }
 
-            //checks to make sure the move is not diagonal
-            else if(vertDifference == horizDifference){
-                return false;
+            else if(abs(horizDifference) > 1 || abs(horizDifference) < 1){
+                if(abs(horizDifference) == 1){
+                    return true;
+                }
             }
+
         }
 
+    }
+
+
+    //Move validation for Knight
+    if(abs(vertDifference) == 2 && abs(horizDifference) != 1){
+        return false;
+    }
+
+    //Move validation for Knight
+    if(abs(horizDifference) == 2 && abs(vertDifference) != 1){
+        return false;
+    }
+
+    //Move validation for Knight
+    if(abs(horizDifference) > 2 || abs(vertDifference) > 2){
+        return false;
+    }
+
+    if(abs(horizDifference) < 2 && abs(vertDifference) < 2){
+        return false;
+    }
+
+    if(abs(horizDifference) < 1 && abs(vertDifference) < 1){
+        return false;
     }
 
 
