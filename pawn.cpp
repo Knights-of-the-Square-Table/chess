@@ -186,15 +186,21 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
 
     bool Pawn::pathClearDblMove(){
         if(this->color == WHITE){
+            if(!this->cell->board->getCell(this->cell->rowIndex + 1, this->cell->colIndex)->isEmpty() && this->cell->board->getCell(this->cell->rowIndex + 2, this->cell->colIndex)->isEmpty()){
+                return false;
+            }
             std::vector<BoardCell*> mirrorCellsW = this->cell->getMirrorCells(this->cell->rowIndex + 1, this->cell->colIndex);
             std::vector<BoardCell*> mirrorCells = this->cell->getMirrorCells(this->cell->rowIndex + 2, this->cell->colIndex );
             for(int i = 0; i < int (mirrorCells.size()); i++){
-                if((mirrorCells[i]->isEmpty()) && !(mirrorCellsW[i]->isEmpty())){
+                if((mirrorCells[i]->isEmpty()) && (!mirrorCellsW[i]->isEmpty())){
                     return false;
                 }
             }
         }
         else{ //this->color == BLACK
+            if(!this->cell->board->getCell(this->cell->rowIndex - 1, this->cell->colIndex)->isEmpty() && this->cell->board->getCell(this->cell->rowIndex - 2, this->cell->colIndex)->isEmpty()){
+                return false;
+            }
             std::vector<BoardCell*> mirrorCellsB = this->cell->getMirrorCells(this->cell->rowIndex - 1, this->cell->colIndex);
             std::vector<BoardCell*> mirrorCells = this->cell->getMirrorCells(this->cell->rowIndex - 2, this->cell->colIndex );
             for(int i = 0; i < int (mirrorCells.size()); i++){
