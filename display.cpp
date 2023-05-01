@@ -40,46 +40,47 @@ void Display::setup()
 void Display::placePieces()
 {
 
-if(boardSize==8){
-//    setup white pieces
-    cellList[0]->setImage(":/images/resource/whiterook.png");
-    cellList[7]->setImage(":/images/resource/whiterook.png");
-    cellList[2]->setImage(":/images/resource/whitebishop.png");
-    cellList[5]->setImage(":/images/resource/whitebishop.png");
-    cellList[1]->setImage(":/images/resource/whiteknight.png");
-    cellList[6]->setImage(":/images/resource/whiteknight.png");
-    cellList[4]->setImage(":/images/resource/whitequeen.png");
-    cellList[3]->setImage(":/images/resource/whiteking.png");
-    cellList[14]->setImage(":/images/resource/whitepawn.png");
-    cellList[15]->setImage(":/images/resource/whitepawn.png");
-    cellList[8]->setImage(":/images/resource/whitepawn.png");
-    cellList[9]->setImage(":/images/resource/whitepawn.png");
-    cellList[10]->setImage(":/images/resource/whitepawn.png");
-    cellList[11]->setImage(":/images/resource/whitepawn.png");
-    cellList[12]->setImage(":/images/resource/whitepawn.png");
-    cellList[13]->setImage(":/images/resource/whitepawn.png");
-
-
-//    setup black pieces
-    cellList[191]->setImage(":/images/resource/blkrook.png");
-    cellList[184]->setImage(":/images/resource/blkrook.png");
-    cellList[189]->setImage(":/images/resource/blkbishop.png");
-    cellList[186]->setImage(":/images/resource/blkbishop.png");
-    cellList[190]->setImage(":/images/resource/blkknight.png");
-    cellList[185]->setImage(":/images/resource/blkknight.png");
-    cellList[188]->setImage(":/images/resource/blkqueen.png");
-    cellList[187]->setImage(":/images/resource/blkking.png");
-    cellList[176]->setImage(":/images/resource/blkpawn.png");
-    cellList[177]->setImage(":/images/resource/blkpawn.png");
-    cellList[178]->setImage(":/images/resource/blkpawn.png");
-    cellList[179]->setImage(":/images/resource/blkpawn.png");
-    cellList[180]->setImage(":/images/resource/blkpawn.png");
-    cellList[181]->setImage(":/images/resource/blkpawn.png");
-    cellList[182]->setImage(":/images/resource/blkpawn.png");
-    cellList[183]->setImage(":/images/resource/blkpawn.png");
-    }else if(boardSize == 6){
-    //6x6
+    if(boardSize==8){
     //    setup white pieces
+        cellList[0]->setImage(":/images/resource/whiterook.png");
+        cellList[7]->setImage(":/images/resource/whiterook.png");
+        cellList[2]->setImage(":/images/resource/whitebishop.png");
+        cellList[5]->setImage(":/images/resource/whitebishop.png");
+        cellList[1]->setImage(":/images/resource/whiteknight.png");
+        cellList[6]->setImage(":/images/resource/whiteknight.png");
+        cellList[4]->setImage(":/images/resource/whitequeen.png");
+        cellList[3]->setImage(":/images/resource/whiteking.png");
+        cellList[14]->setImage(":/images/resource/whitepawn.png");
+        cellList[15]->setImage(":/images/resource/whitepawn.png");
+        cellList[8]->setImage(":/images/resource/whitepawn.png");
+        cellList[9]->setImage(":/images/resource/whitepawn.png");
+        cellList[10]->setImage(":/images/resource/whitepawn.png");
+        cellList[11]->setImage(":/images/resource/whitepawn.png");
+        cellList[12]->setImage(":/images/resource/whitepawn.png");
+        cellList[13]->setImage(":/images/resource/whitepawn.png");
+
+
+    //    setup black pieces
+        cellList[191]->setImage(":/images/resource/blkrook.png");
+        cellList[184]->setImage(":/images/resource/blkrook.png");
+        cellList[189]->setImage(":/images/resource/blkbishop.png");
+        cellList[186]->setImage(":/images/resource/blkbishop.png");
+        cellList[190]->setImage(":/images/resource/blkknight.png");
+        cellList[185]->setImage(":/images/resource/blkknight.png");
+        cellList[188]->setImage(":/images/resource/blkqueen.png");
+        cellList[187]->setImage(":/images/resource/blkking.png");
+        cellList[176]->setImage(":/images/resource/blkpawn.png");
+        cellList[177]->setImage(":/images/resource/blkpawn.png");
+        cellList[178]->setImage(":/images/resource/blkpawn.png");
+        cellList[179]->setImage(":/images/resource/blkpawn.png");
+        cellList[180]->setImage(":/images/resource/blkpawn.png");
+        cellList[181]->setImage(":/images/resource/blkpawn.png");
+        cellList[182]->setImage(":/images/resource/blkpawn.png");
+        cellList[183]->setImage(":/images/resource/blkpawn.png");
+
+    }else if(boardSize == 6){
+
+        // 6x6   setup white pieces
         cellList[0]->setImage(":/images/resource/whiterook.png");
         cellList[1]->setImage(":/images/resource/whitebishop.png");
         cellList[4]->setImage(":/images/resource/whitebishop.png");
@@ -94,9 +95,6 @@ if(boardSize==8){
         cellList[9]->setImage(":/images/resource/whitepawn.png");
         cellList[10]->setImage(":/images/resource/whitepawn.png");
         cellList[11]->setImage(":/images/resource/whitepawn.png");
-
-  ;
-
 
 
     //    setup black pieces
@@ -114,12 +112,10 @@ if(boardSize==8){
         cellList[97]->setImage(":/images/resource/blkpawn.png");
         cellList[96]->setImage(":/images/resource/blkpawn.png");
     }
-
-
-
 }
 
 //Chris
+//Resets board colors back to default if moves were highlighted
 void Display::resetColors()
 {
    for(int i = 0; i < cellList.size(); i++){
@@ -132,6 +128,7 @@ void Display::resetColors()
 }
 
 //Chris
+//Highlights a given set of cells based on the piece selected and its valid moves
 void Display::highLightMoves(std::vector<int> moveList)
 {
     for(unsigned int i = 0; i < moveList.size(); i++){
@@ -140,6 +137,7 @@ void Display::highLightMoves(std::vector<int> moveList)
 }
 
 //Chris
+//Resets display attributes to new game status
 void Display::resetDisplay()
 {
     //reset images for captures pieces
@@ -161,6 +159,7 @@ void Display::resetDisplay()
     scoreBlack->setPlainText(scoreText2);
     statusTracker->setPlainText("New Game Created");
     placePieces();
+
 }
 
 
@@ -173,12 +172,10 @@ void Display::createBoards()
     int i = 0;
     int j = 0;
     int k = 0;
-
     bool black = true;
-    //Set up for TopBoard
-    i = 0;
-    j = 80;
-    k = 260;
+    QList<GUICell*> top, bot, mid;
+
+    //Borders for each board to add depth
     if(boardSize ==8){
         QGraphicsRectItem * topBorder = new QGraphicsRectItem();
         topBorder->setRect(73,258, 569, 569);
@@ -196,16 +193,32 @@ void Display::createBoards()
         DisplayScene->addItem(botBorder);
     }
 
-
+    //Set up for TopBoard layout
+    qDebug() << "starting to create boards";
+    i = 0;
+    j = 80;
+    k = 260;
+    int spacing = 600;
     for(i = 0; i < size*size; i++){
-        QString spacename;
+        QString spacenameTop, spacenameMid, spacenameBot;
         if(boardSize == 8){
-            spacename = spaces[i];
+            spacenameTop = spaces[i];
+            spacenameMid = spaces[scale*scale+i];
+            spacenameBot = spaces[scale*scale+scale*scale+i];
         }else{
-            spacename = spaces2[i];
+            spacenameTop = spaces2[i];
+            spacenameMid = spaces2[scale*scale+i];
+            spacenameBot = spaces2[scale*scale+scale*scale+i];
         }
-        GUICell * cell = new GUICell(j,k,0);
-        cell->setRect(j,k,70,70);
+
+        GUICell * cellTop = new GUICell(j,k,0);
+        cellTop->setRect(j,k,70,70);
+
+        GUICell * cellMid = new GUICell(j+spacing,k,1);
+        cellMid->setRect(j+spacing,k,70,70);
+
+        GUICell * cellBot = new GUICell(j+spacing+spacing,k,2);
+        cellBot->setRect(j+spacing*2, k,70,70);
 
         if(i%size == 0){
             black = !black;
@@ -213,15 +226,19 @@ void Display::createBoards()
 
         if (black)
         {
-            cell->setBrush(Qt::lightGray);
+            cellTop->setBrush(Qt::lightGray);
+            cellMid->setBrush(Qt::lightGray);
+            cellBot->setBrush(Qt::lightGray);
         }else{
-            cell->setBrush(Qt::white);
+            cellTop->setBrush(Qt::white);
+            cellMid->setBrush(Qt::white);
+            cellBot->setBrush(Qt::white);
         }
 
         //set default color to black or white (used for resetting the proper color scheme after a piece is moved
-        cell->setColor(black);
-
-
+        cellTop->setColor(black);
+        cellMid->setColor(black);
+        cellBot->setColor(black);
         black = !black;
 
         j += 70;
@@ -230,100 +247,36 @@ void Display::createBoards()
             j = 80;
             k += 70;
         }
-        cell->setName(spacename);
-        cellList.append(cell);
-        DisplayScene->addItem(cell);
-        QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
+        cellTop->setName(spacenameTop);
+        top.append(cellTop);
+        DisplayScene->addItem(cellTop);
+        QObject::connect(cellTop, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
+
+        cellMid->setName(spacenameMid);
+        mid.append(cellMid);
+        DisplayScene->addItem(cellMid);
+        QObject::connect(cellMid, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
+
+        cellBot->setName(spacenameBot);
+        bot.append(cellBot);
+        DisplayScene->addItem(cellBot);
+        QObject::connect(cellBot, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
     }
-
-    black = true;
-    //Set up for Middle Board
-    j = 70*size +40+80;
-    k = 260;
-    scale *= size;
-    for(i = 0; i < size*size; i++){
-
-        QString spacename;
-
-        if(boardSize==8){
-            spacename = spaces[scale+i];
-        }else{
-            spacename = spaces2[scale+i];
-        }
-
-        GUICell * cell = new GUICell(j,k,1);
-        cell->setRect(j,k,70,70);
-        if(i%size == 0){
-            black = !black;
-        }
-
-        if (black)
-        {
-            cell->setBrush(Qt::lightGray);
-        }else{
-            cell->setBrush(Qt::white);
-        }
-        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
-        cell->setColor(black);
-
-        black = !black;
-
-        j += 70;
-        if (j == 70*size+ 70*size +40 +80)
-        {
-            j = 70*size +40 +80;
-            k += 70;
-        }
-        cell->setName(spacename);
-        cellList.append(cell);
-        DisplayScene->addItem(cell);
-        QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
+    //append them in board order for moving, move validation etc.
+    for(int i = 0; i < top.size(); i++){
+        cellList.append(top[i]);
     }
-    //Set up for Bottom Board
-    j = 2 * (70*size +40)+80;
-    k = 260;
-    scale += size*size;
-    for(i = 0; i < size*size; i++){
-        QString spacename;
+    top.clear();
 
-        if(boardSize==8){
-            spacename = spaces[scale+i];
-        }else{
-            spacename = spaces2[scale+i];
-        }
-
-        GUICell * cell = new GUICell(j,k,2);
-        cell->setRect(j,k,70,70);
-        if(i%size == 0){
-            black = !black;
-        }
-
-        if (black)
-        {
-            cell->setBrush(Qt::lightGray);
-        }else{
-            cell->setBrush(Qt::white);
-        }
-
-        //set default color to black or white (used for resetting the proper color scheme after a piece is moved
-        cell->setColor(black);
-
-        black = !black;
-
-        j += 70;
-        if (j == 3 * (70 * size) + 80 +80)
-        {
-            j = 2*(70*size+40)+80;
-            k += 70;
-        }
-        cell->setName(spacename);
-        cellList.append(cell);
-        DisplayScene->addItem(cell);
-        QObject::connect(cell, SIGNAL(sendSignal(QString)), &game, SLOT(getInput(QString)));
+    for(int i = 0; i < mid.size(); i++){
+        cellList.append(mid[i]);
     }
+    mid.clear();
 
-
-    //TODO setup board labels here
+    for(int i = 0; i < bot.size(); i++){
+        cellList.append(bot[i]);
+    }
+    bot.clear();
 }
 
 //Chris
@@ -332,38 +285,28 @@ void Display::createCapureArea()
 {
     int j = 80;
     int k = 130;
+    int n = 1780;
 
     //setup white captured pieces
     for(int i = 0; i <15; i++){
+        GUICell * cellWhite = new GUICell(j,k,5);
+        whiteCaptures.push_back(cellWhite);
+        cellWhite->setRect(j,k,0,0);
+        DisplayScene->addItem(cellWhite);
 
-        GUICell * cell = new GUICell(j,k,5);
-        whiteCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
+        GUICell * cellBlack = new GUICell(n,k,5);
+        blackCaptures.push_back(cellBlack);
+        cellBlack->setRect(n,k,0,0);
+        DisplayScene->addItem(cellBlack);
+
         j+=60;
+        n-=60;
         if (j == 60*8 +80)
         {
             j = 80;
+            n = 1780;
             k += 60;
         }
-     //   cell->setBrush(Qt::white);
-        DisplayScene->addItem(cell);
-    }
-
-    j = 1750;
-    k = 130;
-    for(int i = 0; i <15; i++){
-
-        GUICell * cell = new GUICell(j,k,5);
-        blackCaptures.push_back(cell);
-        cell->setRect(j,k,0,0);
-        j-=60;
-        if (j == 1270)
-        {
-            j = 1750;
-            k += 60;
-        }
-
-        DisplayScene->addItem(cell);
     }
 }
 
@@ -371,8 +314,7 @@ void Display::createCapureArea()
 //This sets up the rest of the game window with buttons and text areas
 void Display::buttonAndTextLayout()
 {
-    //add logo
-
+    //place label roughly in center of window
     QLabel *logo = new QLabel(nullptr);
     logo->setAttribute(Qt::WA_TranslucentBackground);
     logo->setFixedHeight(200);
@@ -387,16 +329,7 @@ void Display::buttonAndTextLayout()
     logo->move(880, 60);
     DisplayScene->addWidget(logo);
 
-
-
-    //Score trackers
-//    QLabel *scoreWhiteLabel = new QLabel(nullptr);
-//    scoreWhiteLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
-//    scoreWhiteLabel->setFixedHeight(20);
-//    scoreWhiteLabel->setFixedWidth(145);
-//    scoreWhiteLabel->move(390, 238);
-//    DisplayScene->addWidget(scoreWhiteLabel);
-
+    //Adds score tracker texts
     QString s = QString::number(game.players[0]->getPoints());
     QString scoreText = "White score: " + s;
     scoreWhite = new QGraphicsTextItem();
@@ -405,13 +338,6 @@ void Display::buttonAndTextLayout()
     scoreWhite->setDefaultTextColor(Qt::white);
     scoreWhite->setPos(500, 230);
     DisplayScene->addItem(scoreWhite);
-
-//    QLabel *scoreBlackLabel = new QLabel(nullptr);
-//    scoreBlackLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
-//    scoreBlackLabel->setFixedHeight(20);
-//    scoreBlackLabel->setFixedWidth(145);
-//    scoreBlackLabel->move(1164, 238);
-//    DisplayScene->addWidget(scoreBlackLabel);
 
     QString s2 = QString::number(game.players[1]->getPoints());
     QString scoreText2 = "Black score: " + s2;
@@ -422,15 +348,8 @@ void Display::buttonAndTextLayout()
     scoreBlack->setPos(1275, 230);
     DisplayScene->addItem(scoreBlack);
 
-    //Game Status tracker
-//    QLabel *statusLabel = new QLabel(nullptr);
-//    statusLabel->setStyleSheet("QLabel { background-color : white; color : blue; }");;
-//    statusLabel->setFixedHeight(28);
-//    statusLabel->setFixedWidth(340);
-//    statusLabel->move(690, 890);
-//    DisplayScene->addWidget(statusLabel);
-
-    QString status = "Game status goes here";
+    //Adds the game status text
+    QString status = "White's turn first.";
     statusTracker = new QGraphicsTextItem();
     statusTracker->setPlainText(status);
     statusTracker->setDefaultTextColor(Qt::white);
@@ -486,7 +405,6 @@ void Display::buttonAndTextLayout()
     DisplayScene->addWidget(infoButton);
 
 
-
     //Setup a checkbox and location for it
     QPoint * point = new QPoint();
     point->setX(330);
@@ -503,8 +421,6 @@ void Display::buttonAndTextLayout()
     QObject::connect(highLight, SIGNAL(stateChanged(int)), this, SLOT(onCheckBoxChecked()));
     DisplayScene->addItem(checkBoxText);
     DisplayScene->addWidget(highLight);
-
-
 }
 
 //Chris
@@ -519,6 +435,21 @@ void Display::getResponse(QString response)
 {
     //qDebug() << response;
     std::string temp1 = response.toStdString();
+
+    //check for checkmate, if its over, end the game
+    if(temp1 == "Checkmate"){
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(nullptr, "GAME OVER", "This game is over, would you like to play again?",
+                                      QMessageBox::Yes | QMessageBox::No);
+
+        if(reply == QMessageBox::Yes){
+            game.resetGame();
+            resetDisplay();
+        }else{
+             QApplication::quit();
+        }
+
+    }
     //resets colors if an invalid move was chosen
     if(temp1 == "Invalid"){
         resetColors();
@@ -601,6 +532,13 @@ void Display::getResponse(QString response)
          QString s2 = QString::number(game.players[1]->getPoints());
          QString scoreText2 = "Black score: " + s2;
          scoreBlack->setPlainText(scoreText2);
+         QString status;
+         if(game.currentPlayerIndex == 0){
+             status = "White's move.";
+         }else{
+             status = "Black's move.";
+         }
+         statusTracker->setPlainText(status);
     }
 }
 
@@ -608,7 +546,6 @@ void Display::getResponse(QString response)
 //Slot to update current possible moves from a selected piece
 void Display::getMoves(QVector<int> moves)
 {
-    //qDebug() << "moves received";
     this->possibleMoves = std::vector<int>(moves.begin(), moves.end());
 }
 
