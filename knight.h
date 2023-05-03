@@ -23,7 +23,6 @@ class Knight : public ChessPiece
     int getPointValue(){
         return 3;
     }
-
 };
 
 #endif // KNIGHT_H

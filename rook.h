@@ -29,7 +29,6 @@ class Rook: public ChessPiece
 
     bool isInCheck();
     bool isValidAttack(BoardCell* target);
-
 };
 
 #endif // ROOK_H

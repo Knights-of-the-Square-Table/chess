@@ -84,22 +84,14 @@ bool ChessPiece::isValidNoCheck(BoardCell *target)
 }
 
 
-
-
-
 bool ChessPiece::hasSameColor(ChessPiece* piece){
     return color == piece->color;
 }
 
-//Liam
+//Liam - Captures the piece by adding it to the players captured pieces vector
 void ChessPiece::beCaptured(){
     this->cell->board->game->getCurrentPlayer()->addCapturedPiece(this);
     cell->removePiece();
-    //cell = NULL;
-
-
-
-
 }
 
 //Olga - returns a vector with all possible moves across all boards

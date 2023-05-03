@@ -22,7 +22,6 @@ class Bishop : public ChessPiece
         return 3;
     }
 
-
     bool isInCheck();
     bool isValidAttack(BoardCell* target);
 

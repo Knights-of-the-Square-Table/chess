@@ -20,7 +20,6 @@ class Queen: public ChessPiece{
         return 9;
     }
 
-
     bool isInCheck();
     bool isValidAttack(BoardCell* target);
 

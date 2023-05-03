@@ -18,8 +18,6 @@ bool Rook::isValidMove(BoardCell* target)
         return false;
     }
 
-
-
     int srcRowIndex = cell->rowIndex;
     int srcColIndex = cell->colIndex;
     int dstRowIndex = target->rowIndex;

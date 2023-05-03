@@ -3,14 +3,7 @@
 #include "MainWindow.h"
 #include "chessgame.h"
 #include <string.h>
-#include "chessgame.h"
-#include "display.h"
 #include <QApplication>
-#include <QGraphicsScene>
-#include <QGraphicsRectItem>
-#include <QGraphicsView>
-#include <QGridLayout>
-#include <QFrame>
 
 //Chris
 using namespace std;

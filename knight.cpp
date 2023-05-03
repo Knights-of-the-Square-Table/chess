@@ -131,7 +131,6 @@ bool Knight::isValidMove(BoardCell* target){
         return false;
     }
 
-
     //If all checks pass, the move is valid!
     return true;
 }

@@ -20,13 +20,10 @@ class ChessPiece{
     ChessPiece* tempRemovedPiece;
     bool hasMoved = 0;
 
-
     virtual bool isValidMove(BoardCell* target) = 0;
     virtual bool isValidAttack(BoardCell* target) = 0;
     virtual char getNickName() = 0;
     virtual int getPointValue() = 0;
-
-
 
     bool isInplay();
     void move(BoardCell* target);
@@ -40,7 +37,6 @@ class ChessPiece{
     void tempMove(BoardCell* tempTarget);
     void undoTempMove();
     bool isValidNoCheck(BoardCell* target);
-
 
 
     std::vector<ChessPiece*> getMyPieces();

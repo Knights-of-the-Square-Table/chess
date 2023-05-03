@@ -42,9 +42,7 @@ void MainWindow::on_playButton_clicked()
     view->setBackgroundBrush(QBrush(QImage(":/images/resource/test2.jpg")));
     view->setWindowTitle("3D Chess");
     view->show();
-
 }
-
 
 void MainWindow::on_instructionsButton_clicked()
 {

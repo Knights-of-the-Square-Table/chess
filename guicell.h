@@ -32,7 +32,6 @@ private:
     bool isBlack;
     int boardLevel;
 
-
 signals:
     QString sendSignal(QString name);
 };

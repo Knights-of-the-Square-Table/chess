@@ -23,7 +23,6 @@ Display::Display()
 
 }
 
-
 //Chris
 //Sets up the display area for the game
 void Display::setup()
@@ -33,7 +32,6 @@ void Display::setup()
     buttonAndTextLayout();
     placePieces();
 }
-
 
 //Chris
 //Places piece images on the board
@@ -161,8 +159,6 @@ void Display::resetDisplay()
 
     placePieces();
     resetColors();
-
-
 }
 
 

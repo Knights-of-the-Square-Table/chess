@@ -41,7 +41,7 @@ bool Queen::isValidMove(BoardCell* target){
 
     // Check if the target cell has the chesspiece with the same color on every board
     if(!target->isEmpty() && target->piece->hasSameColor(this) ){
-        cout << "target cell empty or not";
+        //cout << "target cell empty or not";
         return false;
     }else if(!mirrorCells[0]->isEmpty() && mirrorCells[0]->piece->hasSameColor(this)){
         return false;

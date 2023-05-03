@@ -367,7 +367,7 @@ void ChessGame::resetGame()
     currentPlayerIndex = 0;
 }
 
-
+// Liam
 void ChessGame::getCurrentWinner(){
     if (this->players[0]->getPoints() == this->players[1]->getPoints()){
         cout << "It's a tie, both players have equal points" << endl;
@@ -432,7 +432,6 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
     return validMove;
 
 }
-
 
 //Olga - returns the cell that the king is on for current player
 BoardCell * ChessGame::getKingLocation(char nickname, Color color){
@@ -537,7 +536,6 @@ void ChessGame::getInput(QString input)
     }
 
 }
-
 
 //Olga - returns a vector of all the current player pieces
 std::vector<ChessPiece*> ChessGame::getCurrentPlayerPieces(BoardCell* src){

@@ -6,7 +6,6 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
 
     //Liam
     bool Pawn::isValidMove(BoardCell* target){
-        cout << isValidAttack(target) << " " << isValidForward(target) << endl;
         if(isValidAttack(target) || isValidForward(target)){
             return true;
         }
@@ -181,6 +180,7 @@ Pawn::Pawn(BoardCell* cell, Color color) : ChessPiece(cell, color){}
         return false;
     }
 
+    // Liam
     bool Pawn::pathClearDblMove(){
         if(this->color == WHITE){
             if(!this->cell->board->getCell(this->cell->rowIndex + 1, this->cell->colIndex)->isEmpty() && this->cell->board->getCell(this->cell->rowIndex + 2, this->cell->colIndex)->isEmpty()){

@@ -7,9 +7,6 @@
 #include <iostream>
 
 
-
-//const int ROW_COUNT = 6;
-//const int COL_COUNT = 6;
 const int ROW_COUNT = 8;
 const int COL_COUNT = 8;
 
@@ -33,7 +30,6 @@ class ChessBoard
     ChessBoard* getBotBoard();
     ChessBoard* getMidBoard();
     std::string printBoardLevel(Level level);
-
 
 };
 
