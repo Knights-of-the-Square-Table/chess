@@ -8,7 +8,7 @@
 #include <QImage>
 #include <QBrush>
 #include <string>
-
+//Chris
 class GUICell: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
@@ -30,7 +30,6 @@ private:
     int xCoord;
     int yCoord;
     bool isBlack;
-    //Might change boardLevel to something else if it makes more sense
     int boardLevel;
 
 

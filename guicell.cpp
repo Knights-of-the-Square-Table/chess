@@ -10,7 +10,6 @@ GUICell::GUICell(int x, int y, int level)
     xCoord = x;
     yCoord = y;
     boardLevel = level;
-
     piece.setParentItem(this);
 
 }

@@ -1,5 +1,5 @@
 //Chris
-//This is the opening window when the application is started
+//Game start up menu
 
 #include "mainwindow.h"
 #include "display.h"

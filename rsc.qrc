@@ -12,18 +12,9 @@
         <file>resource/whitepawn.png</file>
         <file>resource/whitequeen.png</file>
         <file>resource/whiterook.png</file>
-        <file>resource/tableTop.jpg</file>
-        <file>resource/fullTable.jpg</file>
         <file>resource/transparentLogoSmall.png</file>
-        <file>resource/whiteBackground.jpg</file>
         <file>resource/logo.jpg</file>
-        <file>resource/test1.jpg</file>
         <file>resource/test2.jpg</file>
-        <file>resource/test3.jpg</file>
-        <file>resource/test4.jpg</file>
-        <file>resource/test5.jpg</file>
-        <file>resource/test6.jpg</file>
-        <file>resource/Cosmic_Chess.pdf</file>
     </qresource>
     <qresource prefix="/text"/>
 </RCC>

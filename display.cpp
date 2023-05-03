@@ -158,7 +158,10 @@ void Display::resetDisplay()
     QString scoreText2 = "Black score: " + s2;
     scoreBlack->setPlainText(scoreText2);
     statusTracker->setPlainText("New Game Created");
+
     placePieces();
+    resetColors();
+
 
 }
 
@@ -193,23 +196,16 @@ void Display::createBoards()
         DisplayScene->addItem(botBorder);
     }
 
-    //Set up for TopBoard layout
-    qDebug() << "starting to create boards";
-    i = 0;
+    //Prints 3 boards and appropriately names then and adds them
+    //to the cellList in the proper order for move checking
     j = 80;
     k = 260;
     int spacing = 600;
     for(i = 0; i < size*size; i++){
         QString spacenameTop, spacenameMid, spacenameBot;
-        if(boardSize == 8){
-            spacenameTop = spaces[i];
-            spacenameMid = spaces[scale*scale+i];
-            spacenameBot = spaces[scale*scale+scale*scale+i];
-        }else{
-            spacenameTop = spaces2[i];
-            spacenameMid = spaces2[scale*scale+i];
-            spacenameBot = spaces2[scale*scale+scale*scale+i];
-        }
+        spacenameTop = spaces[i];
+        spacenameMid = spaces[scale*scale+i];
+        spacenameBot = spaces[scale*scale+scale*scale+i];
 
         GUICell * cellTop = new GUICell(j,k,0);
         cellTop->setRect(j,k,70,70);
@@ -285,7 +281,7 @@ void Display::createCapureArea()
 {
     int j = 80;
     int k = 130;
-    int n = 1780;
+    int n = 1774;
 
     //setup white captured pieces
     for(int i = 0; i <15; i++){
@@ -304,7 +300,7 @@ void Display::createCapureArea()
         if (j == 60*8 +80)
         {
             j = 80;
-            n = 1780;
+            n = 1774;
             k += 60;
         }
     }
@@ -450,6 +446,7 @@ void Display::getResponse(QString response)
         }
 
     }
+
     //resets colors if an invalid move was chosen
     if(temp1 == "Invalid"){
         resetColors();
@@ -522,7 +519,7 @@ void Display::getResponse(QString response)
                 i++;
             }
         }
-
+        //image has been moved, reset move highlighting
          resetColors();
 
 //        qDebug()<< "Player 1 score: " << game.players[0]->getPoints();
@@ -533,7 +530,13 @@ void Display::getResponse(QString response)
          QString scoreText2 = "Black score: " + s2;
          scoreBlack->setPlainText(scoreText2);
          QString status;
-         if(game.currentPlayerIndex == 0){
+         if(game.isCurrentPlayerInCheck()){
+             if(game.currentPlayerIndex == 0){
+                 status = "White is in check.";
+             }else{
+                 status = "Black is in check.";
+             }
+         }else if(game.currentPlayerIndex == 0){
              status = "White's move.";
          }else{
              status = "Black's move.";
@@ -577,12 +580,13 @@ void Display::onNewGameClick()
 }
 
 //Chris
-//Open window with instructions about the game, the app and maybe have some pictures to help demonstrate
+//TODO: Open window with instructions about the game, the app and maybe have some pictures to help demonstrate
 void Display::onInfoButtonClick()
 {
     //create infoWindow
-    instruction * window = new instruction();
+    //instruction * window = new instruction();
    // window->show();
+    QDesktopServices::openUrl(QUrl("https://en.wikipedia.org/wiki/Millennium_3D_chess", QUrl::TolerantMode));
 }
 
 //Chris

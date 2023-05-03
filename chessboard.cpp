@@ -70,14 +70,6 @@ ChessBoard::ChessBoard(ChessGame* game, Level level){
     }
 
 
-
-
-
-
-
-
-
-
 }
 
 BoardCell* ChessBoard::getCell(int rowIndex, int colIndex){

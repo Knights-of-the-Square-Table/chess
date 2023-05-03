@@ -39,6 +39,7 @@ bool Knight::isValidMove(BoardCell* target){
     int vertDifference = dstRowIndex - srcRowIndex;
     int horizDifference = dstColIndex - srcColIndex;
 
+
     //Create vector that holds the two cells mirroring the target cell
     std::vector<BoardCell*> mirrorCells = target->getMirrorCells(target->rowIndex, target->colIndex);
 
@@ -71,39 +72,39 @@ bool Knight::isValidMove(BoardCell* target){
                 return false;
             }
 
-            else if(srcRowIndex == dstRowIndex){
+            else if(horizDifference ==0){
                 if(abs(vertDifference) == 2){
                     return true;
                 }
             }
 
-            else if(srcColIndex == dstColIndex){
+            else if(vertDifference ==0){
                 if(abs(horizDifference) == 2){
                     return true;
                 }
+            }else{
+                return false;
             }
 
 
         }
 
-        else if(boardMove == 2){
+        if(boardMove == 2){
+
             if(abs(vertDifference) == abs(horizDifference)){
+
                 return false;
             }
 
-            else if(abs(vertDifference) > 1 || abs(vertDifference) < 1){
-                if(abs(vertDifference) == 1){
-                    return true;
-                }
-
+            else if(abs(vertDifference) == 1 && abs(horizDifference) ==0){
+                return true;
             }
 
-            else if(abs(horizDifference) > 1 || abs(horizDifference) < 1){
-                if(abs(horizDifference) == 1){
-                    return true;
-                }
+            else if(abs(horizDifference) == 1 && abs(vertDifference) ==0){
+                return true;
+            }else{
+                return false;
             }
-
         }
 
     }

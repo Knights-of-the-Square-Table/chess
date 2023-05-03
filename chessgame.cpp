@@ -88,16 +88,17 @@ void ChessGame::printStartText()
    cout << "|-------------------------------------------------------------|" << endl;
 
 }
-
+//Chris
 void ChessGame::run()
 {
 
-  //  this->printStartText();
-    //this->gameLoop();
+    this->printStartText();
+    this->gameLoop();
 
 }
 
 //Chris
+//CLI game loop
 void ChessGame::gameLoop()
 {
     char input = printOptionsMenu();
@@ -111,6 +112,7 @@ void ChessGame::gameLoop()
              string curPlayer;
              tuple<int,int,int> fromPos;
              tuple<int,int,int> toPos;
+
              //game loop
              while(1){
 
@@ -124,6 +126,7 @@ void ChessGame::gameLoop()
                  cout << curPlayer << "'s turn, choose a menu option or move: ";
 
                  cin >> userInput ;
+
                  //check it the first input is valid
                  if(this->validateInput(userInput)){
 
@@ -135,6 +138,7 @@ void ChessGame::gameLoop()
                      }
 
                      cin >> userInput2;
+
                      //check if the second input is valid
                      if(this->validateInput(userInput2)){
                          //Convert both inputs from form " A3 " to (0,2).
@@ -187,6 +191,7 @@ void ChessGame::gameLoop()
 
 }
 
+//Olga
 char ChessGame::printOptionsMenu()
 {
     char action;
@@ -334,12 +339,6 @@ std::vector<ChessBoard*> ChessGame::getBoards(){
     return boards;
 }
 
-
-
-
-
-//}
-
 //Chris
 //Method to reset string input for moves
 void ChessGame::resetMoves()
@@ -417,14 +416,9 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
             validMove = false;
         }
 
-
     else{
-
-
         validMove = srcCell->piece->isValidNoCheck(dstCell);
     }
-
-
 
     cout << "Move: (" << c1 << ',' << r1 <<',' <<level1 << ") - (" << c2 << ',' << r2 << ',' << level2 << ")";
     cout << " - " << (validMove ? "VALID" : "INVALID") << endl;
@@ -433,13 +427,8 @@ bool ChessGame::tryMove(int r1, int c1, int level1, int r2, int c2, int level2){
         srcCell->piece->move(dstCell);
         cout << "=============================="<<endl;
 
-
-
         this->printBoards();
-
-
     }
-
 
     return validMove;
 
@@ -487,57 +476,44 @@ BoardCell* ChessGame::getCell(int row, int col, int level)
 //Method to convert string inputs from clicking into tuple that can be used for tryMove()
 std::tuple<int, int, int> ChessGame::convertGUIinput(std::string input)
 {
-
     int row, col, level;
-
     level = input[2]-48;
     row = input[1]-48;
     col = input[0]-'a';
-
     std::tuple<int,int,int> converted(row, col, level);
     return converted;
-
 }
 
 
 //Chris
-
 //This method takes inputs from a click and sends a response string
 void ChessGame::getInput(QString input)
 {
 
     std::tuple<int,int,int> fromPos;
     std::tuple<int,int,int> toPos;
+
     //Check if anything has been clicked, if not, store cell clicked in move1
     if(move1 == ""){
         move1 = input.toStdString();
+
         //Convert move1 to check if the cell has a piece or now
         fromPos = convertGUIinput(move1);
 
         //resets moves if no piece in the cell
         if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->isEmpty()){
-            qDebug() << "No piece selected";
+ //           qDebug() << "No piece selected";
             emit sendResponse("Invalid");
             resetMoves();
 
-        }else{
-            qDebug() << "trying to get possible moves";
+        }
+
+        else if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
             standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
-            qDebug() << "trying to convert to QVector";
             possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
             emit sendMoves(possibleMoves);
             emit sendResponse("Paint moves");
-            qDebug() << "attempting to emit possible moves";
-}
-//        }else
-//            if(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos))->getPiece()->color == this->getCurrentPlayer()->getColor()){
-//            standardMoves = getPossibleMoves(this->getCell(get<0>(fromPos), get<1>(fromPos),get<2>(fromPos)));
-//            possibleMoves = QVector<int>(standardMoves.begin(), standardMoves.end());
-//            emit sendMoves(possibleMoves);
-//            emit sendResponse("Paint moves");
-
-
-
+            }
         }
 
     //If first click is stored, wait for second cell click, convert to tuples and attempt move

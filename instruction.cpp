@@ -14,16 +14,8 @@ instruction::instruction(QWidget *parent) :
     ui(new Ui::instruction)
 {
     ui->setupUi(this);
-//   QFile file(":/images/resource/millennium_3d_chess1556.pdf");
-//   if(!file.open(QIODevice::ReadOnly)){
-//       QMessageBox::information(nullptr, "Error", file.errorString());
-//   }
 
-//   QTextStream in(&file);
-//    this->hide();
-//   ui->textBrowser->setText(in.readAll());
     QDesktopServices::openUrl(QUrl("https://en.wikipedia.org/wiki/Millennium_3D_chess", QUrl::TolerantMode));
-
 }
 
 instruction::~instruction()
