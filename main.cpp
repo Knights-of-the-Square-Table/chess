@@ -12,21 +12,14 @@
 #include <QGridLayout>
 #include <QFrame>
 
-
+//Chris
 using namespace std;
 
 int main(int argc, char *argv[]){
 
-
     QApplication a(argc, argv);
-
     MainWindow w;
     w.show();
-//    Display D;
-//    QGraphicsView* view = new QGraphicsView(D.getScene());
-//    view->setFixedSize(1800,1000);
-//    view->show();
-
     return a.exec(); // comment this line out for CLI
 
 //    ChessGame* g = new ChessGame();

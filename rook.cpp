@@ -1,3 +1,5 @@
+//Rook class - Olga
+
 #include <algorithm>
 #include "rook.h"
 #include "chessboard.h"

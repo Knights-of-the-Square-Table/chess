@@ -52,8 +52,6 @@ std::vector<BoardCell*> BoardCell::getMirrorCells(int rowIndex, int colIndex){
     else{
         return v = {this->board->getTopBoard()->getCell(rowIndex, colIndex), this->board->getMidBoard()->getCell(rowIndex, colIndex)};
     }
-
-
 }
 
 

@@ -14,7 +14,6 @@
 #include "king.h"
 using namespace std;
 
-
 ChessGame::ChessGame()
 {
     botBoard = new ChessBoard(this, BOTTOM);

@@ -1,6 +1,5 @@
 #include "chesspiece.h"
 #include "chessgame.h"
-#include "qdebug.h"
 #include "king.h"
 #include <vector>
 #include <iostream>

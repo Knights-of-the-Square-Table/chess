@@ -86,7 +86,6 @@ bool Knight::isValidMove(BoardCell* target){
                 return false;
             }
 
-
         }
 
         if(boardMove == 2){
@@ -106,7 +105,6 @@ bool Knight::isValidMove(BoardCell* target){
                 return false;
             }
         }
-
     }
 
 
